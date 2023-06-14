@@ -13,7 +13,7 @@
         android:layout_marginStart="35dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="38dp"
-        android:background="#FFC107"
+        android:background="#F4D882"
         android:text="Welcome To Group 7 Project A6"
         android:textColor="#F8F1F1"
         android:textSize="24sp"
@@ -43,10 +43,24 @@
         android:layout_marginStart="109dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="110dp"
+        android:background="#98C662"
         android:onClick="openSearchActivity"
-        android:text="Let's Go Search Movie!"
+        android:text="Let's Go Search Movies!"
+        android:textColor="#F8F6F6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="222dp"
+        android:layout_height="91dp"
+        android:layout_marginStart="94dp"
+        android:layout_marginTop="106dp"
+        android:layout_marginEnd="95dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/movieiconmain" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

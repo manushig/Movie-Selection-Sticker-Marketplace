@@ -24,7 +24,7 @@
         android:layout_height="32dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
-        android:background="#4C4B43"
+        android:background="#534B4B"
         android:text="CANCEL"
         android:textColor="#FBFBFB"
         android:textStyle="bold"
@@ -51,9 +51,12 @@
     <GridLayout
         android:layout_width="410dp"
         android:layout_height="77dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="1dp"
         android:visibility="visible"
-        tools:layout_editor_absoluteX="-3dp"
-        tools:layout_editor_absoluteY="561dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView">
 
         <Button
             android:id="@+id/clearFilterButton"
