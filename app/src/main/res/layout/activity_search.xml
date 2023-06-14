@@ -40,4 +40,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/searchicon" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="409dp"
+        android:layout_height="484dp"
+        tools:layout_editor_absoluteX="-4dp"
+        tools:layout_editor_absoluteY="77dp" />
+
+    <GridLayout
+        android:layout_width="410dp"
+        android:layout_height="77dp"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="-3dp"
+        tools:layout_editor_absoluteY="561dp">
+
+        <Button
+            android:id="@+id/clearFilterButton"
+            android:layout_width="148dp"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:background="#534B4B"
+            android:text="CLEAR"
+            android:textColor="#A39F9F"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/seeResultButton"
+            android:layout_width="262dp"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:background="#F6C01E"
+            android:text="SEE RESULTS"
+            android:textSize="24sp" />
+    </GridLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
