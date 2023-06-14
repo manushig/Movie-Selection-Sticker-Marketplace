@@ -7,7 +7,7 @@
     tools:context=".SearchActivity">
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/searchEditText"
         android:layout_width="263dp"
         android:layout_height="47dp"
         android:layout_marginStart="50dp"
@@ -32,7 +32,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/magnifierImageView"
         android:layout_width="31dp"
         android:layout_height="37dp"
         android:layout_marginStart="16dp"
@@ -42,7 +42,7 @@
         app:srcCompat="@drawable/searchicon" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/filterListRecyclerView"
         android:layout_width="409dp"
         android:layout_height="484dp"
         tools:layout_editor_absoluteX="-4dp"
@@ -56,7 +56,7 @@
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView">
+        app:layout_constraintTop_toBottomOf="@+id/filterListRecyclerView">
 
         <Button
             android:id="@+id/clearFilterButton"
