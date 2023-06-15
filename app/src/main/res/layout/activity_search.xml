@@ -11,15 +11,54 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/zeroToOneText"
+            android:id="@+id/actionText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="27dp"
             android:layout_marginTop="20dp"
-            android:text="0 to 1 Hour"
+            android:onClick="optionClicked"
+            android:tag="0"
+            android:text="Action"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
+            app:layout_constraintTop_toBottomOf="@+id/genreTextView" />
+
+        <TextView
+            android:id="@+id/animationText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="20dp"
+            android:onClick="optionClicked"
+            android:tag="1"
+            android:text="Animation"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/actionText"
+            app:layout_constraintTop_toBottomOf="@+id/genreTextView" />
+        <TextView
+            android:id="@+id/adventureText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="43dp"
+            android:layout_marginTop="20dp"
+            android:text="Adventure"
+            android:onClick="optionClicked"
+            android:tag="2"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/animationText"
+            app:layout_constraintTop_toBottomOf="@+id/genreTextView" />
+        <TextView
+            android:id="@+id/dramaText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:onClick="optionClicked"
+            android:tag="3"
+            android:text="Drama"
+            app:layout_constraintStart_toEndOf="@+id/adventureText"
+            app:layout_constraintTop_toBottomOf="@+id/genreTextView" />
 
         <TextView
             android:id="@+id/crimeText"
@@ -28,20 +67,73 @@
             android:layout_marginStart="27dp"
             android:layout_marginTop="20dp"
             android:text="Crime"
+            android:onClick="optionClicked"
+            android:tag="4"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/actionText" />
-
         <TextView
-            android:id="@+id/dramaText"
+            android:id="@+id/comedyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
+            android:layout_marginStart="31dp"
+            android:layout_marginTop="20dp"
+            android:tag="5"
+            android:onClick="optionClicked"
+            android:text="Comedy"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/crimeText"
+            app:layout_constraintTop_toBottomOf="@+id/animationText" />
+        <TextView
+            android:id="@+id/documentaryText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
             android:layout_marginTop="20dp"
             android:textSize="16sp"
-            android:text="Drama"
-            app:layout_constraintStart_toEndOf="@+id/adventureText"
-            app:layout_constraintTop_toBottomOf="@+id/genreTextView" />
+            android:onClick="optionClicked"
+            android:tag="6"
+            android:text="Documentary"
+            app:layout_constraintStart_toEndOf="@+id/comedyText"
+            app:layout_constraintTop_toBottomOf="@+id/adventureText" />
+        <TextView
+            android:id="@+id/historicalText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
+            android:tag="7"
+            android:onClick="optionClicked"
+            android:textSize="16sp"
+            android:text="Historical"
+            app:layout_constraintStart_toEndOf="@+id/documentaryText"
+            app:layout_constraintTop_toBottomOf="@+id/dramaText" />
+
+        <TextView
+            android:id="@+id/fourStarsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="20dp"
+            android:tag="8"
+            android:onClick="optionClicked"
+            android:text="4 stars and above"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ratingTextView" />
+
+        <TextView
+            android:id="@+id/threeStarsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="20dp"
+            android:tag="9"
+            android:onClick="optionClicked"
+            android:text="3 stars and above"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/fourStarsText"
+            app:layout_constraintTop_toBottomOf="@+id/ratingTextView" />
 
         <TextView
             android:id="@+id/newReleasesText"
@@ -50,31 +142,23 @@
             android:layout_marginStart="27dp"
             android:layout_marginTop="20dp"
             android:text="New Releases"
+            android:onClick="optionClicked"
+            android:tag="10"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/yearTextView" />
 
         <TextView
-            android:id="@+id/actionText"
+            android:id="@+id/s2010Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="27dp"
+            android:layout_marginStart="23dp"
             android:layout_marginTop="20dp"
-            android:text="Action"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/genreTextView" />
-
-        <TextView
-            android:id="@+id/threeStarsText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="21dp"
-            android:layout_marginTop="20dp"
-            android:text="3 stars and above"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/fourStarsText"
-            app:layout_constraintTop_toBottomOf="@+id/ratingTextView" />
+            android:onClick="optionClicked"
+            android:tag="11"
+            android:text="2010's"
+            app:layout_constraintStart_toEndOf="@+id/newReleasesText"
+            app:layout_constraintTop_toBottomOf="@+id/yearTextView" />
 
         <TextView
             android:id="@+id/s2000Text"
@@ -82,10 +166,103 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="22dp"
             android:layout_marginTop="20dp"
+            android:onClick="optionClicked"
             android:textSize="16sp"
+            android:tag="12"
             android:text="2000's"
             app:layout_constraintStart_toEndOf="@+id/s2010Text"
             app:layout_constraintTop_toBottomOf="@+id/yearTextView" />
+
+        <TextView
+            android:id="@+id/s1990Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="20dp"
+            android:onClick="optionClicked"
+            android:textSize="16sp"
+            android:tag="13"
+            android:text="1990's"
+            app:layout_constraintStart_toEndOf="@+id/s2000Text"
+            app:layout_constraintTop_toBottomOf="@+id/yearTextView" />
+
+        <TextView
+            android:id="@+id/s1980Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="20dp"
+            android:onClick="optionClicked"
+            android:text="1980's"
+            android:tag="14"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/newReleasesText" />
+
+        <TextView
+            android:id="@+id/s1970Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="20dp"
+            android:onClick="optionClicked"
+            android:textSize="16sp"
+            android:tag="15"
+            android:text="1970's"
+            app:layout_constraintStart_toEndOf="@+id/s1980Text"
+            app:layout_constraintTop_toBottomOf="@+id/s2010Text" />
+
+        <TextView
+            android:id="@+id/s1960Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:onClick="optionClicked"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:tag="16"
+            android:text="1960's and Earlier"
+            app:layout_constraintStart_toEndOf="@+id/s1970Text"
+            app:layout_constraintTop_toBottomOf="@+id/s2000Text" />
+
+        <TextView
+            android:id="@+id/zeroToOneText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="20dp"
+            android:text="0 to 1 Hour"
+            android:onClick="optionClicked"
+            android:tag="17"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
+
+        <TextView
+            android:id="@+id/oneToTwoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:onClick="optionClicked"
+            android:tag="18"
+            android:text="1 to 2 Hour"
+            app:layout_constraintStart_toEndOf="@+id/zeroToOneText"
+            app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
+
+        <TextView
+            android:id="@+id/twoAndAboveText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:onClick="optionClicked"
+            android:tag="19"
+            android:text="2 Hours and above"
+            app:layout_constraintStart_toEndOf="@+id/oneToTwoText"
+            app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
 
         <TextView
             android:id="@+id/timeTextView"
@@ -99,17 +276,6 @@
             app:layout_constraintTop_toBottomOf="@+id/s1980Text" />
 
         <TextView
-            android:id="@+id/comedyText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="31dp"
-            android:layout_marginTop="20dp"
-            android:text="Comedy"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/crimeText"
-            app:layout_constraintTop_toBottomOf="@+id/animationText" />
-
-        <TextView
             android:id="@+id/ratingTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -120,49 +286,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/crimeText" />
 
-        <TextView
-            android:id="@+id/s1970Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="20dp"
-            android:textSize="16sp"
-            android:text="1970's"
-            app:layout_constraintStart_toEndOf="@+id/s1980Text"
-            app:layout_constraintTop_toBottomOf="@+id/s2010Text" />
-
-        <TextView
-            android:id="@+id/documentaryText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="20dp"
-            android:textSize="16sp"
-            android:text="Documentary"
-            app:layout_constraintStart_toEndOf="@+id/comedyText"
-            app:layout_constraintTop_toBottomOf="@+id/adventureText" />
-
-        <TextView
-            android:id="@+id/s1960Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="20dp"
-            android:textSize="16sp"
-            android:text="1960's and Earlier"
-            app:layout_constraintStart_toEndOf="@+id/s1970Text"
-            app:layout_constraintTop_toBottomOf="@+id/s2000Text" />
-
-        <TextView
-            android:id="@+id/s1980Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="27dp"
-            android:layout_marginTop="20dp"
-            android:text="1980's"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/newReleasesText" />
 
         <TextView
             android:id="@+id/yearTextView"
@@ -176,17 +299,6 @@
             app:layout_constraintTop_toBottomOf="@+id/fourStarsText" />
 
         <TextView
-            android:id="@+id/historicalText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="20dp"
-            android:textSize="16sp"
-            android:text="Historical"
-            app:layout_constraintStart_toEndOf="@+id/documentaryText"
-            app:layout_constraintTop_toBottomOf="@+id/dramaText" />
-
-        <TextView
             android:id="@+id/genreTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -196,72 +308,6 @@
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/magnifierImageView" />
-
-        <TextView
-            android:id="@+id/oneToTwoText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="20dp"
-            android:textSize="16sp"
-            android:text="1 to 2 Hour"
-            app:layout_constraintStart_toEndOf="@+id/zeroToOneText"
-            app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
-
-        <TextView
-            android:id="@+id/twoAndAboveText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="20dp"
-            android:textSize="16sp"
-            android:text="2 Hours and above"
-            app:layout_constraintStart_toEndOf="@+id/oneToTwoText"
-            app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
-
-        <TextView
-            android:id="@+id/animationText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="20dp"
-            android:text="Animation"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/actionText"
-            app:layout_constraintTop_toBottomOf="@+id/genreTextView" />
-
-        <TextView
-            android:id="@+id/fourStarsText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="27dp"
-            android:layout_marginTop="20dp"
-            android:text="4 stars and above"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ratingTextView" />
-
-        <TextView
-            android:id="@+id/s1990Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="20dp"
-            android:textSize="16sp"
-            android:text="1990's"
-            app:layout_constraintStart_toEndOf="@+id/s2000Text"
-            app:layout_constraintTop_toBottomOf="@+id/yearTextView" />
-
-        <TextView
-            android:id="@+id/adventureText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="43dp"
-            android:layout_marginTop="20dp"
-            android:text="Adventure"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/animationText"
-            app:layout_constraintTop_toBottomOf="@+id/genreTextView" />
 
         <EditText
             android:id="@+id/searchEditText"
@@ -316,6 +362,7 @@
                 android:layout_row="0"
                 android:layout_column="0"
                 android:background="#534B4B"
+                android:onClick="clearOptionsClicked"
                 android:text="CLEAR"
                 android:textColor="#A39F9F"
                 android:textSize="24sp" />
@@ -331,15 +378,6 @@
                 android:textSize="24sp" />
         </GridLayout>
 
-        <TextView
-            android:id="@+id/s2010Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="23dp"
-            android:layout_marginTop="20dp"
-            android:text="2010's"
-            app:layout_constraintStart_toEndOf="@+id/newReleasesText"
-            app:layout_constraintTop_toBottomOf="@+id/yearTextView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
