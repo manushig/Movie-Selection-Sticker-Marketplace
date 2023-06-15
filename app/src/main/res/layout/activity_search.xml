@@ -110,54 +110,67 @@
             app:layout_constraintTop_toBottomOf="@+id/dramaText" />
 
         <TextView
-            android:id="@+id/fourStarsText"
+            android:id="@+id/nineScoreText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="27dp"
             android:layout_marginTop="20dp"
-            android:tag="8"
             android:onClick="optionClicked"
-            android:text="4 stars and above"
+            android:tag="8"
+            android:text="9+"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ratingTextView" />
 
         <TextView
-            android:id="@+id/threeStarsText"
+            android:id="@+id/eightScoreText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="21dp"
+            android:layout_marginStart="60dp"
             android:layout_marginTop="20dp"
-            android:tag="9"
             android:onClick="optionClicked"
-            android:text="3 stars and above"
+            android:tag="9"
+            android:text="8+"
             android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/fourStarsText"
+            app:layout_constraintStart_toEndOf="@+id/nineScoreText"
             app:layout_constraintTop_toBottomOf="@+id/ratingTextView" />
 
         <TextView
-            android:id="@+id/newReleasesText"
+            android:id="@+id/sevenScoreText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="27dp"
+            android:layout_marginStart="60dp"
             android:layout_marginTop="20dp"
-            android:text="New Releases"
             android:onClick="optionClicked"
             android:tag="10"
+            android:text="7+"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/yearTextView" />
+            app:layout_constraintStart_toEndOf="@+id/eightScoreText"
+            app:layout_constraintTop_toBottomOf="@+id/ratingTextView" />
+
+        <TextView
+            android:id="@+id/sixScoreText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="20dp"
+            android:onClick="optionClicked"
+            android:tag="11"
+            android:text="6+"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/sevenScoreText"
+            app:layout_constraintTop_toBottomOf="@+id/ratingTextView" />
 
         <TextView
             android:id="@+id/s2010Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="23dp"
+            android:layout_marginStart="27dp"
             android:layout_marginTop="20dp"
             android:onClick="optionClicked"
-            android:tag="11"
+            android:tag="12"
             android:text="2010's"
-            app:layout_constraintStart_toEndOf="@+id/newReleasesText"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/yearTextView" />
 
         <TextView
@@ -168,7 +181,7 @@
             android:layout_marginTop="20dp"
             android:onClick="optionClicked"
             android:textSize="16sp"
-            android:tag="12"
+            android:tag="13"
             android:text="2000's"
             app:layout_constraintStart_toEndOf="@+id/s2010Text"
             app:layout_constraintTop_toBottomOf="@+id/yearTextView" />
@@ -181,7 +194,7 @@
             android:layout_marginTop="20dp"
             android:onClick="optionClicked"
             android:textSize="16sp"
-            android:tag="13"
+            android:tag="14"
             android:text="1990's"
             app:layout_constraintStart_toEndOf="@+id/s2000Text"
             app:layout_constraintTop_toBottomOf="@+id/yearTextView" />
@@ -190,26 +203,24 @@
             android:id="@+id/s1980Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="27dp"
-            android:layout_marginTop="20dp"
             android:onClick="optionClicked"
+            android:tag="15"
             android:text="1980's"
-            android:tag="14"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/newReleasesText" />
+            tools:layout_editor_absoluteX="255dp"
+            tools:layout_editor_absoluteY="398dp" />
 
         <TextView
             android:id="@+id/s1970Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
+            android:layout_marginStart="27dp"
             android:layout_marginTop="20dp"
             android:onClick="optionClicked"
-            android:textSize="16sp"
-            android:tag="15"
+            android:tag="16"
             android:text="1970's"
-            app:layout_constraintStart_toEndOf="@+id/s1980Text"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/s2010Text" />
 
         <TextView
@@ -217,11 +228,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-            android:onClick="optionClicked"
             android:layout_marginTop="20dp"
-            android:textSize="16sp"
-            android:tag="16"
+            android:onClick="optionClicked"
+            android:tag="17"
             android:text="1960's and Earlier"
+            android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/s1970Text"
             app:layout_constraintTop_toBottomOf="@+id/s2000Text" />
 
@@ -233,7 +244,7 @@
             android:layout_marginTop="20dp"
             android:text="0 to 1 Hour"
             android:onClick="optionClicked"
-            android:tag="17"
+            android:tag="18"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
@@ -246,7 +257,7 @@
             android:layout_marginTop="20dp"
             android:textSize="16sp"
             android:onClick="optionClicked"
-            android:tag="18"
+            android:tag="19"
             android:text="1 to 2 Hour"
             app:layout_constraintStart_toEndOf="@+id/zeroToOneText"
             app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
@@ -259,7 +270,7 @@
             android:layout_marginTop="20dp"
             android:textSize="16sp"
             android:onClick="optionClicked"
-            android:tag="19"
+            android:tag="20"
             android:text="2 Hours and above"
             app:layout_constraintStart_toEndOf="@+id/oneToTwoText"
             app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
@@ -273,7 +284,7 @@
             android:text="Time:"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/s1980Text" />
+            app:layout_constraintTop_toBottomOf="@+id/s1970Text" />
 
         <TextView
             android:id="@+id/ratingTextView"
@@ -296,7 +307,7 @@
             android:text="Year:"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fourStarsText" />
+            app:layout_constraintTop_toBottomOf="@+id/nineScoreText" />
 
         <TextView
             android:id="@+id/genreTextView"
