@@ -1,82 +1,345 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SearchActivity">
 
-    <EditText
-        android:id="@+id/searchEditText"
-        android:layout_width="263dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="Search"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/cancelEditTextButton"
-        android:layout_width="76dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:background="#534B4B"
-        android:text="CANCEL"
-        android:textColor="#FBFBFB"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/zeroToOneText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="20dp"
+            android:text="0 to 1 Hour"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
 
-    <ImageView
-        android:id="@+id/magnifierImageView"
-        android:layout_width="31dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/searchicon" />
+        <TextView
+            android:id="@+id/crimeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="20dp"
+            android:text="Crime"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/actionText" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/filterListRecyclerView"
-        android:layout_width="409dp"
-        android:layout_height="484dp"
-        tools:layout_editor_absoluteX="-4dp"
-        tools:layout_editor_absoluteY="77dp" />
+        <TextView
+            android:id="@+id/dramaText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:text="Drama"
+            app:layout_constraintStart_toEndOf="@+id/adventureText"
+            app:layout_constraintTop_toBottomOf="@+id/genreTextView" />
 
-    <GridLayout
-        android:layout_width="410dp"
-        android:layout_height="77dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="1dp"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/filterListRecyclerView">
+        <TextView
+            android:id="@+id/newReleasesText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="20dp"
+            android:text="New Releases"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/yearTextView" />
+
+        <TextView
+            android:id="@+id/actionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="20dp"
+            android:text="Action"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/genreTextView" />
+
+        <TextView
+            android:id="@+id/threeStarsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="20dp"
+            android:text="3 stars and above"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/fourStarsText"
+            app:layout_constraintTop_toBottomOf="@+id/ratingTextView" />
+
+        <TextView
+            android:id="@+id/s2010Text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:text="2000's"
+            app:layout_constraintStart_toEndOf="@+id/s2010Text"
+            app:layout_constraintTop_toBottomOf="@+id/yearTextView" />
+
+        <TextView
+            android:id="@+id/timeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="27dp"
+            android:text="Time:"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/s2010Text4" />
+
+        <TextView
+            android:id="@+id/comedyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="31dp"
+            android:layout_marginTop="20dp"
+            android:text="Comedy"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/crimeText"
+            app:layout_constraintTop_toBottomOf="@+id/animationText" />
+
+        <TextView
+            android:id="@+id/ratingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="27dp"
+            android:text="Rating:"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/crimeText" />
+
+        <TextView
+            android:id="@+id/s2010Text5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:text="1970's"
+            app:layout_constraintStart_toEndOf="@+id/s2010Text4"
+            app:layout_constraintTop_toBottomOf="@+id/s2010Text" />
+
+        <TextView
+            android:id="@+id/documentaryText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:text="Documentary"
+            app:layout_constraintStart_toEndOf="@+id/comedyText"
+            app:layout_constraintTop_toBottomOf="@+id/adventureText" />
+
+        <TextView
+            android:id="@+id/s2010Text6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:text="1960's and Earlier"
+            app:layout_constraintStart_toEndOf="@+id/s2010Text5"
+            app:layout_constraintTop_toBottomOf="@+id/s2010Text2" />
+
+        <TextView
+            android:id="@+id/s2010Text4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="20dp"
+            android:text="1980's"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/newReleasesText" />
+
+        <TextView
+            android:id="@+id/yearTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="27dp"
+            android:text="Year:"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fourStarsText" />
+
+        <TextView
+            android:id="@+id/historicalText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:text="Historical"
+            app:layout_constraintStart_toEndOf="@+id/documentaryText"
+            app:layout_constraintTop_toBottomOf="@+id/dramaText" />
+
+        <TextView
+            android:id="@+id/genreTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="40dp"
+            android:text="Genre:"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/magnifierImageView" />
+
+        <TextView
+            android:id="@+id/OneToTwoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:text="1 to 2 Hour"
+            app:layout_constraintStart_toEndOf="@+id/zeroToOneText"
+            app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
+
+        <TextView
+            android:id="@+id/zeroToOneText3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:text="2 Hours and above"
+            app:layout_constraintStart_toEndOf="@+id/OneToTwoText"
+            app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
+
+        <TextView
+            android:id="@+id/animationText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="20dp"
+            android:text="Animation"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/actionText"
+            app:layout_constraintTop_toBottomOf="@+id/genreTextView" />
+
+        <TextView
+            android:id="@+id/fourStarsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="20dp"
+            android:text="4 stars and above"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ratingTextView" />
+
+        <TextView
+            android:id="@+id/s1990Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:text="1990's"
+            app:layout_constraintStart_toEndOf="@+id/s2010Text2"
+            app:layout_constraintTop_toBottomOf="@+id/yearTextView" />
+
+        <TextView
+            android:id="@+id/adventureText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="43dp"
+            android:layout_marginTop="20dp"
+            android:text="Adventure"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/animationText"
+            app:layout_constraintTop_toBottomOf="@+id/genreTextView" />
+
+        <EditText
+            android:id="@+id/searchEditText"
+            android:layout_width="263dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="Search"
+            android:inputType="text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/clearFilterButton"
-            android:layout_width="148dp"
-            android:layout_height="wrap_content"
-            android:layout_row="0"
-            android:layout_column="0"
+            android:id="@+id/cancelEditTextButton"
+            android:layout_width="80dp"
+            android:layout_height="39dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
             android:background="#534B4B"
-            android:text="CLEAR"
-            android:textColor="#A39F9F"
-            android:textSize="24sp" />
+            android:onClick="cancelEdit"
+            android:text="CANCEL"
+            android:textColor="#FBFBFB"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/seeResultButton"
-            android:layout_width="262dp"
+        <ImageView
+            android:id="@+id/magnifierImageView"
+            android:layout_width="31dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/searchicon" />
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="77dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="1dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/OneToTwoText">
+
+            <Button
+                android:id="@+id/clearFilterButton"
+                android:layout_width="145dp"
+                android:layout_height="74dp"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:background="#534B4B"
+                android:text="CLEAR"
+                android:textColor="#A39F9F"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/seeResultButton"
+                android:layout_width="262dp"
+                android:layout_height="73dp"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:background="#F6C01E"
+                android:text="SEE RESULTS"
+                android:textSize="24sp" />
+        </GridLayout>
+
+        <TextView
+            android:id="@+id/s2010Text"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_row="0"
-            android:layout_column="1"
-            android:background="#F6C01E"
-            android:text="SEE RESULTS"
-            android:textSize="24sp" />
-    </GridLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="20dp"
+            android:text="2010's"
+            app:layout_constraintStart_toEndOf="@+id/newReleasesText"
+            app:layout_constraintTop_toBottomOf="@+id/yearTextView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
