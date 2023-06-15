@@ -77,7 +77,7 @@
             app:layout_constraintTop_toBottomOf="@+id/ratingTextView" />
 
         <TextView
-            android:id="@+id/s2010Text2"
+            android:id="@+id/s2000Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="22dp"
@@ -96,7 +96,7 @@
             android:text="Time:"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/s2010Text4" />
+            app:layout_constraintTop_toBottomOf="@+id/s1980Text" />
 
         <TextView
             android:id="@+id/comedyText"
@@ -121,14 +121,14 @@
             app:layout_constraintTop_toBottomOf="@+id/crimeText" />
 
         <TextView
-            android:id="@+id/s2010Text5"
+            android:id="@+id/s1970Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="36dp"
             android:layout_marginTop="20dp"
             android:textSize="16sp"
             android:text="1970's"
-            app:layout_constraintStart_toEndOf="@+id/s2010Text4"
+            app:layout_constraintStart_toEndOf="@+id/s1980Text"
             app:layout_constraintTop_toBottomOf="@+id/s2010Text" />
 
         <TextView
@@ -143,18 +143,18 @@
             app:layout_constraintTop_toBottomOf="@+id/adventureText" />
 
         <TextView
-            android:id="@+id/s2010Text6"
+            android:id="@+id/s1960Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="20dp"
             android:textSize="16sp"
             android:text="1960's and Earlier"
-            app:layout_constraintStart_toEndOf="@+id/s2010Text5"
-            app:layout_constraintTop_toBottomOf="@+id/s2010Text2" />
+            app:layout_constraintStart_toEndOf="@+id/s1970Text"
+            app:layout_constraintTop_toBottomOf="@+id/s2000Text" />
 
         <TextView
-            android:id="@+id/s2010Text4"
+            android:id="@+id/s1980Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="27dp"
@@ -198,7 +198,7 @@
             app:layout_constraintTop_toBottomOf="@+id/magnifierImageView" />
 
         <TextView
-            android:id="@+id/OneToTwoText"
+            android:id="@+id/oneToTwoText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
@@ -209,14 +209,14 @@
             app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
 
         <TextView
-            android:id="@+id/zeroToOneText3"
+            android:id="@+id/twoAndAboveText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="20dp"
             android:textSize="16sp"
             android:text="2 Hours and above"
-            app:layout_constraintStart_toEndOf="@+id/OneToTwoText"
+            app:layout_constraintStart_toEndOf="@+id/oneToTwoText"
             app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
 
         <TextView
@@ -249,7 +249,7 @@
             android:layout_marginTop="20dp"
             android:textSize="16sp"
             android:text="1990's"
-            app:layout_constraintStart_toEndOf="@+id/s2010Text2"
+            app:layout_constraintStart_toEndOf="@+id/s2000Text"
             app:layout_constraintTop_toBottomOf="@+id/yearTextView" />
 
         <TextView
@@ -307,7 +307,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/OneToTwoText">
+            app:layout_constraintTop_toBottomOf="@+id/oneToTwoText">
 
             <Button
                 android:id="@+id/clearFilterButton"
