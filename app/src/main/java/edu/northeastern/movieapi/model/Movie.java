@@ -24,6 +24,15 @@ public class Movie {
         this.contentRating=contentRating;
         this.imDbRating=imDbRating;
     }
+
+    public Movie(String title, String image,String runtimeStr,String contentRating,String imDbRating, String id) {
+        this.title = title;
+        this.image = image;
+        this.runtimeStr=runtimeStr;
+        this.contentRating=contentRating;
+        this.imDbRating=imDbRating;
+        this.id = id;
+    }
     public String getId() {
         return id;
     }

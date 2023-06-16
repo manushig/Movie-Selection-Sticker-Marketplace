@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MovieAPI</string>
+    <string name="invalid_id">Movie Details not found</string>
 </resources>
