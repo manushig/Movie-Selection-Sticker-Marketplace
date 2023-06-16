@@ -65,6 +65,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/movieiconmain" />
 
+        <!-- TODO: Move button inside the main flow -->
         <Button
             android:id="@+id/trailer_button"
             android:layout_width="wrap_content"
