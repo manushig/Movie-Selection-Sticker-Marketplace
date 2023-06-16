@@ -11,6 +11,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,SearchActivity.class);
         startActivity(intent);
     }
+    public void openTrailerActivity(View view){
+        Intent intent = new Intent(this,TrailerActivity.class);
+        startActivity(intent);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -2,4 +2,5 @@
     <string name="app_name">MovieAPI</string>
     <string name="invalid_id">Movie Details not found</string>
     <string name="search_result_header">Search Results</string>
+    <string name="PopularTrailers">Popular Trailers</string>
 </resources>
