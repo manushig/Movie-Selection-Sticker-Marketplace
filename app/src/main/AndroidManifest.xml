@@ -16,6 +16,13 @@
         android:theme="@style/Theme.MovieAPI"
         tools:targetApi="31">
         <activity
+            android:theme="@style/VideoActivityDialogTheme"
+            android:name=".VideoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TrailerActivity"
+            android:exported="false" />
+        <activity
             android:name=".DetailsActivity"
             android:exported="false" />
         <activity

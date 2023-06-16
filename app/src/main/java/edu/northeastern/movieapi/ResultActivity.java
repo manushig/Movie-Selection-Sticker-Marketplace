@@ -12,6 +12,7 @@ import java.util.List;
 
 import edu.northeastern.movieapi.model.Movie;
 import edu.northeastern.movieapi.model.MovieDetail;
+import edu.northeastern.movieapi.model.YoutubeVideo;
 import edu.northeastern.movieapi.network.MovieWebService;
 
 public class ResultActivity extends AppCompatActivity {
@@ -39,6 +40,11 @@ public class ResultActivity extends AppCompatActivity {
             @Override
             public void onDetailGet(MovieDetail movieDetails) {
                 Log.d(TAG, "movieDetails title = " + movieDetails.getTitle());
+            }
+
+            @Override
+            public void onVideoGet(YoutubeVideo youtubeVideo) {
+
             }
         };
 

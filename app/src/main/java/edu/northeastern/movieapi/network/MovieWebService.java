@@ -1,5 +1,6 @@
 package edu.northeastern.movieapi.network;
 
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -12,12 +13,15 @@ import java.util.List;
 
 import edu.northeastern.movieapi.model.Movie;
 import edu.northeastern.movieapi.model.MovieDetail;
+import edu.northeastern.movieapi.model.YoutubeVideo;
 
 public class MovieWebService {
 
-    private static final String API_KEY = "k_2luv1h1i";
-    private static final String BASE_URL = "https://imdb-api.com/API/AdvancedSearch/" + API_KEY + "?title=";
+//    private static final String API_KEY = "k_2luv1h1i";
+    private static final String API_KEY = "k_0gmz1nay";
+    private static final String BASE_URL = "https://imdb-api.com/API/AdvancedSearch/" + API_KEY;
     private static final String DETAIL_SEARCH_URL = "https://imdb-api.com/en/API/Title/";
+    private static final String YOUTUBE_SEARCH_URL = "https://imdb-api.com/en/API/YouTubeTrailer/";
     private UiThreadCallback uiThreadCallback;
 
     public MovieWebService(UiThreadCallback uiThreadCallback) {
@@ -28,10 +32,21 @@ public class MovieWebService {
         void onSearchResultGet(List<Movie> movies);
 
         void onDetailGet(MovieDetail movieDetails);
+
+        void onVideoGet(YoutubeVideo youtubeVideo);
+    }
+
+    public void getNowPlaying() {
+        String uri = BASE_URL + "?groups=now-playing-us";
+        makeNetworkCall(uri);
     }
 
     public void getSearchResult(String keyword) {
-        String uri = BASE_URL + keyword;
+        String uri = BASE_URL + "?title=" + keyword;
+        makeNetworkCall(uri);
+    }
+
+    public void makeNetworkCall(String uri) {
         new NetworkThread(uri, new NetworkThread.NetworkCallback() {
             @Override
             public void processResponse(String responseData) {
@@ -58,6 +73,26 @@ public class MovieWebService {
                     @Override
                     public void run() {
                         uiThreadCallback.onDetailGet(movieDetail);
+                    }
+                });
+
+            }
+        }).start();
+
+    }
+
+    public void getVideo(String movieId) {
+        //  movieId ="tt1375666";
+        //https://imdb-api.com/en/API/Title/k_0gmz1nay/tt1375666
+        String uri = YOUTUBE_SEARCH_URL + API_KEY + "/" + movieId;
+        new NetworkThread(uri, new NetworkThread.NetworkCallback() {
+            @Override
+            public void processResponse(String responseData) {
+                YoutubeVideo youtubeVideo = handleYoutubeResponse(responseData);
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        uiThreadCallback.onVideoGet(youtubeVideo);
                     }
                 });
 
@@ -114,5 +149,21 @@ public class MovieWebService {
             // Handle JSON parsing errors
         }
         return movieDetail;
+    }
+
+    private YoutubeVideo handleYoutubeResponse(String responseData) {
+        YoutubeVideo youtubeVideo = null;
+        try {
+            JSONObject movieObject = new JSONObject(responseData);
+            String id = movieObject.getString("imDbId");
+            String title = movieObject.getString("title");
+            String videoId = movieObject.getString("videoId");
+            String videoUrl = movieObject.getString("videoUrl");
+            youtubeVideo = new YoutubeVideo(id, title,videoId,videoUrl);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            // Handle JSON parsing errors
+        }
+        return youtubeVideo;
     }
 }

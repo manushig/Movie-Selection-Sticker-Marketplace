@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MovieAPI</string>
+    <string name="PopularTrailers">Popular Trailers</string>
 </resources>
