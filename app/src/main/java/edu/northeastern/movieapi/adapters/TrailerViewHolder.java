@@ -1,4 +1,4 @@
-package edu.northeastern.movieapi.adapter;
+package edu.northeastern.movieapi.adapters;
 
 import android.view.View;
 import android.widget.ImageView;

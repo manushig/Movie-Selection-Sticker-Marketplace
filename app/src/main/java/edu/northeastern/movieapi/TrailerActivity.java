@@ -6,17 +6,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.Layout;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.northeastern.movieapi.adapter.TrailerAdapter;
+import edu.northeastern.movieapi.adapters.TrailerAdapter;
 import edu.northeastern.movieapi.model.Movie;
 import edu.northeastern.movieapi.model.MovieDetail;
 import edu.northeastern.movieapi.model.YoutubeVideo;
