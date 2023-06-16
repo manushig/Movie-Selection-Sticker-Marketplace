@@ -28,7 +28,7 @@ public class ResultActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private MovieListAdapter movieListAdapter;
-    private List<Movie> movies;
+    private List<Movie> moviesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,9 @@ public class ResultActivity extends AppCompatActivity {
             public void onSearchResultGet(List<Movie> movies) {
                 progressBar.setVisibility(View.GONE);
                 Log.d(TAG, "movies size = " + movies.size());
+                moviesList.clear();
+                moviesList.addAll(movies);
+                movieListAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -66,13 +69,7 @@ public class ResultActivity extends AppCompatActivity {
         buildRecyclerView();
 
 
-/*        // Move this to Details activity. This is only for testing.
-        findViewById(R.id.test_details_call_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                movieWebService.getDetailResult("tt1375666");
-            }
-        });*/
+
     }
 
     public void buildRecyclerView() {
@@ -82,10 +79,10 @@ public class ResultActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        movies = getMovieList();
+        moviesList = new ArrayList<>();
 
 
-        movieListAdapter = new MovieListAdapter(movies);
+        movieListAdapter = new MovieListAdapter(moviesList);
 
         recyclerView.setAdapter(movieListAdapter);
 
@@ -98,31 +95,31 @@ public class ResultActivity extends AppCompatActivity {
         });
     }
 
-    private List<Movie> getMovieList() {
-        List<Movie> movies = new ArrayList<>();
-
+//    private List<Movie> getMovieList() {
+//        List<Movie> movies = new ArrayList<>();
+//
 
         // Add movies to the list
-        movies.add(new Movie("Spider-Man: Into the Spider-Verse", "https://m.media-amazon.com/images/M/MV5BNmMzODkwNDktMTkyMy00MmU5LWE4MGMtYzIzZjdjNmJiZDRiXkEyXkFqcGdeQXVyNDU1NDQ0NzE@._V1_Ratio0.7041_AL_.jpg", "1h 57m", "PG", "8.4", "1"));
-        movies.add(new Movie("The Flash", "https://m.media-amazon.com/images/M/MV5BMDY0MGJlYzktNzZiNS00MWZhLWJjNWEtNmJmZTg3NjMwZDYwXkEyXkFqcGdeQXVyMTUzOTcyODA5._V1_Ratio0.6837_AL_.jpg", "2h 24m", "PG-13", "", "2"));
-        movies.add(new Movie("Avatar: The Way of Water", "https://imdb-api.com/images/original/nopicture.jpg", "3h 12m", "PG-13", "7.7", "3"));
-        movies.add(new Movie("Fast X",
-                "https://imdb-api.com/images/original/nopicture.jpg", "2h 21m", "PG-13", "6.1", "4"));
-        movies.add(new Movie("Avatar: The Way of Water", "https://imdb-api.com/images/original/nopicture.jpg", "3h 12m", "PG-13", "7.7", "3"));
-        movies.add(new Movie("Fast X",
-                "https://imdb-api.com/images/original/nopicture.jpg", "2h 21m", "PG-13", "6.1", "4"));
-        movies.add(new Movie("Avatar: The Way of Water", "https://imdb-api.com/images/original/nopicture.jpg", "3h 12m", "PG-13", "7.7", "3"));
-        movies.add(new Movie("Fast X",
-                "https://imdb-api.com/images/original/nopicture.jpg", "2h 21m", "PG-13", "6.1", "4"));
+//        movies.add(new Movie("Spider-Man: Into the Spider-Verse", "https://m.media-amazon.com/images/M/MV5BNmMzODkwNDktMTkyMy00MmU5LWE4MGMtYzIzZjdjNmJiZDRiXkEyXkFqcGdeQXVyNDU1NDQ0NzE@._V1_Ratio0.7041_AL_.jpg", "1h 57m", "PG", "8.4", "1"));
+//        movies.add(new Movie("The Flash", "https://m.media-amazon.com/images/M/MV5BMDY0MGJlYzktNzZiNS00MWZhLWJjNWEtNmJmZTg3NjMwZDYwXkEyXkFqcGdeQXVyMTUzOTcyODA5._V1_Ratio0.6837_AL_.jpg", "2h 24m", "PG-13", "", "2"));
+//        movies.add(new Movie("Avatar: The Way of Water", "https://imdb-api.com/images/original/nopicture.jpg", "3h 12m", "PG-13", "7.7", "3"));
+//        movies.add(new Movie("Fast X",
+//                "https://imdb-api.com/images/original/nopicture.jpg", "2h 21m", "PG-13", "6.1", "4"));
+//        movies.add(new Movie("Avatar: The Way of Water", "https://imdb-api.com/images/original/nopicture.jpg", "3h 12m", "PG-13", "7.7", "3"));
+//        movies.add(new Movie("Fast X",
+//                "https://imdb-api.com/images/original/nopicture.jpg", "2h 21m", "PG-13", "6.1", "4"));
+//        movies.add(new Movie("Avatar: The Way of Water", "https://imdb-api.com/images/original/nopicture.jpg", "3h 12m", "PG-13", "7.7", "3"));
+//        movies.add(new Movie("Fast X",
+//                "https://imdb-api.com/images/original/nopicture.jpg", "2h 21m", "PG-13", "6.1", "4"));
         // Add more movies as needed
 
-        return movies;
-    }
+//        return movies;
+//    }
 
 
     public void launchItem(int position) {
 
-        String selectedId = ((Movie) movies.get(position)).getId();
+        String selectedId = ((Movie) moviesList.get(position)).getId();
 
         if (selectedId.equals("") || selectedId.equals(null)) {
             Toast.makeText(this, R.string.invalid_id, Toast.LENGTH_SHORT).show();
