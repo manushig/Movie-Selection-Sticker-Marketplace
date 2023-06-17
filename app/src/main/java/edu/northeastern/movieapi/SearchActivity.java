@@ -261,6 +261,11 @@ public class SearchActivity extends AppCompatActivity {
         for (int i = 0; i < 21; i++) {
             optionsBoolean[i] = false;
         }
+
+        genresSelected = false;
+        ratingSelected = false;
+        timeSelected = false;
+        yearSelected = false;
     }
 
     /**
