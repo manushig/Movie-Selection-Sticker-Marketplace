@@ -147,11 +147,6 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         initView();
-        // https://imdb-api.com/API/AdvancedSearch/k_2luv1h1i
-//String passed to searchKeyword should be like this:  ?user_rating=8.0,&release_date=2010-01-01,&genres=action,adventure&moviemeter=2,3
-        Intent intent = new Intent(SearchActivity.this, ResultActivity.class);
-        intent.putExtra("searchKeyword", searchEditText.getText().toString());
-        startActivity(intent);
         seeResultButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
