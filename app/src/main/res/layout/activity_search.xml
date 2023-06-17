@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="top"
         android:layout_weight="1"
         android:weightSum="1">
 
@@ -111,7 +112,6 @@
                     android:id="@+id/actionText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="optionClicked"
                     android:tag="0"
                     android:text="Action"
                     android:textSize="14sp"
@@ -123,7 +123,7 @@
                     android:id="@+id/animationText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="optionClicked"
+                    
                     android:tag="1"
                     android:text="Animation"
                     android:textSize="14sp"
@@ -135,7 +135,7 @@
                     android:id="@+id/adventureText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="optionClicked"
+                     
                     android:tag="2"
                     android:text="Adventure"
                     android:textSize="14sp"
@@ -147,7 +147,7 @@
                     android:id="@+id/dramaText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="optionClicked"
+                      
                     android:tag="3"
                     android:text="Drama"
                     android:textSize="14sp"
@@ -160,7 +160,7 @@
                     android:layout_height="wrap_content"
                     android:layout_row="1"
                     android:layout_column="0"
-                    android:onClick="optionClicked"
+                      
                     android:tag="4"
                     android:text="Crime"
                     android:textSize="14sp"
@@ -172,7 +172,7 @@
                     android:id="@+id/comedyText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="optionClicked"
+                      
                     android:tag="5"
                     android:text="Comedy"
                     android:textSize="14sp"
@@ -184,7 +184,7 @@
                     android:id="@+id/documentaryText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="optionClicked"
+                      
                     android:tag="6"
                     android:text="Documentary"
                     android:textSize="14sp"
@@ -196,7 +196,7 @@
                     android:id="@+id/historicalText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="optionClicked"
+                      
                     android:tag="7"
                     android:text="Historical"
                     android:textSize="14sp"
@@ -223,7 +223,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="10dp"
-                    android:onClick="optionClicked"
+                      
                     android:tag="19"
                     android:text="1 to 2 Hour"
                     android:textSize="14sp"
@@ -237,7 +237,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="10dp"
-                    android:onClick="optionClicked"
+                      
                     android:tag="18"
                     android:text="0 to 1 Hour"
                     android:textSize="14sp"
@@ -251,7 +251,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="10dp"
-                    android:onClick="optionClicked"
+                      
                     android:tag="20"
                     android:text="2 Hours and above"
                     android:textSize="14sp"
@@ -276,7 +276,7 @@
                     android:layout_height="40dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="10dp"
-                    android:onClick="optionClicked"
+                      
                     android:tag="8"
                     android:text="9+"
                     android:textSize="14sp"
@@ -289,7 +289,7 @@
                     android:layout_height="40dp"
                     android:layout_marginStart="27dp"
                     android:layout_marginTop="10dp"
-                    android:onClick="optionClicked"
+                      
                     android:tag="9"
                     android:text="8+"
                     android:textSize="14sp"
@@ -302,7 +302,7 @@
                     android:layout_height="40dp"
                     android:layout_marginStart="27dp"
                     android:layout_marginTop="10dp"
-                    android:onClick="optionClicked"
+                      
                     android:tag="10"
                     android:text="7+"
                     android:textSize="14sp"
@@ -315,7 +315,7 @@
                     android:layout_height="40dp"
                     android:layout_marginStart="27dp"
                     android:layout_marginTop="10dp"
-                    android:onClick="optionClicked"
+                      
                     android:tag="11"
                     android:text="6+"
                     android:textSize="14sp"
@@ -340,7 +340,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="10dp"
-                    android:onClick="optionClicked"
+                      
                     android:tag="12"
                     android:text="2010's"
                     app:layout_column="0"
@@ -352,7 +352,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="27dp"
                     android:layout_marginTop="10dp"
-                    android:onClick="optionClicked"
+                      
                     android:tag="13"
                     android:text="2000's"
                     android:textSize="14sp"
@@ -365,7 +365,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="27dp"
                     android:layout_marginTop="10dp"
-                    android:onClick="optionClicked"
+                      
                     android:tag="14"
                     android:text="1990's"
                     android:textSize="14sp"
@@ -380,7 +380,7 @@
                     android:layout_column="0"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="10dp"
-                    android:onClick="optionClicked"
+                      
                     android:tag="15"
                     android:text="1980's"
                     android:textSize="14sp"
@@ -393,7 +393,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="27dp"
                     android:layout_marginTop="10dp"
-                    android:onClick="optionClicked"
+                      
                     android:tag="14"
                     android:text="1970's"
                     android:textSize="14sp"
@@ -406,7 +406,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="27dp"
                     android:layout_marginTop="10dp"
-                    android:onClick="optionClicked"
+                      
                     android:tag="17"
                     android:text="1960's and Earlier"
                     android:textSize="14sp"
