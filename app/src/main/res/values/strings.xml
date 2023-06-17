@@ -3,4 +3,8 @@
     <string name="invalid_id">Movie Details not found</string>
     <string name="search_result_header">Search Results</string>
     <string name="PopularTrailers">Popular Trailers</string>
+    <string name="result_no_title">Title Information Unavailable</string>
+    <string name="result_no_content_rating">Not Rated</string>
+    <string name="result_no_duration">Duration Information Unavailable</string>
+    <string name="result_no_ratings">Ratings Unavailable</string>
 </resources>
