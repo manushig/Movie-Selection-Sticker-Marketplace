@@ -154,6 +154,10 @@ public class SearchActivity extends AppCompatActivity {
         zeroToOneText.setTextColor(Color.BLACK);
         oneToTwoText.setTextColor(Color.BLACK);
         twoAndAboveText.setTextColor(Color.BLACK);
+
+        for (int i = 0; i < 21; i++) {
+            optionsBoolean[i] = false;
+        }
     }
 
     /**
@@ -169,98 +173,6 @@ public class SearchActivity extends AppCompatActivity {
      * A helper method to initialize view in searching page
      */
     public void initView() {
-        for (int i = 0; i < 21; i++) {
-            if (optionsBoolean[i]) {
-                switch (i) {
-                    case 0:
-                        actionText.setTextColor(Color.RED);
-                        optionsBoolean[0] = true;
-                        break;
-                    case 1:
-                        animationText.setTextColor(Color.RED);
-                        optionsBoolean[1] = true;
-                        break;
-                    case 2:
-                        adventureText.setTextColor(Color.RED);
-                        optionsBoolean[2] = true;
-                        break;
-                    case 3:
-                        dramaText.setTextColor(Color.RED);
-                        optionsBoolean[3] = true;
-                        break;
-                    case 4:
-                        crimeText.setTextColor(Color.RED);
-                        optionsBoolean[4] = true;
-                        break;
-                    case 5:
-                        comedyText.setTextColor(Color.RED);
-                        optionsBoolean[5] = true;
-                        break;
-                    case 6:
-                        documentaryText.setTextColor(Color.RED);
-                        optionsBoolean[6] = true;
-                        break;
-                    case 7:
-                        historicText.setTextColor(Color.RED);
-                        optionsBoolean[7] = true;
-                        break;
-                    case 8:
-                        nineScoreText.setTextColor(Color.RED);
-                        optionsBoolean[8] = true;
-                        break;
-                    case 9:
-                        eightScoreText.setTextColor(Color.RED);
-                        optionsBoolean[9] = true;
-                        break;
-                    case 10:
-                        sevenScoreText.setTextColor(Color.RED);
-                        optionsBoolean[10] = true;
-                        break;
-                    case 11:
-                        sixScoreText.setTextColor(Color.RED);
-                        optionsBoolean[11] = true;
-                        break;
-                    case 12:
-                        s2010Text.setTextColor(Color.RED);
-                        optionsBoolean[12] = true;
-                        break;
-                    case 13:
-                        s2000Text.setTextColor(Color.RED);
-                        optionsBoolean[13] = true;
-                        break;
-                    case 14:
-                        s1990Text.setTextColor(Color.RED);
-                        optionsBoolean[14] = true;
-                        break;
-                    case 15:
-                        s1980Text.setTextColor(Color.RED);
-                        optionsBoolean[15] = true;
-                        break;
-                    case 16:
-                        s1970Text.setTextColor(Color.RED);
-                        optionsBoolean[16] = true;
-                        break;
-                    case 17:
-                        s1960Text.setTextColor(Color.RED);
-                        optionsBoolean[17] = true;
-                        break;
-                    case 18:
-                        zeroToOneText.setTextColor(Color.RED);
-                        optionsBoolean[18] = true;
-                        break;
-                    case 19:
-                        oneToTwoText.setTextColor(Color.RED);
-                        optionsBoolean[19] = true;
-                        break;
-                    case 20:
-                        twoAndAboveText.setTextColor(Color.RED);
-                        optionsBoolean[20] = true;
-                        break;
-//                    default:
-//                        break;
-                }
-            }
-        }
         searchEditText = findViewById(R.id.searchEditText);
         seeResultButton = findViewById(R.id.seeResultButton);
         actionText = findViewById(R.id.actionText);
@@ -296,6 +208,75 @@ public class SearchActivity extends AppCompatActivity {
             Log.i("info", "runnable is not null");
             for (int i = 0; i < 21; i++) {
                 this.optionsBoolean[i] = savedInstanceState.getBoolean("tag" + i + "clicked");
+                if (optionsBoolean[i]) {
+                    switch (i) {
+                        case 0:
+                            actionText.setTextColor(Color.RED);
+                            break;
+                        case 1:
+                            animationText.setTextColor(Color.RED);
+                            break;
+                        case 2:
+                            adventureText.setTextColor(Color.RED);
+                            break;
+                        case 3:
+                            dramaText.setTextColor(Color.RED);
+                            break;
+                        case 4:
+                            crimeText.setTextColor(Color.RED);
+                            break;
+                        case 5:
+                            comedyText.setTextColor(Color.RED);
+                            break;
+                        case 6:
+                            documentaryText.setTextColor(Color.RED);
+                            break;
+                        case 7:
+                            historicText.setTextColor(Color.RED);
+                            break;
+                        case 8:
+                            nineScoreText.setTextColor(Color.RED);
+                            break;
+                        case 9:
+                            eightScoreText.setTextColor(Color.RED);
+                            break;
+                        case 10:
+                            sevenScoreText.setTextColor(Color.RED);
+                            break;
+                        case 11:
+                            sixScoreText.setTextColor(Color.RED);
+                            break;
+                        case 12:
+                            s2010Text.setTextColor(Color.RED);
+                            break;
+                        case 13:
+                            s2000Text.setTextColor(Color.RED);
+                            break;
+                        case 14:
+                            s1990Text.setTextColor(Color.RED);
+                            break;
+                        case 15:
+                            s1980Text.setTextColor(Color.RED);
+                            break;
+                        case 16:
+                            s1970Text.setTextColor(Color.RED);
+                            break;
+                        case 17:
+                            s1960Text.setTextColor(Color.RED);
+                            break;
+                        case 18:
+                            zeroToOneText.setTextColor(Color.RED);
+                            break;
+                        case 19:
+                            oneToTwoText.setTextColor(Color.RED);
+                            break;
+                        case 20:
+                            twoAndAboveText.setTextColor(Color.RED);
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
         }else{
             for (int i = 0; i < 21; i++) {

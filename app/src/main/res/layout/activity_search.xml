@@ -393,8 +393,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="27dp"
                     android:layout_marginTop="10dp"
-                      
-                    android:tag="14"
+                    android:tag="16"
                     android:text="1970's"
                     android:textSize="14sp"
                     app:layout_column="1"
