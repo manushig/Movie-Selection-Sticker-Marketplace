@@ -1,5 +1,6 @@
 package edu.northeastern.movieapi;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 /**
@@ -27,14 +29,18 @@ public class SearchFragment extends Fragment {
     Button nineScoreText, eightScoreText, sevenScoreText, sixScoreText;
     Button s2010Text, s2000Text, s1990Text, s1980Text, s1970Text, s1960Text;
     Button zeroToOneText, oneToTwoText, twoAndAboveText;
+    int bgColor, textColor;
+    int buttonNum;
+    int ratingSelectedNum,yearSelectedNum,timeSelectedNum;
     boolean[] optionsBoolean = new boolean[21];
+    String[] buttonApiString = new String[21];
     boolean genresSelected, ratingSelected, yearSelected, timeSelected;
-    StringBuilder genresSum, ratingSum, yearSum, timeSum;
+    StringBuilder apiLinkSum, genresSum, ratingSum, yearSum, timeSum;
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        for (int i = 0; i < 21; i++) {
+        for (int i = 0; i < buttonNum; i++) {
             outState.putBoolean("tag" + i + "clicked", optionsBoolean[i]);
         }
         outState.putBoolean("genresSelected", genresSelected);
@@ -43,10 +49,44 @@ public class SearchFragment extends Fragment {
         outState.putBoolean("timeSelected", timeSelected);
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_search, container, false);
+    /**
+     * Helper method to change background color to transparent
+     */
+    public void buttonReset(Button name, int tagNum) {
+        name.setBackgroundColor(Color.TRANSPARENT);
+        optionsBoolean[tagNum] = false;
+        if (tagNum >= 0 && tagNum < 8) {
+            genresSum.delete(genresSum.indexOf(buttonApiString[tagNum]), buttonApiString[tagNum].length() + 1);
+        } else if (tagNum >= 8 && tagNum < 12) {
+            ratingSelectedNum--;
+            ratingSum.delete(ratingSum.indexOf(buttonApiString[tagNum]), buttonApiString[tagNum].length() + 1);
+        } else if (tagNum >= 12 && tagNum < 18) {
+            yearSelectedNum--;
+            yearSum.delete(yearSum.indexOf(buttonApiString[tagNum]), buttonApiString[tagNum].length() + 1);
+        } else {
+            timeSelectedNum--;
+            timeSum.delete(timeSum.indexOf(buttonApiString[tagNum]), buttonApiString[tagNum].length() + 1);
+        }
+    }
+
+    /**
+     * Helper method to change background color to transparent
+     */
+    public void buttonSelected(Button name, int tagNum){
+        name.setBackgroundColor(bgColor);
+        optionsBoolean[tagNum] = true;
+        if (tagNum >= 0 && tagNum < 8) {
+            genresSum.append(buttonApiString[tagNum]+",");
+        } else if (tagNum >= 8 && tagNum < 12) {
+            ratingSelectedNum++;
+            ratingSum.append(buttonApiString[tagNum]);
+        } else if (tagNum >= 12 && tagNum < 18) {
+            yearSelectedNum++;
+            yearSum.append(buttonApiString[tagNum]);
+        } else {
+            timeSelectedNum++;
+            timeSum.append(buttonApiString[tagNum]);
+        }
     }
 
     /**
@@ -57,180 +97,200 @@ public class SearchFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getTag().toString()) {
             case "0":
-                actionText.setTextColor(Color.WHITE);
-                genresSum.append("action,");
-                optionsBoolean[0] = true;
-                genresSelected = true;
+                if (optionsBoolean[0]) {
+                    buttonReset(actionText, 0);
+                    break;
+                }
+                buttonSelected(actionText, 0);
                 break;
             case "1":
-                animationText.setTextColor(Color.WHITE);
-                optionsBoolean[1] = true;
-                genresSelected = true;
-                genresSum.append("animation,");
+                if (optionsBoolean[1]) {
+                    buttonReset(animationText, 1);
+                    break;
+                }
+                buttonSelected(animationText, 1);
                 break;
             case "2":
-                adventureText.setTextColor(Color.WHITE);
-                optionsBoolean[2] = true;
-                genresSelected = true;
-                genresSum.append("adventure,");
+                if (optionsBoolean[2]) {
+                    buttonReset(adventureText, 2);
+                    break;
+                }
+                buttonSelected(adventureText, 2);
                 break;
             case "3":
-                dramaText.setTextColor(Color.WHITE);
-                optionsBoolean[3] = true;
-                genresSelected = true;
-                genresSum.append("drama,");
+                if (optionsBoolean[3]) {
+                    buttonReset(dramaText, 3);
+                    break;
+                }
+                buttonSelected(dramaText, 3);
                 break;
             case "4":
-                crimeText.setTextColor(Color.WHITE);
-                optionsBoolean[4] = true;
-                genresSelected = true;
-                genresSum.append("crime,");
+                if (optionsBoolean[4]) {
+                    buttonReset(crimeText, 4);
+                    break;
+                }
+                buttonSelected(crimeText, 4);
                 break;
             case "5":
-                comedyText.setTextColor(Color.WHITE);
-                optionsBoolean[5] = true;
-                genresSelected = true;
-                genresSum.append("comedy,");
+                if (optionsBoolean[5]) {
+                    buttonReset(comedyText, 5);
+                    break;
+                }
+                buttonSelected(comedyText, 5);
                 break;
             case "6":
-                documentaryText.setTextColor(Color.WHITE);
-                optionsBoolean[6] = true;
-                genresSelected = true;
-                genresSum.append("documentary,");
+                if (optionsBoolean[6]) {
+                    buttonReset(documentaryText, 6);
+                    break;
+                }
+                buttonSelected(documentaryText, 6);
                 break;
             case "7":
-                historicText.setTextColor(Color.WHITE);
-                optionsBoolean[7] = true;
-                genresSelected = true;
-                genresSum.append("history,");
+                if (optionsBoolean[7]) {
+                    buttonReset(historicText, 7);
+                    break;
+                }
+                buttonSelected(historicText, 7);
                 break;
             case "8":
-                if (!ratingSelected) {
-                    Log.i("info", "wrong");
-                    ratingSelected = true;
-                    nineScoreText.setTextColor(Color.WHITE);
-                    optionsBoolean[8] = true;
-                    ratingSum.append("9.0,10");
+                if (optionsBoolean[8]) {
+                    buttonReset(nineScoreText, 8);
+                    break;
+                }
+                if (ratingSelectedNum == 0) {
+                    buttonSelected(nineScoreText, 8);
                 } else {
                     Toast.makeText(requireActivity(), "Only can select one score", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "9":
-                if (!ratingSelected) {
-                    ratingSelected = true;
-                    eightScoreText.setTextColor(Color.WHITE);
-                    optionsBoolean[9] = true;
-                    ratingSum.append("8.0,10");
+                if (optionsBoolean[9]) {
+                    buttonReset(eightScoreText, 9);
+                    break;
+                }
+                if (ratingSelectedNum == 0) {
+                    buttonSelected(eightScoreText, 9);
                 } else {
                     Toast.makeText(requireActivity(), "Only can select one score", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "10":
-                if (!ratingSelected) {
-                    ratingSelected = true;
-                    sevenScoreText.setTextColor(Color.WHITE);
-                    optionsBoolean[10] = true;
-                    ratingSum.append("7.0,10");
+                if (optionsBoolean[10]) {
+                    buttonReset(sevenScoreText, 10);
+                    break;
+                }
+                if (ratingSelectedNum == 0) {
+                    buttonSelected(sevenScoreText, 10);
                 } else {
                     Toast.makeText(requireActivity(), "Only can select one score", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "11":
-                if (!ratingSelected) {
-                    ratingSelected = true;
-                    sixScoreText.setTextColor(Color.WHITE);
-                    optionsBoolean[11] = true;
-                    ratingSum.append("6.0,10");
+                if (optionsBoolean[11]) {
+                    buttonReset(sixScoreText, 11);
+                    break;
+                }
+                if (ratingSelectedNum == 0) {
+                    buttonSelected(sixScoreText, 11);
                 } else {
                     Toast.makeText(requireActivity(), "Only can select one score", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "12":
-                if (!yearSelected) {
-                    yearSelected = true;
-                    s2010Text.setTextColor(Color.WHITE);
-                    optionsBoolean[12] = true;
-                    yearSum.append("2010-01-01,2023-01-01");
+                if (optionsBoolean[12]) {
+                    buttonReset(s2010Text, 12);
+                    break;
+                }
+                if (yearSelectedNum == 0) {
+                    buttonSelected(s2010Text, 12);
                 } else {
                     Toast.makeText(requireActivity(), "Only can select one period and later", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "13":
-                if (!yearSelected) {
-                    s2000Text.setTextColor(Color.WHITE);
-                    optionsBoolean[13] = true;
-                    yearSelected = true;
-                    yearSum.append("2000-01-01,2010-01-01");
+                if (optionsBoolean[13]) {
+                    buttonReset(s2000Text, 13);
+                    break;
+                }
+                if (yearSelectedNum == 0) {
+                    buttonSelected(s2000Text, 13);
                 } else {
                     Toast.makeText(requireActivity(), "Only can select one period and later", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "14":
-                if (!yearSelected) {
-                    s1990Text.setTextColor(Color.WHITE);
-                    optionsBoolean[14] = true;
-                    yearSelected = true;
-                    yearSum.append("1990-01-01,2000-01-01");
+                if (optionsBoolean[14]) {
+                    buttonReset(s1990Text, 14);
+                    break;
+                }
+                if (yearSelectedNum == 0) {
+                    buttonSelected(s1990Text, 14);
                 } else {
                     Toast.makeText(requireActivity(), "Only can select one period", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "15":
-                if (!yearSelected) {
-                    s1980Text.setTextColor(Color.WHITE);
-                    optionsBoolean[15] = true;
-                    yearSelected = true;
-                    yearSum.append("1980-01-01,1990-01-01");
+                if (optionsBoolean[15]) {
+                    buttonReset(s1980Text, 15);
+                    break;
+                }
+                if (yearSelectedNum == 0) {
+                    buttonSelected(s1980Text, 15);
                 } else {
                     Toast.makeText(requireActivity(), "Only can select one period", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "16":
-                if (!yearSelected) {
-                    s1970Text.setTextColor(Color.WHITE);
-                    optionsBoolean[16] = true;
-                    yearSelected = true;
-                    yearSum.append("1970-01-01,1980-01-01");
+                if (optionsBoolean[16]) {
+                    buttonReset(s1970Text, 16);
+                    break;
+                }
+                if (yearSelectedNum == 0) {
+                    buttonSelected(s1970Text, 16);
                 } else {
                     Toast.makeText(requireActivity(), "Only can select one period", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "17":
-                if (!yearSelected) {
-                    s1960Text.setTextColor(Color.WHITE);
-                    optionsBoolean[17] = true;
-                    yearSelected = true;
-                    yearSum.append("1960-01-01,1970-01-01");
+                if (optionsBoolean[17]) {
+                    buttonReset(s1960Text, 17);
+                    break;
+                }
+                if (yearSelectedNum == 0) {
+                    buttonSelected(s1960Text, 17);
                 } else {
                     Toast.makeText(requireActivity(), "Only can select one period", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "18":
-                if (!timeSelected) {
-                    zeroToOneText.setTextColor(Color.WHITE);
-                    optionsBoolean[18] = true;
-                    timeSelected = true;
-                    timeSum.append("0,60");
+                if (optionsBoolean[18]) {
+                    buttonReset(zeroToOneText, 18);
+                    break;
+                }
+                if (timeSelectedNum == 0) {
+                    buttonSelected(zeroToOneText, 18);
                 } else {
                     Toast.makeText(requireActivity(), "Only can select one range", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "19":
-                if (!timeSelected) {
-                    oneToTwoText.setTextColor(Color.WHITE);
-                    optionsBoolean[19] = true;
-                    timeSelected = true;
-                    timeSum.append("60,120");
+                if (optionsBoolean[19]) {
+                    buttonReset(oneToTwoText, 19);
+                    break;
+                }
+                if (timeSelectedNum == 0) {
+                    buttonSelected(oneToTwoText, 19);
                 } else {
                     Toast.makeText(requireActivity(), "Only can select one range", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "20":
-                if (!timeSelected) {
-                    twoAndAboveText.setTextColor(Color.WHITE);
-                    optionsBoolean[20] = true;
-                    timeSelected = true;
-                    timeSum.append("120,300");
+                if (optionsBoolean[20]) {
+                    buttonReset(twoAndAboveText, 20);
+                    break;
+                }
+                if (timeSelectedNum == 0) {
+                    buttonSelected(twoAndAboveText, 20);
                 } else {
                     Toast.makeText(requireActivity(), "Only can select one range", Toast.LENGTH_SHORT).show();
                 }
@@ -242,32 +302,35 @@ public class SearchFragment extends Fragment {
 
     /**
      * A method that make all clicked filter options back to the original status.
+     *
+     * @param view the search activity view
      */
-    public void clearOptionsClicked() {
-        actionText.setTextColor(Color.BLACK);
-        animationText.setTextColor(Color.BLACK);
-        adventureText.setTextColor(Color.BLACK);
-        dramaText.setTextColor(Color.BLACK);
-        crimeText.setTextColor(Color.BLACK);
-        comedyText.setTextColor(Color.BLACK);
-        documentaryText.setTextColor(Color.BLACK);
-        historicText.setTextColor(Color.BLACK);
-        nineScoreText.setTextColor(Color.BLACK);
-        eightScoreText.setTextColor(Color.BLACK);
-        sevenScoreText.setTextColor(Color.BLACK);
-        sixScoreText.setTextColor(Color.BLACK);
-        s2010Text.setTextColor(Color.BLACK);
-        s2000Text.setTextColor(Color.BLACK);
-        s1990Text.setTextColor(Color.BLACK);
-        s1980Text.setTextColor(Color.BLACK);
-        s1970Text.setTextColor(Color.BLACK);
-        s1960Text.setTextColor(Color.BLACK);
-        zeroToOneText.setTextColor(Color.BLACK);
-        oneToTwoText.setTextColor(Color.BLACK);
-        twoAndAboveText.setTextColor(Color.BLACK);
+    public void clearOptionsClicked(View view) {
+        //Set back text color
+        actionText.setBackgroundColor(Color.TRANSPARENT);
+        animationText.setBackgroundColor(Color.TRANSPARENT);
+        adventureText.setBackgroundColor(Color.TRANSPARENT);
+        dramaText.setBackgroundColor(Color.TRANSPARENT);
+        crimeText.setBackgroundColor(Color.TRANSPARENT);
+        comedyText.setBackgroundColor(Color.TRANSPARENT);
+        documentaryText.setBackgroundColor(Color.TRANSPARENT);
+        historicText.setBackgroundColor(Color.TRANSPARENT);
+        nineScoreText.setBackgroundColor(Color.TRANSPARENT);
+        eightScoreText.setBackgroundColor(Color.TRANSPARENT);
+        sevenScoreText.setBackgroundColor(Color.TRANSPARENT);
+        sixScoreText.setBackgroundColor(Color.TRANSPARENT);
+        s2010Text.setBackgroundColor(Color.TRANSPARENT);
+        s2000Text.setBackgroundColor(Color.TRANSPARENT);
+        s1990Text.setBackgroundColor(Color.TRANSPARENT);
+        s1980Text.setBackgroundColor(Color.TRANSPARENT);
+        s1970Text.setBackgroundColor(Color.TRANSPARENT);
+        s1960Text.setBackgroundColor(Color.TRANSPARENT);
+        zeroToOneText.setBackgroundColor(Color.TRANSPARENT);
+        oneToTwoText.setBackgroundColor(Color.TRANSPARENT);
+        twoAndAboveText.setBackgroundColor(Color.TRANSPARENT);
 
         //Set optionBoolean[] back to false help onSaveInstanceState memory
-        for (int i = 0; i < 21; i++) {
+        for (int i = 0; i < buttonNum; i++) {
             optionsBoolean[i] = false;
         }
 
@@ -276,18 +339,25 @@ public class SearchFragment extends Fragment {
         ratingSelected = false;
         timeSelected = false;
         yearSelected = false;
+
+        ratingSelectedNum = 0;
+        yearSelectedNum = 0;
+        timeSelectedNum = 0;
     }
 
     /**
      * A on click method of cancel edit button
+     *
+     * @param view the search activity view
      */
-    public void cancelEdit() {
+    public void cancelEdit(View view) {
         searchEditText.setText("");
     }
 
     /**
      * A helper method to initialize view in searching page
      */
+    @SuppressLint("ResourceType")
     public void initView(View view) {
         searchEditText = view.findViewById(R.id.searchEditText);
         seeResultButton = view.findViewById(R.id.seeResultButton);
@@ -315,40 +385,137 @@ public class SearchFragment extends Fragment {
 
         searchEditText.setFocusable(false);
 
-        view.findViewById(R.id.cancelEditTextButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cancelEdit();
-            }
-        });
+        bgColor = ContextCompat.getColor(requireContext(), R.color.bg_color);
+        textColor = ContextCompat.getColor(requireContext(), R.color.text_color);
 
-        view.findViewById(R.id.clearFilterButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clearOptionsClicked();
+        buttonNum = 21;
+        ratingSelectedNum = 0;
+        yearSelectedNum = 0;
+        timeSelectedNum = 0;
+
+        //the relative api string
+        for (int i = 0; i < buttonNum; i++) {
+            switch (i) {
+                case 0:
+                    buttonApiString[i] = "action";
+                    break;
+                case 1:
+                    buttonApiString[i] = "animation";
+                    break;
+                case 2:
+                    buttonApiString[i] = "adventure";
+                    break;
+                case 3:
+                    buttonApiString[i] = "drama";
+                    break;
+                case 4:
+                    buttonApiString[i] = "crime";
+                    break;
+                case 5:
+                    buttonApiString[i] = "comedy";
+                    break;
+                case 6:
+                    buttonApiString[i] = "documentary";
+                    break;
+                case 7:
+                    buttonApiString[i] = "history";
+                    break;
+                case 8:
+                    buttonApiString[i] = "9.0,10";
+                    break;
+                case 9:
+                    buttonApiString[i] = "8.0,10";
+                    break;
+                case 10:
+                    buttonApiString[i] = "7.0,10";
+                    break;
+                case 11:
+                    buttonApiString[i] = "6.0,10";
+                    break;
+                case 12:
+                    buttonApiString[i] = "2010-01-01,2023-01-01";
+                    break;
+                case 13:
+                    buttonApiString[i] = "2000-01-01,2010-01-01";
+                    break;
+                case 14:
+                    buttonApiString[i] = "1990-01-01,2000-01-01";
+                    break;
+                case 15:
+                    buttonApiString[i] = "1980-01-01,1990-01-01";
+                    break;
+                case 16:
+                    buttonApiString[i] = "1970-01-01,1980-01-01";
+                    break;
+                case 17:
+                    buttonApiString[i] = "1950-01-01,1970-01-01";
+                    break;
+                case 18:
+                    buttonApiString[i] = "0,1";
+                    break;
+                case 19:
+                    buttonApiString[i] = "1,2";
+                    break;
+                case 20:
+                    buttonApiString[i] = "2,5";
+                    break;
+                default:
+                    break;
             }
-        });
+        }
     }
 
     public String createApiLinkSum() {
-        //Make the full link of API including all filters
-        StringBuilder apiLinkSum = new StringBuilder();
+        for (int i = 0; i < 8; i++) {
+            if (optionsBoolean[i]){
+                genresSelected = true;
+                break;
+            }
+        }
+        for (int i = 8; i < 12; i++) {
+            if (optionsBoolean[i]){
+                ratingSelected = true;
+                break;
+            }
+        }
+        for (int i = 12; i < 18; i++) {
+            if (optionsBoolean[i]){
+                yearSelected = true;
+                break;
+            }
+        }
+        for (int i = 18; i < buttonNum; i++) {
+            if (optionsBoolean[i]){
+                timeSelected = true;
+                break;
+            }
+        }
+        //Make the full link of API including all filters data
+        apiLinkSum.append("https://imdb-api.com/API/AdvancedSearch/k_05231n2i");
+
+        apiLinkSum.append("?");
         if (!searchEditText.getText().toString().equals("")) {
             apiLinkSum.append("title=");
             apiLinkSum.append(searchEditText.getText().toString());
             apiLinkSum.append("&");
+        } else {
+            apiLinkSum.deleteCharAt(apiLinkSum.lastIndexOf("&"));
         }
 
         if (ratingSelected) {
             apiLinkSum.append("user_rating=");
             apiLinkSum.append(ratingSum);
             apiLinkSum.append("&");
+        } else {
+            apiLinkSum.deleteCharAt(apiLinkSum.lastIndexOf("&"));
         }
 
         if (yearSelected) {
             apiLinkSum.append("release_date=");
             apiLinkSum.append(yearSum);
             apiLinkSum.append("&");
+        } else {
+            apiLinkSum.deleteCharAt(apiLinkSum.lastIndexOf("&"));
         }
 
         if (genresSelected) {
@@ -356,101 +523,105 @@ public class SearchFragment extends Fragment {
             apiLinkSum.append(genresSum);
             apiLinkSum.deleteCharAt(apiLinkSum.length() - 1);
             apiLinkSum.append("&");
+        } else {
+            apiLinkSum.deleteCharAt(apiLinkSum.lastIndexOf("&"));
         }
 
         if (timeSelected) {
             apiLinkSum.append("moviemeter=");
             apiLinkSum.append(timeSum);
-        }
-
-        if (apiLinkSum.charAt(apiLinkSum.length() - 1) == '&') {
-            apiLinkSum.deleteCharAt(apiLinkSum.length() - 1);
+        } else {
+            apiLinkSum.deleteCharAt(apiLinkSum.lastIndexOf("&"));
         }
 
         return apiLinkSum.toString();
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_search, container, false);
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Initialize view
         initView(view);
-        searchEditText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                searchEditText.setFocusableInTouchMode(true);
-                searchEditText.requestFocus();
-                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.showSoftInput(searchEditText, InputMethodManager.SHOW_IMPLICIT);
-            }
+        searchEditText.setOnClickListener(v -> {
+            searchEditText.setFocusableInTouchMode(true);
+            searchEditText.requestFocus();
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(searchEditText, InputMethodManager.SHOW_IMPLICIT);
         });
         //If the savedInstanceState have called, make these action
         if (savedInstanceState != null) {
-            for (int i = 0; i < 21; i++) {
+            for (int i = 0; i < buttonNum; i++) {
                 this.optionsBoolean[i] = savedInstanceState.getBoolean("tag" + i + "clicked");
                 if (optionsBoolean[i]) {
                     switch (i) {
                         case 0:
-                            actionText.setTextColor(Color.WHITE);
+                            actionText.setBackgroundColor(bgColor);
                             break;
                         case 1:
-                            animationText.setTextColor(Color.WHITE);
+                            animationText.setBackgroundColor(bgColor);
                             break;
                         case 2:
-                            adventureText.setTextColor(Color.WHITE);
+                            adventureText.setBackgroundColor(bgColor);
                             break;
                         case 3:
-                            dramaText.setTextColor(Color.WHITE);
+                            dramaText.setBackgroundColor(bgColor);
                             break;
                         case 4:
-                            crimeText.setTextColor(Color.WHITE);
+                            crimeText.setBackgroundColor(bgColor);
                             break;
                         case 5:
-                            comedyText.setTextColor(Color.WHITE);
+                            comedyText.setBackgroundColor(bgColor);
                             break;
                         case 6:
-                            documentaryText.setTextColor(Color.WHITE);
+                            documentaryText.setBackgroundColor(bgColor);
                             break;
                         case 7:
-                            historicText.setTextColor(Color.WHITE);
+                            historicText.setBackgroundColor(bgColor);
                             break;
                         case 8:
-                            nineScoreText.setTextColor(Color.WHITE);
+                            nineScoreText.setBackgroundColor(bgColor);
                             break;
                         case 9:
-                            eightScoreText.setTextColor(Color.WHITE);
+                            eightScoreText.setBackgroundColor(bgColor);
                             break;
                         case 10:
-                            sevenScoreText.setTextColor(Color.WHITE);
+                            sevenScoreText.setBackgroundColor(bgColor);
                             break;
                         case 11:
-                            sixScoreText.setTextColor(Color.WHITE);
+                            sixScoreText.setBackgroundColor(bgColor);
                             break;
                         case 12:
-                            s2010Text.setTextColor(Color.WHITE);
+                            s2010Text.setBackgroundColor(bgColor);
                             break;
                         case 13:
-                            s2000Text.setTextColor(Color.WHITE);
+                            s2000Text.setBackgroundColor(bgColor);
                             break;
                         case 14:
-                            s1990Text.setTextColor(Color.WHITE);
+                            s1990Text.setBackgroundColor(bgColor);
                             break;
                         case 15:
-                            s1980Text.setTextColor(Color.WHITE);
+                            s1980Text.setBackgroundColor(bgColor);
                             break;
                         case 16:
-                            s1970Text.setTextColor(Color.WHITE);
+                            s1970Text.setBackgroundColor(bgColor);
                             break;
                         case 17:
-                            s1960Text.setTextColor(Color.WHITE);
+                            s1960Text.setBackgroundColor(bgColor);
                             break;
                         case 18:
-                            zeroToOneText.setTextColor(Color.WHITE);
+                            zeroToOneText.setBackgroundColor(bgColor);
                             break;
                         case 19:
-                            oneToTwoText.setTextColor(Color.WHITE);
+                            oneToTwoText.setBackgroundColor(bgColor);
                             break;
                         case 20:
-                            twoAndAboveText.setTextColor(Color.WHITE);
+                            twoAndAboveText.setBackgroundColor(bgColor);
                             break;
                         default:
                             break;
@@ -468,7 +639,7 @@ public class SearchFragment extends Fragment {
             ratingSelected = false;
             yearSelected = false;
             timeSelected = false;
-            for (int i = 0; i < 21; i++) {
+            for (int i = 0; i < buttonNum; i++) {
                 optionsBoolean[i] = false;
             }
         }
@@ -477,6 +648,8 @@ public class SearchFragment extends Fragment {
 //        Intent intent = new Intent(SearchActivity.this, ResultActivity.class);
 //        intent.putExtra("searchKeyword", searchEditText.getText().toString());
 //        startActivity(intent);
+
+        apiLinkSum = new StringBuilder();
         genresSum = new StringBuilder();
         ratingSum = new StringBuilder();
         yearSum = new StringBuilder();
@@ -509,16 +682,14 @@ public class SearchFragment extends Fragment {
         twoAndAboveText.setOnClickListener(this::onClick);
 
 
-        seeResultButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String searchKeyWord = createApiLinkSum();
-                Log.i("apiLinkSum", searchKeyWord);
-                //String passed to searchKeyword should be like this:  ?user_rating=8.0,&release_date=2010-01-01,&genres=action,adventure&moviemeter=2,3
-                Intent intent = new Intent(getActivity(), ResultActivity.class);
-                intent.putExtra("searchKeyword", searchKeyWord);
-                startActivity(intent);
-            }
+        seeResultButton.setOnClickListener(v -> {
+            String searchKeyWord = createApiLinkSum();
+            Log.i("apiLinkSum", searchKeyWord);
+
+            Intent intent = new Intent(getActivity(), ResultActivity.class);
+            intent.putExtra("searchKeyword", searchKeyWord);
+            intent.putExtra("searchKeyword", searchEditText.getText().toString());
+            startActivity(intent);
         });
     }
 }

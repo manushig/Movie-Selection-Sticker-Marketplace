@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#020202"
     android:orientation="vertical"
     tools:context=".SearchFragment">
 
@@ -13,26 +14,32 @@
         android:layout_gravity="top">
 
         <ImageView
-            android:layout_width="48dp"
-            android:layout_height="40dp"
+            android:id="@+id/magnifierImageView"
+            android:layout_width="56dp"
+            android:layout_height="48dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/searchicon" />
+            android:src="@drawable/magnifier" />
 
         <EditText
             android:id="@+id/searchEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@color/bg_color"
             android:hint="Search"
-            android:textColorHint="@color/white"
-            android:inputType="text" />
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHighlight="@color/white"
+            android:textColorHint="@color/white" />
 
         <Button
             android:id="@+id/cancelEditTextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#534B4B"
+            android:background="@color/black"
+            android:onClick="cancelEdit"
             android:text="CANCEL"
             android:textColor="#FBFBFB"
             android:textStyle="bold" />
@@ -53,10 +60,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="7dp"
                 android:layout_marginTop="8dp"
+                android:background="#3E7BDFC8"
                 android:text="Rating:"
+                android:textColor="#03A9F4"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/gridLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
 
             <TextView
                 android:id="@+id/timeTextView"
@@ -64,7 +73,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="7dp"
                 android:layout_marginTop="8dp"
+                android:background="#3E7BDFC8"
                 android:text="Time:"
+                android:textColor="#03A9F4"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/gridLayout3" />
@@ -75,7 +86,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="7dp"
                 android:layout_marginTop="8dp"
+                android:background="#3E7BDFC8"
+                android:shadowColor="@color/white"
                 android:text="Year:"
+                android:textColor="#03A9F4"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/gridLayout2" />
@@ -86,90 +100,122 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="7dp"
                 android:layout_marginTop="8dp"
+                android:background="#3E7BDFC8"
                 android:text="Genre:"
+                android:textColor="#03A9F4"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <GridLayout
-                android:id="@+id/gridLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+            <TableLayout
+                android:id="@+id/tableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/genreTextView">
 
-                <Button
-                    android:id="@+id/actionText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tag="0"
-                    android:text="Action"
-                    android:textSize="13sp" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <Button
-                    android:id="@+id/animationText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tag="1"
-                    android:text="Animation"
-                    android:textSize="13sp" />
+                    <Button
+                        android:id="@+id/actionText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="0"
+                        android:layout_column="0"
+                        android:background="@android:color/transparent"
+                        android:tag="0"
+                        android:text="Action"
+                        android:textColor="@color/white"
+                        android:textSize="13sp" />
 
-                <Button
-                    android:id="@+id/adventureText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tag="2"
-                    android:text="Adventure"
-                    android:textSize="13sp" />
+                    <Button
+                        android:id="@+id/animationText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:tag="1"
+                        android:text="Animation"
+                        android:textColor="@color/white"
+                        android:textSize="13sp" />
 
-                <Button
-                    android:id="@+id/dramaText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tag="3"
-                    android:textSize="13sp"
-                    android:text="Drama" />
+                    <Button
+                        android:id="@+id/adventureText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:tag="2"
+                        android:text="Adventure"
+                        android:textColor="@color/white"
+                        android:textSize="13sp" />
 
-                <Button
-                    android:id="@+id/crimeText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_row="1"
-                    android:layout_column="0"
-                    android:tag="4"
-                    android:text="Crime"
-                    android:textSize="13sp" />
+                    <Button
+                        android:id="@+id/dramaText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:tag="3"
+                        android:text="Drama"
+                        android:textColor="@color/white"
+                        android:textSize="13sp" />
+                </TableRow>
 
-                <Button
-                    android:id="@+id/comedyText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tag="5"
-                    android:text="Comedy"
-                    android:textSize="13sp" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <Button
-                    android:id="@+id/documentaryText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tag="6"
-                    android:text="Documentary"
-                    android:textSize="13sp" />
+                    <Button
+                        android:id="@+id/crimeText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="1"
+                        android:layout_column="0"
+                        android:background="@android:color/transparent"
+                        android:tag="4"
+                        android:text="Crime"
+                        android:textColor="@color/white"
+                        android:textSize="13sp" />
 
-                <Button
-                    android:id="@+id/historicalText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tag="7"
-                    android:text="Historical"
-                    android:textSize="13sp" />
+                    <Button
+                        android:id="@+id/comedyText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:tag="5"
+                        android:text="Comedy"
+                        android:textColor="@color/white"
+                        android:textSize="13sp" />
 
-            </GridLayout>
+                    <Button
+                        android:id="@+id/documentaryText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:tag="6"
+                        android:text="Documentary"
+                        android:textColor="@color/white"
+                        android:textSize="13sp" />
+
+                    <Button
+                        android:id="@+id/historicalText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:tag="7"
+                        android:text="History"
+                        android:textColor="@color/white"
+                        android:textSize="13sp" />
+                </TableRow>
+
+            </TableLayout>
 
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/transparent"
+                android:textColor="@color/white"
                 app:columnCount="3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -182,8 +228,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="10dp"
+                    android:background="@android:color/transparent"
                     android:tag="18"
                     android:text="0 TO 1 HOUR"
+                    android:textColor="@color/white"
                     android:textSize="13sp"
                     android:visibility="visible"
                     app:layout_column="0"
@@ -195,8 +243,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="10dp"
+                    android:background="@android:color/transparent"
                     android:tag="19"
                     android:text="1 TO 2 HOURS"
+                    android:textColor="@color/white"
                     android:textSize="13sp"
                     android:visibility="visible"
                     app:layout_column="1"
@@ -208,8 +258,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="10dp"
+                    android:background="@android:color/transparent"
                     android:tag="20"
                     android:text="2 Hours above"
+                    android:textColor="@color/white"
                     android:textSize="13sp"
                     android:visibility="visible"
                     app:layout_column="2"
@@ -220,7 +272,7 @@
                 android:id="@+id/gridLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 app:columnCount="4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -231,11 +283,12 @@
                     android:id="@+id/nineScoreText"
                     android:layout_width="74dp"
                     android:layout_height="40dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="10dp"
 
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/transparent"
                     android:tag="8"
                     android:text="9+"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     app:layout_column="0"
                     app:layout_row="0" />
@@ -246,9 +299,10 @@
                     android:layout_height="40dp"
                     android:layout_marginStart="27dp"
                     android:layout_marginTop="10dp"
-
+                    android:background="@android:color/transparent"
                     android:tag="9"
                     android:text="8+"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     app:layout_column="1"
                     app:layout_row="0" />
@@ -259,9 +313,10 @@
                     android:layout_height="40dp"
                     android:layout_marginStart="27dp"
                     android:layout_marginTop="10dp"
-
+                    android:background="@android:color/transparent"
                     android:tag="10"
                     android:text="7+"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     app:layout_column="2"
                     app:layout_row="0" />
@@ -272,9 +327,10 @@
                     android:layout_height="40dp"
                     android:layout_marginStart="27dp"
                     android:layout_marginTop="10dp"
-
+                    android:background="@android:color/transparent"
                     android:tag="11"
                     android:text="6+"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     app:layout_column="3"
                     app:layout_row="0" />
@@ -284,7 +340,7 @@
                 android:id="@+id/gridLayout3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 app:columnCount="3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -295,10 +351,11 @@
                     android:id="@+id/s2010Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
                     android:layout_marginTop="10dp"
+                    android:background="@android:color/transparent"
                     android:tag="12"
                     android:text="2010's"
+                    android:textColor="@color/white"
                     app:layout_column="0"
                     app:layout_row="0" />
 
@@ -308,9 +365,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="27dp"
                     android:layout_marginTop="10dp"
-
+                    android:background="@android:color/transparent"
                     android:tag="13"
                     android:text="2000's"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     app:layout_column="1"
                     app:layout_row="0" />
@@ -321,9 +379,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="27dp"
                     android:layout_marginTop="10dp"
-
+                    android:background="@android:color/transparent"
                     android:tag="14"
                     android:text="1990's"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     app:layout_column="2"
                     app:layout_row="0" />
@@ -334,11 +393,11 @@
                     android:layout_height="wrap_content"
                     android:layout_row="1"
                     android:layout_column="0"
-                    android:layout_marginStart="8dp"
                     android:layout_marginTop="10dp"
-
+                    android:background="@android:color/transparent"
                     android:tag="15"
                     android:text="1980's"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     app:layout_column="0"
                     app:layout_row="1" />
@@ -349,8 +408,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="27dp"
                     android:layout_marginTop="10dp"
+                    android:background="@android:color/transparent"
                     android:tag="16"
                     android:text="1970's"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     app:layout_column="1"
                     app:layout_row="1" />
@@ -361,9 +422,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="27dp"
                     android:layout_marginTop="10dp"
-
+                    android:background="@android:color/transparent"
                     android:tag="17"
                     android:text="1960's and Earlier"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     app:layout_column="2"
                     app:layout_row="1" />
@@ -382,9 +444,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#534B4B"
+            android:background="#8C8282"
+            android:onClick="clearOptionsClicked"
             android:text="CLEAR"
-            android:textColor="#A39F9F"
+            android:textColor="#534848"
             android:textSize="24sp" />
 
         <Button
@@ -394,7 +457,7 @@
             android:layout_weight="2"
             android:background="#F6C01E"
             android:text="SEE RESULTS"
-            android:textSize="24sp"  />
+            android:textSize="24sp" />
     </LinearLayout>
 
 </LinearLayout>
