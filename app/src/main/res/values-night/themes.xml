@@ -3,5 +3,7 @@
     <style name="Base.Theme.MovieAPI" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="android:windowBackground">@android:color/background_dark</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
     </style>
 </resources>

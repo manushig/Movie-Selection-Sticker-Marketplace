@@ -27,7 +27,8 @@
             android:exported="false" />
         <activity
             android:name=".ResultActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Base.Theme.MovieAPI"/>
         <activity
             android:name=".SearchActivity"
             android:exported="false" />

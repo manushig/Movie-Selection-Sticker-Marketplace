@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/background_dark"
     tools:context=".ResultActivity">
 
     <TextView
@@ -15,8 +16,10 @@
         android:textStyle="bold"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
+        android:textColor="@android:color/white"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
     <ProgressBar
         android:id="@+id/progressBar"
