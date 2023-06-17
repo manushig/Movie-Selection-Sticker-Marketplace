@@ -27,6 +27,8 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
 
     public interface OnItemClickListener {
         void onItemClick(int position);
+
+        void onImageClick(int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -127,10 +129,11 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         TextView textViewContentRating;
         TextView textViewMovieRating;
         TextView textViewMovieDuration;
-
+        ImageView imageViewPlay;
         public MovieViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
 
+            imageViewPlay = itemView.findViewById(R.id.imageViewPlay);
             constraintLayout = itemView.findViewById(R.id.constraintLayoutMovieItem);
             imageViewMovie = itemView.findViewById(R.id.imageViewMovie);
             textViewMovieTitle = itemView.findViewById(R.id.textViewMovieTitle);
@@ -138,6 +141,17 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
             textViewMovieRating = itemView.findViewById(R.id.textViewMovieRating);
             textViewMovieDuration = itemView.findViewById(R.id.textViewMovieDuration);
 
+            imageViewPlay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onImageClick(position);
+                        }
+                    }
+                }
+            });
             constraintLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

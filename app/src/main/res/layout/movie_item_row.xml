@@ -17,6 +17,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/imageViewPlay"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/playcircle"
+        android:contentDescription="Play Button"
+        app:layout_constraintBottom_toBottomOf="@id/imageViewMovie"
+        app:layout_constraintEnd_toEndOf="@id/imageViewMovie"
+        app:layout_constraintStart_toStartOf="@id/imageViewMovie"
+        app:layout_constraintTop_toTopOf="@id/imageViewMovie" />
+
     <TextView
         android:id="@+id/textViewMovieTitle"
         android:layout_width="wrap_content"

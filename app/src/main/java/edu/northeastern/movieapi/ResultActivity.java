@@ -89,32 +89,17 @@ public class ResultActivity extends AppCompatActivity {
         movieListAdapter.setOnItemClickListener(new MovieListAdapter.OnItemClickListener() {
 
             @Override
+            public void onImageClick(int position) {
+                launchTrailer(position);
+            }
+
+            @Override
             public void onItemClick(int position) {
                 launchItem(position);
             }
         });
     }
 
-//    private List<Movie> getMovieList() {
-//        List<Movie> movies = new ArrayList<>();
-//
-
-        // Add movies to the list
-//        movies.add(new Movie("Spider-Man: Into the Spider-Verse", "https://m.media-amazon.com/images/M/MV5BNmMzODkwNDktMTkyMy00MmU5LWE4MGMtYzIzZjdjNmJiZDRiXkEyXkFqcGdeQXVyNDU1NDQ0NzE@._V1_Ratio0.7041_AL_.jpg", "1h 57m", "PG", "8.4", "1"));
-//        movies.add(new Movie("The Flash", "https://m.media-amazon.com/images/M/MV5BMDY0MGJlYzktNzZiNS00MWZhLWJjNWEtNmJmZTg3NjMwZDYwXkEyXkFqcGdeQXVyMTUzOTcyODA5._V1_Ratio0.6837_AL_.jpg", "2h 24m", "PG-13", "", "2"));
-//        movies.add(new Movie("Avatar: The Way of Water", "https://imdb-api.com/images/original/nopicture.jpg", "3h 12m", "PG-13", "7.7", "3"));
-//        movies.add(new Movie("Fast X",
-//                "https://imdb-api.com/images/original/nopicture.jpg", "2h 21m", "PG-13", "6.1", "4"));
-//        movies.add(new Movie("Avatar: The Way of Water", "https://imdb-api.com/images/original/nopicture.jpg", "3h 12m", "PG-13", "7.7", "3"));
-//        movies.add(new Movie("Fast X",
-//                "https://imdb-api.com/images/original/nopicture.jpg", "2h 21m", "PG-13", "6.1", "4"));
-//        movies.add(new Movie("Avatar: The Way of Water", "https://imdb-api.com/images/original/nopicture.jpg", "3h 12m", "PG-13", "7.7", "3"));
-//        movies.add(new Movie("Fast X",
-//                "https://imdb-api.com/images/original/nopicture.jpg", "2h 21m", "PG-13", "6.1", "4"));
-        // Add more movies as needed
-
-//        return movies;
-//    }
 
 
     public void launchItem(int position) {
@@ -129,6 +114,17 @@ public class ResultActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
+    public void launchTrailer(int position) {
+
+        String selectedId = ((Movie) moviesList.get(position)).getId();
+
+        Intent intent = new Intent(ResultActivity.this, VideoActivity.class);
+        intent.putExtra("movieId",selectedId);
+        startActivity(intent);
+
+    }
+
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
