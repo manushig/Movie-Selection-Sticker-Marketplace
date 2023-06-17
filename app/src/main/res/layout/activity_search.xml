@@ -1,394 +1,450 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".SearchActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:weightSum="1">
 
-        <TextView
-            android:id="@+id/actionText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="27dp"
-            android:layout_marginTop="20dp"
-            android:onClick="optionClicked"
-            android:tag="0"
-            android:text="Action"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/genreTextView" />
-
-        <TextView
-            android:id="@+id/animationText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="20dp"
-            android:onClick="optionClicked"
-            android:tag="1"
-            android:text="Animation"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/actionText"
-            app:layout_constraintTop_toBottomOf="@+id/genreTextView" />
-        <TextView
-            android:id="@+id/adventureText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="43dp"
-            android:layout_marginTop="20dp"
-            android:text="Adventure"
-            android:onClick="optionClicked"
-            android:tag="2"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/animationText"
-            app:layout_constraintTop_toBottomOf="@+id/genreTextView" />
-        <TextView
-            android:id="@+id/dramaText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="20dp"
-            android:textSize="16sp"
-            android:onClick="optionClicked"
-            android:tag="3"
-            android:text="Drama"
-            app:layout_constraintStart_toEndOf="@+id/adventureText"
-            app:layout_constraintTop_toBottomOf="@+id/genreTextView" />
-
-        <TextView
-            android:id="@+id/crimeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="27dp"
-            android:layout_marginTop="20dp"
-            android:text="Crime"
-            android:onClick="optionClicked"
-            android:tag="4"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/actionText" />
-        <TextView
-            android:id="@+id/comedyText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="31dp"
-            android:layout_marginTop="20dp"
-            android:tag="5"
-            android:onClick="optionClicked"
-            android:text="Comedy"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/crimeText"
-            app:layout_constraintTop_toBottomOf="@+id/animationText" />
-        <TextView
-            android:id="@+id/documentaryText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="20dp"
-            android:textSize="16sp"
-            android:onClick="optionClicked"
-            android:tag="6"
-            android:text="Documentary"
-            app:layout_constraintStart_toEndOf="@+id/comedyText"
-            app:layout_constraintTop_toBottomOf="@+id/adventureText" />
-        <TextView
-            android:id="@+id/historicalText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="20dp"
-            android:tag="7"
-            android:onClick="optionClicked"
-            android:textSize="16sp"
-            android:text="Historical"
-            app:layout_constraintStart_toEndOf="@+id/documentaryText"
-            app:layout_constraintTop_toBottomOf="@+id/dramaText" />
-
-        <TextView
-            android:id="@+id/nineScoreText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="27dp"
-            android:layout_marginTop="20dp"
-            android:onClick="optionClicked"
-            android:tag="8"
-            android:text="9+"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ratingTextView" />
-
-        <TextView
-            android:id="@+id/eightScoreText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="20dp"
-            android:onClick="optionClicked"
-            android:tag="9"
-            android:text="8+"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/nineScoreText"
-            app:layout_constraintTop_toBottomOf="@+id/ratingTextView" />
-
-        <TextView
-            android:id="@+id/sevenScoreText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="20dp"
-            android:onClick="optionClicked"
-            android:tag="10"
-            android:text="7+"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/eightScoreText"
-            app:layout_constraintTop_toBottomOf="@+id/ratingTextView" />
-
-        <TextView
-            android:id="@+id/sixScoreText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="20dp"
-            android:onClick="optionClicked"
-            android:tag="11"
-            android:text="6+"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/sevenScoreText"
-            app:layout_constraintTop_toBottomOf="@+id/ratingTextView" />
-
-        <TextView
-            android:id="@+id/s2010Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="27dp"
-            android:layout_marginTop="20dp"
-            android:onClick="optionClicked"
-            android:tag="12"
-            android:text="2010's"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/yearTextView" />
-
-        <TextView
-            android:id="@+id/s2000Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="22dp"
-            android:layout_marginTop="20dp"
-            android:onClick="optionClicked"
-            android:textSize="16sp"
-            android:tag="13"
-            android:text="2000's"
-            app:layout_constraintStart_toEndOf="@+id/s2010Text"
-            app:layout_constraintTop_toBottomOf="@+id/yearTextView" />
-
-        <TextView
-            android:id="@+id/s1990Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="20dp"
-            android:onClick="optionClicked"
-            android:textSize="16sp"
-            android:tag="14"
-            android:text="1990's"
-            app:layout_constraintStart_toEndOf="@+id/s2000Text"
-            app:layout_constraintTop_toBottomOf="@+id/yearTextView" />
-
-        <TextView
-            android:id="@+id/s1980Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="optionClicked"
-            android:tag="15"
-            android:text="1980's"
-            android:textSize="16sp"
-            tools:layout_editor_absoluteX="255dp"
-            tools:layout_editor_absoluteY="398dp" />
-
-        <TextView
-            android:id="@+id/s1970Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="27dp"
-            android:layout_marginTop="20dp"
-            android:onClick="optionClicked"
-            android:tag="16"
-            android:text="1970's"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/s2010Text" />
-
-        <TextView
-            android:id="@+id/s1960Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="20dp"
-            android:onClick="optionClicked"
-            android:tag="17"
-            android:text="1960's and Earlier"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/s1970Text"
-            app:layout_constraintTop_toBottomOf="@+id/s2000Text" />
-
-        <TextView
-            android:id="@+id/zeroToOneText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="27dp"
-            android:layout_marginTop="20dp"
-            android:text="0 to 1 Hour"
-            android:onClick="optionClicked"
-            android:tag="18"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
-
-        <TextView
-            android:id="@+id/oneToTwoText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="20dp"
-            android:textSize="16sp"
-            android:onClick="optionClicked"
-            android:tag="19"
-            android:text="1 to 2 Hour"
-            app:layout_constraintStart_toEndOf="@+id/zeroToOneText"
-            app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
-
-        <TextView
-            android:id="@+id/twoAndAboveText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="20dp"
-            android:textSize="16sp"
-            android:onClick="optionClicked"
-            android:tag="20"
-            android:text="2 Hours and above"
-            app:layout_constraintStart_toEndOf="@+id/oneToTwoText"
-            app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
-
-        <TextView
-            android:id="@+id/timeTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="27dp"
-            android:layout_marginTop="27dp"
-            android:text="Time:"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/s1970Text" />
-
-        <TextView
-            android:id="@+id/ratingTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="27dp"
-            android:layout_marginTop="27dp"
-            android:text="Rating:"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/crimeText" />
-
-
-        <TextView
-            android:id="@+id/yearTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="27dp"
-            android:layout_marginTop="27dp"
-            android:text="Year:"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nineScoreText" />
-
-        <TextView
-            android:id="@+id/genreTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="27dp"
-            android:layout_marginTop="40dp"
-            android:text="Genre:"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/magnifierImageView" />
+        <ImageView
+            android:id="@+id/magnifierImageView"
+            android:layout_width="47dp"
+            android:layout_height="41dp"
+            android:layout_gravity="center_vertical"
+            app:srcCompat="@drawable/searchicon" />
 
         <EditText
             android:id="@+id/searchEditText"
-            android:layout_width="263dp"
-            android:layout_height="47dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="14dp"
             android:ems="10"
             android:hint="Search"
-            android:inputType="text"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:inputType="text" />
 
         <Button
             android:id="@+id/cancelEditTextButton"
-            android:layout_width="80dp"
-            android:layout_height="39dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:background="#534B4B"
             android:onClick="cancelEdit"
             android:text="CANCEL"
             android:textColor="#FBFBFB"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textStyle="bold" />
+    </LinearLayout>
 
-        <ImageView
-            android:id="@+id/magnifierImageView"
-            android:layout_width="31dp"
-            android:layout_height="37dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/searchicon" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
-        <GridLayout
-            android:layout_width="wrap_content"
-            android:layout_height="77dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="1dp"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/oneToTwoText">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/clearFilterButton"
-                android:layout_width="145dp"
-                android:layout_height="74dp"
-                android:layout_row="0"
-                android:layout_column="0"
-                android:background="#534B4B"
-                android:onClick="clearOptionsClicked"
-                android:text="CLEAR"
-                android:textColor="#A39F9F"
-                android:textSize="24sp" />
+            <TextView
+                android:id="@+id/timeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="9dp"
+                android:text="Time:"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gridLayout3" />
 
-            <Button
-                android:id="@+id/seeResultButton"
-                android:layout_width="262dp"
-                android:layout_height="73dp"
-                android:layout_row="0"
-                android:layout_column="1"
-                android:background="#F6C01E"
-                android:text="SEE RESULTS"
-                android:textSize="24sp" />
-        </GridLayout>
+            <TextView
+                android:id="@+id/yearTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="9dp"
+                android:text="Year:"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gridLayout2" />
+
+            <TextView
+                android:id="@+id/ratingTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="9dp"
+                android:text="Rating:"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gridLayout" />
+
+            <TextView
+                android:id="@+id/genreTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="2dp"
+                android:text="Genre:"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <GridLayout
+                android:id="@+id/gridLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                app:columnCount="4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/genreTextView"
+                app:rowCount="2">
+
+                <Button
+                    android:id="@+id/actionText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="optionClicked"
+                    android:tag="0"
+                    android:text="Action"
+                    android:textSize="14sp"
+                    app:layout_column="0"
+                    app:layout_gravity="bottom|right"
+                    app:layout_row="0" />
+
+                <Button
+                    android:id="@+id/animationText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="optionClicked"
+                    android:tag="1"
+                    android:text="Animation"
+                    android:textSize="14sp"
+                    app:layout_column="1"
+                    app:layout_gravity="bottom"
+                    app:layout_row="0" />
+
+                <Button
+                    android:id="@+id/adventureText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="optionClicked"
+                    android:tag="2"
+                    android:text="Adventure"
+                    android:textSize="14sp"
+                    app:layout_column="2"
+                    app:layout_gravity="bottom"
+                    app:layout_row="0" />
+
+                <Button
+                    android:id="@+id/dramaText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="optionClicked"
+                    android:tag="3"
+                    android:text="Drama"
+                    android:textSize="14sp"
+                    app:layout_column="3"
+                    app:layout_row="0" />
+
+                <Button
+                    android:id="@+id/crimeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="1"
+                    android:layout_column="0"
+                    android:onClick="optionClicked"
+                    android:tag="4"
+                    android:text="Crime"
+                    android:textSize="14sp"
+                    app:layout_column="0"
+                    app:layout_gravity="bottom|right"
+                    app:layout_row="1" />
+
+                <Button
+                    android:id="@+id/comedyText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="optionClicked"
+                    android:tag="5"
+                    android:text="Comedy"
+                    android:textSize="14sp"
+                    app:layout_column="1"
+                    app:layout_gravity="bottom"
+                    app:layout_row="1" />
+
+                <Button
+                    android:id="@+id/documentaryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="optionClicked"
+                    android:tag="6"
+                    android:text="Documentary"
+                    android:textSize="14sp"
+                    app:layout_column="2"
+                    app:layout_gravity="bottom"
+                    app:layout_row="1" />
+
+                <Button
+                    android:id="@+id/historicalText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="optionClicked"
+                    android:tag="7"
+                    android:text="Historical"
+                    android:textSize="14sp"
+                    app:layout_column="3"
+                    app:layout_gravity="bottom"
+                    app:layout_row="1" />
+
+            </GridLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+            <GridLayout
+                android:id="@+id/gridLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:columnCount="3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/timeTextView"
+                app:rowCount="1">
+
+                <Button
+                    android:id="@+id/oneToTwoText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="10dp"
+                    android:onClick="optionClicked"
+                    android:tag="19"
+                    android:text="1 to 2 Hour"
+                    android:textSize="14sp"
+                    android:visibility="visible"
+                    app:layout_column="0"
+                    app:layout_row="0" />
+
+                <Button
+                    android:id="@+id/zeroToOneText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="10dp"
+                    android:onClick="optionClicked"
+                    android:tag="18"
+                    android:text="0 to 1 Hour"
+                    android:textSize="14sp"
+                    android:visibility="visible"
+                    app:layout_column="1"
+                    app:layout_row="0" />
+
+                <Button
+                    android:id="@+id/twoAndAboveText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="10dp"
+                    android:onClick="optionClicked"
+                    android:tag="20"
+                    android:text="2 Hours and above"
+                    android:textSize="14sp"
+                    android:visibility="visible"
+                    app:layout_column="2"
+                    app:layout_row="0" />
+            </GridLayout>
+
+            <GridLayout
+                android:id="@+id/gridLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:columnCount="4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ratingTextView"
+                app:rowCount="1">
+
+                <Button
+                    android:id="@+id/nineScoreText"
+                    android:layout_width="74dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="10dp"
+                    android:onClick="optionClicked"
+                    android:tag="8"
+                    android:text="9+"
+                    android:textSize="14sp"
+                    app:layout_column="0"
+                    app:layout_row="0" />
+
+                <Button
+                    android:id="@+id/eightScoreText"
+                    android:layout_width="74dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="10dp"
+                    android:onClick="optionClicked"
+                    android:tag="9"
+                    android:text="8+"
+                    android:textSize="14sp"
+                    app:layout_column="1"
+                    app:layout_row="0" />
+
+                <Button
+                    android:id="@+id/sevenScoreText"
+                    android:layout_width="74dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="10dp"
+                    android:onClick="optionClicked"
+                    android:tag="10"
+                    android:text="7+"
+                    android:textSize="14sp"
+                    app:layout_column="2"
+                    app:layout_row="0" />
+
+                <Button
+                    android:id="@+id/sixScoreText"
+                    android:layout_width="74dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="10dp"
+                    android:onClick="optionClicked"
+                    android:tag="11"
+                    android:text="6+"
+                    android:textSize="14sp"
+                    app:layout_column="3"
+                    app:layout_row="0" />
+            </GridLayout>
+
+            <GridLayout
+                android:id="@+id/gridLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                app:columnCount="3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yearTextView"
+                app:rowCount="1">
+
+                <Button
+                    android:id="@+id/s2010Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="10dp"
+                    android:onClick="optionClicked"
+                    android:tag="12"
+                    android:text="2010's"
+                    app:layout_column="0"
+                    app:layout_row="0" />
+
+                <Button
+                    android:id="@+id/s2000Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="10dp"
+                    android:onClick="optionClicked"
+                    android:tag="13"
+                    android:text="2000's"
+                    android:textSize="14sp"
+                    app:layout_column="1"
+                    app:layout_row="0" />
+
+                <Button
+                    android:id="@+id/s1990Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="10dp"
+                    android:onClick="optionClicked"
+                    android:tag="14"
+                    android:text="1990's"
+                    android:textSize="14sp"
+                    app:layout_column="2"
+                    app:layout_row="0" />
+
+                <Button
+                    android:id="@+id/s1980Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="1"
+                    android:layout_column="0"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="10dp"
+                    android:onClick="optionClicked"
+                    android:tag="15"
+                    android:text="1980's"
+                    android:textSize="14sp"
+                    app:layout_column="0"
+                    app:layout_row="1" />
+
+                <Button
+                    android:id="@+id/s1970Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="10dp"
+                    android:onClick="optionClicked"
+                    android:tag="14"
+                    android:text="1970's"
+                    android:textSize="14sp"
+                    app:layout_column="1"
+                    app:layout_row="1" />
+
+                <Button
+                    android:id="@+id/s1960Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="10dp"
+                    android:onClick="optionClicked"
+                    android:tag="17"
+                    android:text="1960's and Earlier"
+                    android:textSize="14sp"
+                    app:layout_column="2"
+                    app:layout_row="1" />
+            </GridLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:columnCount="2"
+        app:rowCount="1">
+
+        <Button
+            android:id="@+id/clearFilterButton"
+            android:layout_width="145dp"
+            android:layout_height="74dp"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:background="#534B4B"
+            android:onClick="clearOptionsClicked"
+            android:text="CLEAR"
+            android:textColor="#A39F9F"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/seeResultButton"
+            android:layout_width="262dp"
+            android:layout_height="73dp"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:background="#F6C01E"
+            android:text="SEE RESULTS"
+            android:textSize="24sp" />
+    </GridLayout>
+
+</LinearLayout>

@@ -17,10 +17,10 @@ import android.widget.TextView;
 public class SearchActivity extends AppCompatActivity {
     Button seeResultButton;
     EditText searchEditText;
-    TextView actionText,animationText,adventureText,dramaText,crimeText,comedyText,documentaryText,historicText;
-    TextView nineScoreText,eightScoreText,sevenScoreText,sixScoreText;
-    TextView s2010Text,s2000Text,s1990Text,s1980Text,s1970Text,s1960Text;
-    TextView zeroToOneText,oneToTwoText, twoAndAboveText;
+    Button actionText,animationText,adventureText,dramaText,crimeText,comedyText,documentaryText,historicText;
+    Button nineScoreText,eightScoreText,sevenScoreText,sixScoreText;
+    Button s2010Text,s2000Text,s1990Text,s1980Text,s1970Text,s1960Text;
+    Button zeroToOneText,oneToTwoText, twoAndAboveText;
 
     /**
      * A on click method that give filter options reaction, including backgrounds being gray,
@@ -30,47 +30,47 @@ public class SearchActivity extends AppCompatActivity {
         String tagNum = view.getTag().toString();
         Log.i("info","pressed");
         switch(tagNum){
-            case "0": actionText.setBackgroundColor(Color.LTGRAY);
+            case "0": actionText.setBackgroundColor(Color.DKGRAY);
                 break;
-            case "1": animationText.setBackgroundColor(Color.LTGRAY);
+            case "1": animationText.setBackgroundColor(Color.DKGRAY);
                 break;
-            case "2": adventureText.setBackgroundColor(Color.LTGRAY);
+            case "2": adventureText.setBackgroundColor(Color.DKGRAY);
                 break;
-            case "3": dramaText.setBackgroundColor(Color.LTGRAY);
+            case "3": dramaText.setBackgroundColor(Color.DKGRAY);
                 break;
-            case "4": crimeText.setBackgroundColor(Color.LTGRAY);
+            case "4": crimeText.setBackgroundColor(Color.DKGRAY);
                 break;
-            case "5": comedyText.setBackgroundColor(Color.LTGRAY);
+            case "5": comedyText.setBackgroundColor(Color.DKGRAY);
                 break;
-            case "6": documentaryText.setBackgroundColor(Color.LTGRAY);
+            case "6": documentaryText.setBackgroundColor(Color.DKGRAY);
                 break;
-            case "7": historicText.setBackgroundColor(Color.LTGRAY);
+            case "7": historicText.setBackgroundColor(Color.DKGRAY);
                 break;
-            case "8": nineScoreText.setBackgroundColor(Color.LTGRAY);
+            case "8": nineScoreText.setBackgroundColor(Color.DKGRAY);
                 break;
-            case "9": eightScoreText.setBackgroundColor(Color.LTGRAY);
+            case "9": eightScoreText.setBackgroundColor(Color.DKGRAY);
                 break;
-            case "10": sevenScoreText.setBackgroundColor(Color.LTGRAY);
+            case "10": sevenScoreText.setBackgroundColor(Color.DKGRAY);
                 break;
-            case "11": sixScoreText.setBackgroundColor(Color.LTGRAY);
+            case "11": sixScoreText.setBackgroundColor(Color.DKGRAY);
                 break;
-            case "12": s2010Text.setBackgroundColor(Color.LTGRAY);
+            case "12": s2010Text.setBackgroundColor(Color.DKGRAY);
                 break;
-            case "13": s2000Text.setBackgroundColor(Color.LTGRAY);
+            case "13": s2000Text.setBackgroundColor(Color.DKGRAY);
                 break;
-            case "14": s1990Text.setBackgroundColor(Color.LTGRAY);
+            case "14": s1990Text.setBackgroundColor(Color.DKGRAY);
                 break;
-            case "15": s1980Text.setBackgroundColor(Color.LTGRAY);
+            case "15": s1980Text.setBackgroundColor(Color.DKGRAY);
                 break;
-            case "16": s1970Text.setBackgroundColor(Color.LTGRAY);
+            case "16": s1970Text.setBackgroundColor(Color.DKGRAY);
                 break;
-            case "17": s1960Text.setBackgroundColor(Color.LTGRAY);
+            case "17": s1960Text.setBackgroundColor(Color.DKGRAY);
                 break;
-            case "18": zeroToOneText.setBackgroundColor(Color.LTGRAY);
+            case "18": zeroToOneText.setBackgroundColor(Color.DKGRAY);
                 break;
-            case "19": oneToTwoText.setBackgroundColor(Color.LTGRAY);
+            case "19": oneToTwoText.setBackgroundColor(Color.DKGRAY);
                 break;
-            case "20": twoAndAboveText.setBackgroundColor(Color.LTGRAY);
+            case "20": twoAndAboveText.setBackgroundColor(Color.DKGRAY);
                 break;
             default:
                 break;
@@ -82,27 +82,27 @@ public class SearchActivity extends AppCompatActivity {
      * @param view
      */
     public void clearOptionsClicked(View view){
-        actionText.setBackgroundColor(Color.WHITE);
-        animationText.setBackgroundColor(Color.WHITE);
-        adventureText.setBackgroundColor(Color.WHITE);
-        dramaText.setBackgroundColor(Color.WHITE);
-        crimeText.setBackgroundColor(Color.WHITE);
-        comedyText.setBackgroundColor(Color.WHITE);
-        documentaryText.setBackgroundColor(Color.WHITE);
-        historicText.setBackgroundColor(Color.WHITE);
-        nineScoreText.setBackgroundColor(Color.WHITE);
-        eightScoreText.setBackgroundColor(Color.WHITE);
-        sevenScoreText.setBackgroundColor(Color.WHITE);
-        sixScoreText.setBackgroundColor(Color.WHITE);
-        s2010Text.setBackgroundColor(Color.WHITE);
-        s2000Text.setBackgroundColor(Color.WHITE);
-        s1990Text.setBackgroundColor(Color.WHITE);
-        s1980Text.setBackgroundColor(Color.WHITE);
-        s1970Text.setBackgroundColor(Color.WHITE);
-        s1960Text.setBackgroundColor(Color.WHITE);
-        zeroToOneText.setBackgroundColor(Color.WHITE);
-        oneToTwoText.setBackgroundColor(Color.WHITE);
-        twoAndAboveText.setBackgroundColor(Color.WHITE);
+        actionText.setBackgroundColor(Color.LTGRAY);
+        animationText.setBackgroundColor(Color.LTGRAY);
+        adventureText.setBackgroundColor(Color.LTGRAY);
+        dramaText.setBackgroundColor(Color.LTGRAY);
+        crimeText.setBackgroundColor(Color.LTGRAY);
+        comedyText.setBackgroundColor(Color.LTGRAY);
+        documentaryText.setBackgroundColor(Color.LTGRAY);
+        historicText.setBackgroundColor(Color.LTGRAY);
+        nineScoreText.setBackgroundColor(Color.LTGRAY);
+        eightScoreText.setBackgroundColor(Color.LTGRAY);
+        sevenScoreText.setBackgroundColor(Color.LTGRAY);
+        sixScoreText.setBackgroundColor(Color.LTGRAY);
+        s2010Text.setBackgroundColor(Color.LTGRAY);
+        s2000Text.setBackgroundColor(Color.LTGRAY);
+        s1990Text.setBackgroundColor(Color.LTGRAY);
+        s1980Text.setBackgroundColor(Color.LTGRAY);
+        s1970Text.setBackgroundColor(Color.LTGRAY);
+        s1960Text.setBackgroundColor(Color.LTGRAY);
+        zeroToOneText.setBackgroundColor(Color.LTGRAY);
+        oneToTwoText.setBackgroundColor(Color.LTGRAY);
+        twoAndAboveText.setBackgroundColor(Color.LTGRAY);
     }
 
     /**
@@ -147,6 +147,11 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         initView();
+        // https://imdb-api.com/API/AdvancedSearch/k_2luv1h1i
+//String passed to searchKeyword should be like this:  ?user_rating=8.0,&release_date=2010-01-01,&genres=action,adventure&moviemeter=2,3
+        Intent intent = new Intent(SearchActivity.this, ResultActivity.class);
+        intent.putExtra("searchKeyword", searchEditText.getText().toString());
+        startActivity(intent);
         seeResultButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
