@@ -96,89 +96,80 @@ public class SearchActivity extends AppCompatActivity {
             case "8":
                 nineScoreText.setTextColor(Color.WHITE);
                 optionsBoolean[8] = true;
-
                 ratingSelected = true;
-                apiLinkSum.append("9.0,10");
+                ratingSum.append("9.0,10");
                 break;
             case "9":
                 eightScoreText.setTextColor(Color.WHITE);
                 optionsBoolean[9] = true;
-
                 ratingSelected = true;
-                apiLinkSum.append("8.0,10");
+                ratingSum.append("8.0,10");
                 break;
             case "10":
                 sevenScoreText.setTextColor(Color.WHITE);
                 optionsBoolean[10] = true;
-
                 ratingSelected = true;
-                apiLinkSum.append("7.0,10");
+                ratingSum.append("7.0,10");
                 break;
             case "11":
                 sixScoreText.setTextColor(Color.WHITE);
                 optionsBoolean[11] = true;
                 ratingSelected = true;
-                apiLinkSum.append("6.0,10");
+                ratingSum.append("6.0,10");
                 break;
             case "12":
                 s2010Text.setTextColor(Color.WHITE);
                 optionsBoolean[12] = true;
-
                 yearSelected = true;
-                apiLinkSum.append("2010-01-01,2020-01-01");
+                yearSum.append("2010-01-01,2020-01-01");
                 break;
             case "13":
                 s2000Text.setTextColor(Color.WHITE);
                 optionsBoolean[13] = true;
-
                 yearSelected = true;
-                apiLinkSum.append("2000-01-01,2010-01-01");
+                yearSum.append("2000-01-01,2010-01-01");
                 break;
             case "14":
                 s1990Text.setTextColor(Color.WHITE);
                 optionsBoolean[14] = true;
-
                 yearSelected = true;
-                apiLinkSum.append("1990-01-01,2000-01-01");
+                yearSum.append("1990-01-01,2000-01-01");
                 break;
             case "15":
                 s1980Text.setTextColor(Color.WHITE);
                 optionsBoolean[15] = true;
-
                 yearSelected = true;
-                apiLinkSum.append("1980-01-01,1990-01-01");
+                yearSum.append("1980-01-01,1990-01-01");
                 break;
             case "16":
                 s1970Text.setTextColor(Color.WHITE);
                 optionsBoolean[16] = true;
-
                 yearSelected = true;
-                apiLinkSum.append("1970-01-01,1980-01-01");
+                yearSum.append("1970-01-01,1980-01-01");
                 break;
             case "17":
                 s1960Text.setTextColor(Color.WHITE);
                 optionsBoolean[17] = true;
-
                 yearSelected = true;
-                apiLinkSum.append("1960-01-01,1970-01-01");
+                yearSum.append("1960-01-01,1970-01-01");
                 break;
             case "18":
                 zeroToOneText.setTextColor(Color.WHITE);
                 optionsBoolean[18] = true;
                 timeSelected = true;
-                apiLinkSum.append("0,1");
+                timeSum.append("0,1");
                 break;
             case "19":
                 oneToTwoText.setTextColor(Color.WHITE);
                 optionsBoolean[19] = true;
                 timeSelected = true;
-                apiLinkSum.append("1,2");
+                timeSum.append("1,2");
                 break;
             case "20":
                 twoAndAboveText.setTextColor(Color.WHITE);
                 optionsBoolean[20] = true;
                 timeSelected = true;
-                apiLinkSum.append("2,3");
+                timeSum.append("2,5");
                 break;
             default:
                 break;
@@ -256,6 +247,52 @@ public class SearchActivity extends AppCompatActivity {
         twoAndAboveText = findViewById(R.id.twoAndAboveText);
 
         searchEditText.setFocusable(false);
+    }
+
+    public String createApiLinkSum(){
+        //Make the full link of API including all filters
+        apiLinkSum.append("https://imdb-api.com/API/AdvancedSearch/k_05231n2i");
+        apiLinkSum.append("?");
+        if (!searchEditText.getText().toString().equals("")) {
+            apiLinkSum.append("title=");
+            apiLinkSum.append(searchEditText.getText().toString());
+            apiLinkSum.append("&");
+        }else{
+            apiLinkSum.deleteCharAt(apiLinkSum.lastIndexOf("&"));
+        }
+
+        if (ratingSelected) {
+            apiLinkSum.append("user_rating=");
+            apiLinkSum.append(ratingSum);
+            apiLinkSum.append("&");
+        }else{
+            apiLinkSum.deleteCharAt(apiLinkSum.lastIndexOf("&"));
+        }
+
+        if (yearSelected) {
+            apiLinkSum.append("release_date=");
+            apiLinkSum.append(yearSum);
+            apiLinkSum.append("&");
+        }else{
+            apiLinkSum.deleteCharAt(apiLinkSum.lastIndexOf("&"));
+        }
+
+        if (genresSelected) {
+            apiLinkSum.append("genres=");
+            apiLinkSum.append(genresSum);
+            apiLinkSum.append("&");
+        }else{
+            apiLinkSum.deleteCharAt(apiLinkSum.lastIndexOf("&"));
+        }
+
+        if (timeSelected) {
+            apiLinkSum.append("moviemeter=");
+            apiLinkSum.append(timeSum);
+        }else{
+            apiLinkSum.deleteCharAt(apiLinkSum.lastIndexOf("&"));
+        }
+
+        return apiLinkSum.toString();
     }
 
     @Override
@@ -369,18 +406,14 @@ public class SearchActivity extends AppCompatActivity {
         apiLinkSum = new StringBuilder();
         genresSum = new StringBuilder();
         ratingSum = new StringBuilder();
+        yearSum = new StringBuilder();
         timeSum = new StringBuilder();
 
-        apiLinkSum.append("user_rating=");
         nineScoreText.setOnClickListener(this::onClick);
         eightScoreText.setOnClickListener(this::onClick);
         sevenScoreText.setOnClickListener(this::onClick);
         sixScoreText.setOnClickListener(this::onClick);
 
-        if (ratingSelected) {
-            apiLinkSum.append("&");
-        }
-        apiLinkSum.append("release_date=");
         s2010Text.setOnClickListener(this::onClick);
         s2000Text.setOnClickListener(this::onClick);
         s1990Text.setOnClickListener(this::onClick);
@@ -388,10 +421,6 @@ public class SearchActivity extends AppCompatActivity {
         s1970Text.setOnClickListener(this::onClick);
         s1960Text.setOnClickListener(this::onClick);
 
-        if (yearSelected) {
-            apiLinkSum.append("&");
-        }
-        apiLinkSum.append("genres=");
         actionText.setOnClickListener(this::onClick);
         animationText.setOnClickListener(this::onClick);
         adventureText.setOnClickListener(this::onClick);
@@ -401,32 +430,17 @@ public class SearchActivity extends AppCompatActivity {
         documentaryText.setOnClickListener(this::onClick);
         historicText.setOnClickListener(this::onClick);
 
-        if (genresSelected) {
-            apiLinkSum.append("&");
-        }
-        apiLinkSum.append("moviemeter=");
+
         zeroToOneText.setOnClickListener(this::onClick);
         oneToTwoText.setOnClickListener(this::onClick);
         twoAndAboveText.setOnClickListener(this::onClick);
 
-        //Make the full link of API including all filters
-        apiLinkSum.append("https://imdb-api.com/API/AdvancedSearch/k_05231n2i");
-        apiLinkSum.append("?");
-        if (!searchEditText.getText().toString().equals("")) {
-            apiLinkSum.append("title=");
-            apiLinkSum.append(searchEditText.getText().toString());
-            apiLinkSum.append("&");
-        }
 
-        if (genresSelected) {
-            apiLinkSum.append("genres=");
-            apiLinkSum.append("&");
-            apiLinkSum.append(genresSum);
-        }
         seeResultButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("apiLinkSum", apiLinkSum.toString());
+                String searchKeyWord = createApiLinkSum();
+                Log.i("apiLinkSum",searchKeyWord);
                 //String passed to searchKeyword should be like this:  ?user_rating=8.0,&release_date=2010-01-01,&genres=action,adventure&moviemeter=2,3
                 Intent intent = new Intent(SearchActivity.this, ResultActivity.class);
                 intent.putExtra("searchKeyword", "https://imdb-api.com/API/AdvancedSearch/k_05231n2i?genres=comedy");
