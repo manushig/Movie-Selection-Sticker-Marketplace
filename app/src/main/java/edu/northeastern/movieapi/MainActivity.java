@@ -8,7 +8,7 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
     public void openSearchActivity(View view){
-        Intent intent = new Intent(this,SearchActivity.class);
+        Intent intent = new Intent(this, SearchActivity.class);
         startActivity(intent);
     }
     public void openTrailerActivity(View view){
