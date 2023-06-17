@@ -307,6 +307,7 @@ public class SearchFragment extends Fragment {
      *
      */
     private void clearOptionsClicked() {
+        searchEditText.setText("");
         //Set back text color
         actionText.setBackgroundColor(Color.TRANSPARENT);
         animationText.setBackgroundColor(Color.TRANSPARENT);
