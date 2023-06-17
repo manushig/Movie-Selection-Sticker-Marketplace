@@ -3,19 +3,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/black"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <ImageView
         android:id="@+id/imgView"
-        android:layout_width="47dp"
-        android:layout_height="41dp"
-        android:layout_gravity="center_vertical"
+        android:layout_width="159dp"
+        android:layout_height="157dp"
+        android:layout_gravity="center"
+
         app:srcCompat="@drawable/searchicon" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:layout_marginHorizontal="15dp"
         android:gravity="center">
 
@@ -31,6 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@android:color/white"
             android:text="TextView 4"
             android:textAlignment="center"
             android:textSize="24sp"
@@ -50,6 +54,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@android:color/white"
             android:text="Movie Id: " />
 
         <TextView
@@ -57,7 +62,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView 2" />
+            android:textColor="@android:color/white"
+            android:text="TextView" />
 
     </LinearLayout>
 
@@ -78,6 +84,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@android:color/white"
             android:text="Year: " />
 
         <TextView
@@ -85,7 +92,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView 6" />
+            android:textColor="@android:color/white"
+            android:text="TextView" />
 
     </LinearLayout>
 
@@ -101,6 +109,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@android:color/white"
             android:text="Release Date: " />
 
         <TextView
@@ -108,7 +117,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView 8" />
+            android:textColor="@android:color/white"
+            android:text="TextView" />
 
     </LinearLayout>
 
@@ -124,6 +134,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@android:color/white"
             android:text="Awards: " />
 
         <TextView
@@ -131,7 +142,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView 8" />
+            android:textColor="@android:color/white"
+            android:text="TextView" />
 
     </LinearLayout>
 
@@ -147,6 +159,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@android:color/white"
             android:text="Directors: " />
 
         <TextView
@@ -154,7 +167,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView 8" />
+            android:textColor="@android:color/white"
+            android:text="TextView" />
 
     </LinearLayout>
 
@@ -170,6 +184,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@android:color/white"
             android:text="Stars: " />
 
         <TextView
@@ -177,7 +192,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView 8" />
+            android:textColor="@android:color/white"
+            android:text="TextView" />
 
     </LinearLayout>
 
@@ -193,6 +209,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@android:color/white"
             android:text="Genres: " />
 
         <TextView
@@ -200,7 +217,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView 8" />
+            android:textColor="@android:color/white"
+            android:text="TextView" />
 
     </LinearLayout>
 
@@ -216,6 +234,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@android:color/white"
             android:text="Content Rating: " />
 
         <TextView
@@ -223,7 +242,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView 8" />
+            android:textColor="@android:color/white"
+            android:text="TextView" />
 
     </LinearLayout>
 
@@ -239,6 +259,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@android:color/white"
             android:text="Imdb Rating: " />
 
         <TextView
@@ -246,6 +267,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@android:color/white"
             android:text="TextView" />
 
     </LinearLayout>
@@ -262,6 +284,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@android:color/white"
             android:text="Plot: " />
 
         <TextView
@@ -269,7 +292,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView 8" />
+            android:textColor="@android:color/white"
+            android:text="TextView" />
 
     </LinearLayout>
 
@@ -285,6 +309,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@android:color/white"
             android:text="Runtime: " />
 
         <TextView
@@ -292,7 +317,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView 8" />
+            android:textColor="@android:color/white"
+            android:text="TextView" />
 
     </LinearLayout>
 
