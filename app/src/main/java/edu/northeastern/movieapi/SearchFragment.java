@@ -36,6 +36,8 @@ public class SearchFragment extends Fragment {
     String[] buttonApiString = new String[21];
     boolean genresSelected, ratingSelected, yearSelected, timeSelected;
     StringBuilder apiLinkSum, genresSum, ratingSum, yearSum, timeSum;
+    private Button clearFilterButton;
+    private Button cancelEditTextButton;
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -52,7 +54,7 @@ public class SearchFragment extends Fragment {
     /**
      * Helper method to change background color to transparent
      */
-    public void buttonReset(Button name, int tagNum) {
+    private void buttonReset(Button name, int tagNum) {
         name.setBackgroundColor(Color.TRANSPARENT);
         optionsBoolean[tagNum] = false;
         if (tagNum >= 0 && tagNum < 8) {
@@ -72,7 +74,7 @@ public class SearchFragment extends Fragment {
     /**
      * Helper method to change background color to transparent
      */
-    public void buttonSelected(Button name, int tagNum){
+    private void buttonSelected(Button name, int tagNum){
         name.setBackgroundColor(bgColor);
         optionsBoolean[tagNum] = true;
         if (tagNum >= 0 && tagNum < 8) {
@@ -94,7 +96,7 @@ public class SearchFragment extends Fragment {
      *
      * @param view the search activity view
      */
-    public void onClick(View view) {
+    private void onClick(View view) {
         switch (view.getTag().toString()) {
             case "0":
                 if (optionsBoolean[0]) {
@@ -303,9 +305,8 @@ public class SearchFragment extends Fragment {
     /**
      * A method that make all clicked filter options back to the original status.
      *
-     * @param view the search activity view
      */
-    public void clearOptionsClicked(View view) {
+    private void clearOptionsClicked() {
         //Set back text color
         actionText.setBackgroundColor(Color.TRANSPARENT);
         animationText.setBackgroundColor(Color.TRANSPARENT);
@@ -348,9 +349,8 @@ public class SearchFragment extends Fragment {
     /**
      * A on click method of cancel edit button
      *
-     * @param view the search activity view
      */
-    public void cancelEdit(View view) {
+    private void cancelEdit() {
         searchEditText.setText("");
     }
 
@@ -358,7 +358,7 @@ public class SearchFragment extends Fragment {
      * A helper method to initialize view in searching page
      */
     @SuppressLint("ResourceType")
-    public void initView(View view) {
+    private void initView(View view) {
         searchEditText = view.findViewById(R.id.searchEditText);
         seeResultButton = view.findViewById(R.id.seeResultButton);
         actionText = view.findViewById(R.id.actionText);
@@ -382,6 +382,8 @@ public class SearchFragment extends Fragment {
         zeroToOneText = view.findViewById(R.id.zeroToOneText);
         oneToTwoText = view.findViewById(R.id.oneToTwoText);
         twoAndAboveText = view.findViewById(R.id.twoAndAboveText);
+        clearFilterButton = view.findViewById(R.id.clearFilterButton);
+        cancelEditTextButton = view.findViewById(R.id.cancelEditTextButton);
 
         searchEditText.setFocusable(false);
 
@@ -465,7 +467,7 @@ public class SearchFragment extends Fragment {
         }
     }
 
-    public String createApiLinkSum() {
+    private String createApiLinkSum() {
         for (int i = 0; i < 8; i++) {
             if (optionsBoolean[i]){
                 genresSelected = true;
@@ -681,6 +683,8 @@ public class SearchFragment extends Fragment {
         oneToTwoText.setOnClickListener(this::onClick);
         twoAndAboveText.setOnClickListener(this::onClick);
 
+        clearFilterButton.setOnClickListener(v -> clearOptionsClicked());
+        cancelEditTextButton.setOnClickListener(v -> cancelEdit());
 
         seeResultButton.setOnClickListener(v -> {
             String searchKeyWord = createApiLinkSum();
