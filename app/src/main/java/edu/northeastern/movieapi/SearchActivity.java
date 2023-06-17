@@ -25,7 +25,7 @@ public class SearchActivity extends AppCompatActivity {
     Button zeroToOneText, oneToTwoText, twoAndAboveText;
     boolean[] optionsBoolean = new boolean[21];
     boolean genresSelected, ratingSelected, yearSelected, timeSelected;
-    StringBuilder apiLinkSum, genresSum,ratingSum,yearSum,timeSum;
+    StringBuilder genresSum,ratingSum,yearSum,timeSum;
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -200,7 +200,7 @@ public class SearchActivity extends AppCompatActivity {
                     zeroToOneText.setTextColor(Color.WHITE);
                     optionsBoolean[18] = true;
                     timeSelected = true;
-                    timeSum.append("0,1");
+                    timeSum.append("0,60");
                 } else {
                     Toast.makeText(this,"Only can select one range", Toast.LENGTH_SHORT).show();
                 }
@@ -210,7 +210,7 @@ public class SearchActivity extends AppCompatActivity {
                     oneToTwoText.setTextColor(Color.WHITE);
                     optionsBoolean[19] = true;
                     timeSelected = true;
-                    timeSum.append("1,2");
+                    timeSum.append("60,120");
                 } else {
                     Toast.makeText(this,"Only can select one range", Toast.LENGTH_SHORT).show();
                 }
@@ -220,7 +220,7 @@ public class SearchActivity extends AppCompatActivity {
                     twoAndAboveText.setTextColor(Color.WHITE);
                     optionsBoolean[20] = true;
                     timeSelected = true;
-                    timeSum.append("2,5");
+                    timeSum.append("120,300");
                 } else {
                     Toast.makeText(this,"Only can select one range", Toast.LENGTH_SHORT).show();
                 }
@@ -305,30 +305,23 @@ public class SearchActivity extends AppCompatActivity {
 
     public String createApiLinkSum(){
         //Make the full link of API including all filters
-        apiLinkSum.append("https://imdb-api.com/API/AdvancedSearch/k_05231n2i");
-        apiLinkSum.append("?");
+        StringBuilder apiLinkSum = new StringBuilder();
         if (!searchEditText.getText().toString().equals("")) {
             apiLinkSum.append("title=");
             apiLinkSum.append(searchEditText.getText().toString());
             apiLinkSum.append("&");
-        }else{
-            apiLinkSum.deleteCharAt(apiLinkSum.lastIndexOf("&"));
         }
 
         if (ratingSelected) {
             apiLinkSum.append("user_rating=");
             apiLinkSum.append(ratingSum);
             apiLinkSum.append("&");
-        }else{
-            apiLinkSum.deleteCharAt(apiLinkSum.lastIndexOf("&"));
         }
 
         if (yearSelected) {
             apiLinkSum.append("release_date=");
             apiLinkSum.append(yearSum);
             apiLinkSum.append("&");
-        }else{
-            apiLinkSum.deleteCharAt(apiLinkSum.lastIndexOf("&"));
         }
 
         if (genresSelected) {
@@ -336,15 +329,15 @@ public class SearchActivity extends AppCompatActivity {
             apiLinkSum.append(genresSum);
             apiLinkSum.deleteCharAt(apiLinkSum.length()-1);
             apiLinkSum.append("&");
-        }else{
-            apiLinkSum.deleteCharAt(apiLinkSum.lastIndexOf("&"));
         }
 
         if (timeSelected) {
             apiLinkSum.append("moviemeter=");
             apiLinkSum.append(timeSum);
-        }else{
-            apiLinkSum.deleteCharAt(apiLinkSum.lastIndexOf("&"));
+        }
+
+        if (apiLinkSum.charAt(apiLinkSum.length() - 1) == '&') {
+            apiLinkSum.deleteCharAt(apiLinkSum.length() - 1);
         }
 
         return apiLinkSum.toString();
@@ -458,7 +451,6 @@ public class SearchActivity extends AppCompatActivity {
 //        Intent intent = new Intent(SearchActivity.this, ResultActivity.class);
 //        intent.putExtra("searchKeyword", searchEditText.getText().toString());
 //        startActivity(intent);
-        apiLinkSum = new StringBuilder();
         genresSum = new StringBuilder();
         ratingSum = new StringBuilder();
         yearSum = new StringBuilder();
@@ -495,11 +487,10 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String searchKeyWord = createApiLinkSum();
-                Log.i("apiLinkSum",searchKeyWord);
+                Log.i("apiLinkSum", searchKeyWord);
                 //String passed to searchKeyword should be like this:  ?user_rating=8.0,&release_date=2010-01-01,&genres=action,adventure&moviemeter=2,3
                 Intent intent = new Intent(SearchActivity.this, ResultActivity.class);
                 intent.putExtra("searchKeyword", searchKeyWord);
-                intent.putExtra("searchKeyword", searchEditText.getText().toString());
                 startActivity(intent);
             }
         });

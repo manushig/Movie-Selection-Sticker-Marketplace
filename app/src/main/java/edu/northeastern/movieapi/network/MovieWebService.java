@@ -42,7 +42,7 @@ public class MovieWebService {
     }
 
     public void getSearchResult(String keyword) {
-        String uri = BASE_URL + "?title=" + keyword;
+        String uri = BASE_URL + "?" + keyword;
         makeNetworkCall(uri);
     }
 
