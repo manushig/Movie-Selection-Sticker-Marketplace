@@ -52,7 +52,7 @@ public class SearchFragment extends Fragment {
     /**
      * A on click method that give filter options reaction, including backgrounds being gray,
      *
-     * @param view
+     * @param view the search activity view
      */
     public void onClick(View view) {
         switch (view.getTag().toString()) {
@@ -266,10 +266,12 @@ public class SearchFragment extends Fragment {
         oneToTwoText.setTextColor(Color.BLACK);
         twoAndAboveText.setTextColor(Color.BLACK);
 
+        //Set optionBoolean[] back to false help onSaveInstanceState memory
         for (int i = 0; i < 21; i++) {
             optionsBoolean[i] = false;
         }
 
+        //Make all category select status become false
         genresSelected = false;
         ratingSelected = false;
         timeSelected = false;
@@ -381,8 +383,7 @@ public class SearchFragment extends Fragment {
                 imm.showSoftInput(searchEditText, InputMethodManager.SHOW_IMPLICIT);
             }
         });
-
-
+        //If the savedInstanceState have called, make these action
         if (savedInstanceState != null) {
             for (int i = 0; i < 21; i++) {
                 this.optionsBoolean[i] = savedInstanceState.getBoolean("tag" + i + "clicked");
@@ -460,7 +461,9 @@ public class SearchFragment extends Fragment {
             this.ratingSelected = savedInstanceState.getBoolean("ratingSelected");
             this.yearSelected = savedInstanceState.getBoolean("yearSelected");
             this.timeSelected = savedInstanceState.getBoolean("timeSelected");
-        } else {
+        }
+        //The savedInstanceState didn't call before, do initialize
+        else {
             genresSelected = false;
             ratingSelected = false;
             yearSelected = false;
