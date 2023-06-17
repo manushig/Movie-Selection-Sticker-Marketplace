@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -94,82 +95,135 @@ public class SearchActivity extends AppCompatActivity {
                 genresSum.append("history,");
                 break;
             case "8":
-                nineScoreText.setTextColor(Color.WHITE);
-                optionsBoolean[8] = true;
-                ratingSelected = true;
-                ratingSum.append("9.0,10");
+                if (!ratingSelected){
+                    Log.i("info","wrong");
+                    ratingSelected = true;
+                    nineScoreText.setTextColor(Color.WHITE);
+                    optionsBoolean[8] = true;
+                    ratingSum.append("9.0,10");
+                } else {
+                    Toast.makeText(this,"Only can select one score", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case "9":
-                eightScoreText.setTextColor(Color.WHITE);
-                optionsBoolean[9] = true;
-                ratingSelected = true;
-                ratingSum.append("8.0,10");
+                if (!ratingSelected){
+                    ratingSelected = true;
+                    eightScoreText.setTextColor(Color.WHITE);
+                    optionsBoolean[9] = true;
+                    ratingSum.append("8.0,10");
+                } else {
+                    Toast.makeText(this,"Only can select one score", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case "10":
-                sevenScoreText.setTextColor(Color.WHITE);
-                optionsBoolean[10] = true;
-                ratingSelected = true;
-                ratingSum.append("7.0,10");
+                if (!ratingSelected){
+                    ratingSelected = true;
+                    sevenScoreText.setTextColor(Color.WHITE);
+                    optionsBoolean[10] = true;
+                    ratingSum.append("7.0,10");
+                } else {
+                    Toast.makeText(this,"Only can select one score", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case "11":
-                sixScoreText.setTextColor(Color.WHITE);
-                optionsBoolean[11] = true;
-                ratingSelected = true;
-                ratingSum.append("6.0,10");
+                if (!ratingSelected){
+                    ratingSelected = true;
+                    sixScoreText.setTextColor(Color.WHITE);
+                    optionsBoolean[11] = true;
+                    ratingSum.append("6.0,10");
+                } else {
+                    Toast.makeText(this,"Only can select one score", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case "12":
-                s2010Text.setTextColor(Color.WHITE);
-                optionsBoolean[12] = true;
-                yearSelected = true;
-                yearSum.append("2010-01-01,2020-01-01");
+                if (!yearSelected){
+                    yearSelected = true;
+                    s2010Text.setTextColor(Color.WHITE);
+                    optionsBoolean[12] = true;
+                    yearSum.append("2010-01-01,2023-01-01");
+                } else {
+                    Toast.makeText(this,"Only can select one period and later", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case "13":
-                s2000Text.setTextColor(Color.WHITE);
-                optionsBoolean[13] = true;
-                yearSelected = true;
-                yearSum.append("2000-01-01,2010-01-01");
+                if (!yearSelected){
+                    s2000Text.setTextColor(Color.WHITE);
+                    optionsBoolean[13] = true;
+                    yearSelected = true;
+                    yearSum.append("2000-01-01,2010-01-01");
+                } else {
+                    Toast.makeText(this,"Only can select one period and later", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case "14":
-                s1990Text.setTextColor(Color.WHITE);
-                optionsBoolean[14] = true;
-                yearSelected = true;
-                yearSum.append("1990-01-01,2000-01-01");
+                if (!yearSelected){
+                    s1990Text.setTextColor(Color.WHITE);
+                    optionsBoolean[14] = true;
+                    yearSelected = true;
+                    yearSum.append("1990-01-01,2000-01-01");
+                } else {
+                    Toast.makeText(this,"Only can select one period", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case "15":
-                s1980Text.setTextColor(Color.WHITE);
-                optionsBoolean[15] = true;
-                yearSelected = true;
-                yearSum.append("1980-01-01,1990-01-01");
+                if (!yearSelected){
+                    s1980Text.setTextColor(Color.WHITE);
+                    optionsBoolean[15] = true;
+                    yearSelected = true;
+                    yearSum.append("1980-01-01,1990-01-01");
+                } else {
+                    Toast.makeText(this,"Only can select one period", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case "16":
-                s1970Text.setTextColor(Color.WHITE);
-                optionsBoolean[16] = true;
-                yearSelected = true;
-                yearSum.append("1970-01-01,1980-01-01");
+                if (!yearSelected){
+                    s1970Text.setTextColor(Color.WHITE);
+                    optionsBoolean[16] = true;
+                    yearSelected = true;
+                    yearSum.append("1970-01-01,1980-01-01");
+                } else {
+                    Toast.makeText(this,"Only can select one period", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case "17":
-                s1960Text.setTextColor(Color.WHITE);
-                optionsBoolean[17] = true;
-                yearSelected = true;
-                yearSum.append("1960-01-01,1970-01-01");
+                if (!yearSelected){
+                    s1960Text.setTextColor(Color.WHITE);
+                    optionsBoolean[17] = true;
+                    yearSelected = true;
+                    yearSum.append("1960-01-01,1970-01-01");
+                } else {
+                    Toast.makeText(this,"Only can select one period", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case "18":
-                zeroToOneText.setTextColor(Color.WHITE);
-                optionsBoolean[18] = true;
-                timeSelected = true;
-                timeSum.append("0,1");
+                if (!timeSelected){
+                    zeroToOneText.setTextColor(Color.WHITE);
+                    optionsBoolean[18] = true;
+                    timeSelected = true;
+                    timeSum.append("0,1");
+                } else {
+                    Toast.makeText(this,"Only can select one range", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case "19":
-                oneToTwoText.setTextColor(Color.WHITE);
-                optionsBoolean[19] = true;
-                timeSelected = true;
-                timeSum.append("1,2");
+                if (!timeSelected){
+                    oneToTwoText.setTextColor(Color.WHITE);
+                    optionsBoolean[19] = true;
+                    timeSelected = true;
+                    timeSum.append("1,2");
+                } else {
+                    Toast.makeText(this,"Only can select one range", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case "20":
-                twoAndAboveText.setTextColor(Color.WHITE);
-                optionsBoolean[20] = true;
-                timeSelected = true;
-                timeSum.append("2,5");
+                if (!timeSelected){
+                    twoAndAboveText.setTextColor(Color.WHITE);
+                    optionsBoolean[20] = true;
+                    timeSelected = true;
+                    timeSum.append("2,5");
+                } else {
+                    Toast.makeText(this,"Only can select one range", Toast.LENGTH_SHORT).show();
+                }
                 break;
             default:
                 break;
@@ -280,6 +334,7 @@ public class SearchActivity extends AppCompatActivity {
         if (genresSelected) {
             apiLinkSum.append("genres=");
             apiLinkSum.append(genresSum);
+            apiLinkSum.deleteCharAt(apiLinkSum.length()-1);
             apiLinkSum.append("&");
         }else{
             apiLinkSum.deleteCharAt(apiLinkSum.lastIndexOf("&"));
@@ -443,7 +498,7 @@ public class SearchActivity extends AppCompatActivity {
                 Log.i("apiLinkSum",searchKeyWord);
                 //String passed to searchKeyword should be like this:  ?user_rating=8.0,&release_date=2010-01-01,&genres=action,adventure&moviemeter=2,3
                 Intent intent = new Intent(SearchActivity.this, ResultActivity.class);
-                intent.putExtra("searchKeyword", "https://imdb-api.com/API/AdvancedSearch/k_05231n2i?genres=comedy");
+                intent.putExtra("searchKeyword", searchKeyWord);
                 intent.putExtra("searchKeyword", searchEditText.getText().toString());
                 startActivity(intent);
             }
