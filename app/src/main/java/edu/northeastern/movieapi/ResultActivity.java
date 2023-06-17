@@ -67,9 +67,6 @@ public class ResultActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
 
         buildRecyclerView();
-
-
-
     }
 
     public void buildRecyclerView() {

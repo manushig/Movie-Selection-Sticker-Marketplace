@@ -1,15 +1,16 @@
 package edu.northeastern.movieapi;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * A class that make related reactions in searching page layout
@@ -22,6 +23,8 @@ public class SearchActivity extends AppCompatActivity {
     Button s2010Text, s2000Text, s1990Text, s1980Text, s1970Text, s1960Text;
     Button zeroToOneText, oneToTwoText, twoAndAboveText;
     boolean[] optionsBoolean = new boolean[21];
+    boolean genresSelected, ratingSelected, yearSelected, timeSelected;
+    StringBuilder apiLinkSum, genresSum,ratingSum,yearSum,timeSum;
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -29,6 +32,10 @@ public class SearchActivity extends AppCompatActivity {
         for (int i = 0; i < 21; i++) {
             outState.putBoolean("tag" + i + "clicked", optionsBoolean[i]);
         }
+        outState.putBoolean("genresSelected", genresSelected);
+        outState.putBoolean("ratingSelected", ratingSelected);
+        outState.putBoolean("yearSelected", yearSelected);
+        outState.putBoolean("timeSelected", timeSelected);
     }
 
     /**
@@ -39,88 +46,139 @@ public class SearchActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getTag().toString()) {
             case "0":
-                actionText.setTextColor(Color.RED);
+                actionText.setTextColor(Color.WHITE);
+                genresSum.append("action,");
                 optionsBoolean[0] = true;
+                genresSelected = true;
                 break;
             case "1":
-                animationText.setTextColor(Color.RED);
+                animationText.setTextColor(Color.WHITE);
                 optionsBoolean[1] = true;
+                genresSelected = true;
+                genresSum.append("animation,");
                 break;
             case "2":
-                adventureText.setTextColor(Color.RED);
+                adventureText.setTextColor(Color.WHITE);
                 optionsBoolean[2] = true;
+                genresSelected = true;
+                genresSum.append("adventure,");
                 break;
             case "3":
-                dramaText.setTextColor(Color.RED);
+                dramaText.setTextColor(Color.WHITE);
                 optionsBoolean[3] = true;
+                genresSelected = true;
+                genresSum.append("drama,");
                 break;
             case "4":
-                crimeText.setTextColor(Color.RED);
+                crimeText.setTextColor(Color.WHITE);
                 optionsBoolean[4] = true;
+                genresSelected = true;
+                genresSum.append("crime,");
                 break;
             case "5":
-                comedyText.setTextColor(Color.RED);
+                comedyText.setTextColor(Color.WHITE);
                 optionsBoolean[5] = true;
+                genresSelected = true;
+                genresSum.append("comedy,");
                 break;
             case "6":
-                documentaryText.setTextColor(Color.RED);
+                documentaryText.setTextColor(Color.WHITE);
                 optionsBoolean[6] = true;
+                genresSelected = true;
+                genresSum.append("documentary,");
                 break;
             case "7":
-                historicText.setTextColor(Color.RED);
+                historicText.setTextColor(Color.WHITE);
                 optionsBoolean[7] = true;
+                genresSelected = true;
+                genresSum.append("history,");
                 break;
             case "8":
-                nineScoreText.setTextColor(Color.RED);
+                nineScoreText.setTextColor(Color.WHITE);
                 optionsBoolean[8] = true;
+
+                ratingSelected = true;
+                apiLinkSum.append("9.0,10");
                 break;
             case "9":
-                eightScoreText.setTextColor(Color.RED);
+                eightScoreText.setTextColor(Color.WHITE);
                 optionsBoolean[9] = true;
+
+                ratingSelected = true;
+                apiLinkSum.append("8.0,10");
                 break;
             case "10":
-                sevenScoreText.setTextColor(Color.RED);
+                sevenScoreText.setTextColor(Color.WHITE);
                 optionsBoolean[10] = true;
+
+                ratingSelected = true;
+                apiLinkSum.append("7.0,10");
                 break;
             case "11":
-                sixScoreText.setTextColor(Color.RED);
+                sixScoreText.setTextColor(Color.WHITE);
                 optionsBoolean[11] = true;
+                ratingSelected = true;
+                apiLinkSum.append("6.0,10");
                 break;
             case "12":
-                s2010Text.setTextColor(Color.RED);
+                s2010Text.setTextColor(Color.WHITE);
                 optionsBoolean[12] = true;
+
+                yearSelected = true;
+                apiLinkSum.append("2010-01-01,2020-01-01");
                 break;
             case "13":
-                s2000Text.setTextColor(Color.RED);
+                s2000Text.setTextColor(Color.WHITE);
                 optionsBoolean[13] = true;
+
+                yearSelected = true;
+                apiLinkSum.append("2000-01-01,2010-01-01");
                 break;
             case "14":
-                s1990Text.setTextColor(Color.RED);
+                s1990Text.setTextColor(Color.WHITE);
                 optionsBoolean[14] = true;
+
+                yearSelected = true;
+                apiLinkSum.append("1990-01-01,2000-01-01");
                 break;
             case "15":
-                s1980Text.setTextColor(Color.RED);
+                s1980Text.setTextColor(Color.WHITE);
                 optionsBoolean[15] = true;
+
+                yearSelected = true;
+                apiLinkSum.append("1980-01-01,1990-01-01");
                 break;
             case "16":
-                s1970Text.setTextColor(Color.RED);
+                s1970Text.setTextColor(Color.WHITE);
                 optionsBoolean[16] = true;
+
+                yearSelected = true;
+                apiLinkSum.append("1970-01-01,1980-01-01");
                 break;
             case "17":
-                s1960Text.setTextColor(Color.RED);
+                s1960Text.setTextColor(Color.WHITE);
                 optionsBoolean[17] = true;
+
+                yearSelected = true;
+                apiLinkSum.append("1960-01-01,1970-01-01");
                 break;
             case "18":
-                zeroToOneText.setTextColor(Color.RED);
+                zeroToOneText.setTextColor(Color.WHITE);
                 optionsBoolean[18] = true;
+                timeSelected = true;
+                apiLinkSum.append("0,1");
                 break;
             case "19":
-                oneToTwoText.setTextColor(Color.RED);
+                oneToTwoText.setTextColor(Color.WHITE);
                 optionsBoolean[19] = true;
+                timeSelected = true;
+                apiLinkSum.append("1,2");
                 break;
             case "20":
-                twoAndAboveText.setTextColor(Color.RED);
+                twoAndAboveText.setTextColor(Color.WHITE);
                 optionsBoolean[20] = true;
+                timeSelected = true;
+                apiLinkSum.append("2,3");
                 break;
             default:
                 break;
@@ -196,6 +254,8 @@ public class SearchActivity extends AppCompatActivity {
         zeroToOneText = findViewById(R.id.zeroToOneText);
         oneToTwoText = findViewById(R.id.oneToTwoText);
         twoAndAboveText = findViewById(R.id.twoAndAboveText);
+
+        searchEditText.setFocusable(false);
     }
 
     @Override
@@ -204,81 +264,99 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         initView();
+        searchEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchEditText.setFocusableInTouchMode(true);
+                searchEditText.requestFocus();
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(searchEditText, InputMethodManager.SHOW_IMPLICIT);
+            }
+        });
+
+
         if (savedInstanceState != null) {
-            Log.i("info", "runnable is not null");
             for (int i = 0; i < 21; i++) {
                 this.optionsBoolean[i] = savedInstanceState.getBoolean("tag" + i + "clicked");
                 if (optionsBoolean[i]) {
                     switch (i) {
                         case 0:
-                            actionText.setTextColor(Color.RED);
+                            actionText.setTextColor(Color.WHITE);
                             break;
                         case 1:
-                            animationText.setTextColor(Color.RED);
+                            animationText.setTextColor(Color.WHITE);
                             break;
                         case 2:
-                            adventureText.setTextColor(Color.RED);
+                            adventureText.setTextColor(Color.WHITE);
                             break;
                         case 3:
-                            dramaText.setTextColor(Color.RED);
+                            dramaText.setTextColor(Color.WHITE);
                             break;
                         case 4:
-                            crimeText.setTextColor(Color.RED);
+                            crimeText.setTextColor(Color.WHITE);
                             break;
                         case 5:
-                            comedyText.setTextColor(Color.RED);
+                            comedyText.setTextColor(Color.WHITE);
                             break;
                         case 6:
-                            documentaryText.setTextColor(Color.RED);
+                            documentaryText.setTextColor(Color.WHITE);
                             break;
                         case 7:
-                            historicText.setTextColor(Color.RED);
+                            historicText.setTextColor(Color.WHITE);
                             break;
                         case 8:
-                            nineScoreText.setTextColor(Color.RED);
+                            nineScoreText.setTextColor(Color.WHITE);
                             break;
                         case 9:
-                            eightScoreText.setTextColor(Color.RED);
+                            eightScoreText.setTextColor(Color.WHITE);
                             break;
                         case 10:
-                            sevenScoreText.setTextColor(Color.RED);
+                            sevenScoreText.setTextColor(Color.WHITE);
                             break;
                         case 11:
-                            sixScoreText.setTextColor(Color.RED);
+                            sixScoreText.setTextColor(Color.WHITE);
                             break;
                         case 12:
-                            s2010Text.setTextColor(Color.RED);
+                            s2010Text.setTextColor(Color.WHITE);
                             break;
                         case 13:
-                            s2000Text.setTextColor(Color.RED);
+                            s2000Text.setTextColor(Color.WHITE);
                             break;
                         case 14:
-                            s1990Text.setTextColor(Color.RED);
+                            s1990Text.setTextColor(Color.WHITE);
                             break;
                         case 15:
-                            s1980Text.setTextColor(Color.RED);
+                            s1980Text.setTextColor(Color.WHITE);
                             break;
                         case 16:
-                            s1970Text.setTextColor(Color.RED);
+                            s1970Text.setTextColor(Color.WHITE);
                             break;
                         case 17:
-                            s1960Text.setTextColor(Color.RED);
+                            s1960Text.setTextColor(Color.WHITE);
                             break;
                         case 18:
-                            zeroToOneText.setTextColor(Color.RED);
+                            zeroToOneText.setTextColor(Color.WHITE);
                             break;
                         case 19:
-                            oneToTwoText.setTextColor(Color.RED);
+                            oneToTwoText.setTextColor(Color.WHITE);
                             break;
                         case 20:
-                            twoAndAboveText.setTextColor(Color.RED);
+                            twoAndAboveText.setTextColor(Color.WHITE);
                             break;
                         default:
                             break;
                     }
                 }
             }
-        }else{
+            this.genresSelected = savedInstanceState.getBoolean("genresSelected");
+            this.ratingSelected = savedInstanceState.getBoolean("ratingSelected");
+            this.yearSelected = savedInstanceState.getBoolean("yearSelected");
+            this.timeSelected = savedInstanceState.getBoolean("timeSelected");
+        } else {
+            genresSelected = false;
+            ratingSelected = false;
+            yearSelected = false;
+            timeSelected = false;
             for (int i = 0; i < 21; i++) {
                 optionsBoolean[i] = false;
             }
@@ -288,7 +366,32 @@ public class SearchActivity extends AppCompatActivity {
 //        Intent intent = new Intent(SearchActivity.this, ResultActivity.class);
 //        intent.putExtra("searchKeyword", searchEditText.getText().toString());
 //        startActivity(intent);
+        apiLinkSum = new StringBuilder();
+        genresSum = new StringBuilder();
+        ratingSum = new StringBuilder();
+        timeSum = new StringBuilder();
 
+        apiLinkSum.append("user_rating=");
+        nineScoreText.setOnClickListener(this::onClick);
+        eightScoreText.setOnClickListener(this::onClick);
+        sevenScoreText.setOnClickListener(this::onClick);
+        sixScoreText.setOnClickListener(this::onClick);
+
+        if (ratingSelected) {
+            apiLinkSum.append("&");
+        }
+        apiLinkSum.append("release_date=");
+        s2010Text.setOnClickListener(this::onClick);
+        s2000Text.setOnClickListener(this::onClick);
+        s1990Text.setOnClickListener(this::onClick);
+        s1980Text.setOnClickListener(this::onClick);
+        s1970Text.setOnClickListener(this::onClick);
+        s1960Text.setOnClickListener(this::onClick);
+
+        if (yearSelected) {
+            apiLinkSum.append("&");
+        }
+        apiLinkSum.append("genres=");
         actionText.setOnClickListener(this::onClick);
         animationText.setOnClickListener(this::onClick);
         adventureText.setOnClickListener(this::onClick);
@@ -297,33 +400,36 @@ public class SearchActivity extends AppCompatActivity {
         comedyText.setOnClickListener(this::onClick);
         documentaryText.setOnClickListener(this::onClick);
         historicText.setOnClickListener(this::onClick);
-        actionText.setOnClickListener(this::onClick);
-        actionText.setOnClickListener(this::onClick);
-        actionText.setOnClickListener(this::onClick);
-        actionText.setOnClickListener(this::onClick);
 
-        nineScoreText.setOnClickListener(this::onClick);
-        eightScoreText.setOnClickListener(this::onClick);
-        sevenScoreText.setOnClickListener(this::onClick);
-        sixScoreText.setOnClickListener(this::onClick);
-
-        s2010Text.setOnClickListener(this::onClick);
-        s2000Text.setOnClickListener(this::onClick);
-        s1990Text.setOnClickListener(this::onClick);
-        s1980Text.setOnClickListener(this::onClick);
-        s1970Text.setOnClickListener(this::onClick);
-        s1960Text.setOnClickListener(this::onClick);
-
+        if (genresSelected) {
+            apiLinkSum.append("&");
+        }
+        apiLinkSum.append("moviemeter=");
         zeroToOneText.setOnClickListener(this::onClick);
         oneToTwoText.setOnClickListener(this::onClick);
         twoAndAboveText.setOnClickListener(this::onClick);
 
+        //Make the full link of API including all filters
+        apiLinkSum.append("https://imdb-api.com/API/AdvancedSearch/k_05231n2i");
+        apiLinkSum.append("?");
+        if (!searchEditText.getText().toString().equals("")) {
+            apiLinkSum.append("title=");
+            apiLinkSum.append(searchEditText.getText().toString());
+            apiLinkSum.append("&");
+        }
+
+        if (genresSelected) {
+            apiLinkSum.append("genres=");
+            apiLinkSum.append("&");
+            apiLinkSum.append(genresSum);
+        }
         seeResultButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // https://imdb-api.com/API/AdvancedSearch/k_2luv1h1i
+                Log.i("apiLinkSum", apiLinkSum.toString());
                 //String passed to searchKeyword should be like this:  ?user_rating=8.0,&release_date=2010-01-01,&genres=action,adventure&moviemeter=2,3
                 Intent intent = new Intent(SearchActivity.this, ResultActivity.class);
+                intent.putExtra("searchKeyword", "https://imdb-api.com/API/AdvancedSearch/k_05231n2i?genres=comedy");
                 intent.putExtra("searchKeyword", searchEditText.getText().toString());
                 startActivity(intent);
             }

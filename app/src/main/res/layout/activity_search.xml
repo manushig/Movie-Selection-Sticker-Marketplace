@@ -10,25 +10,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="top"
-        android:layout_weight="1"
-        android:weightSum="1">
+        android:layout_gravity="top">
 
         <ImageView
             android:id="@+id/magnifierImageView"
-            android:layout_width="47dp"
-            android:layout_height="41dp"
+            android:layout_width="48dp"
+            android:layout_height="40dp"
             android:layout_gravity="center_vertical"
-            app:srcCompat="@drawable/searchicon" />
+            android:src="@drawable/searchicon" />
 
         <EditText
             android:id="@+id/searchEditText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="14dp"
-            android:ems="10"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
             android:hint="Search"
             android:inputType="text" />
 
@@ -46,7 +42,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,11 +50,21 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/ratingTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Rating:"
+                android:textSize="24sp"
+                app:layout_constraintTop_toBottomOf="@+id/gridLayout"
+                tools:layout_editor_absoluteX="7dp" />
+
+            <TextView
                 android:id="@+id/timeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="7dp"
-                android:layout_marginTop="9dp"
+                android:layout_marginTop="8dp"
                 android:text="Time:"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -69,29 +75,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="7dp"
-                android:layout_marginTop="9dp"
+                android:layout_marginTop="8dp"
                 android:text="Year:"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/gridLayout2" />
 
             <TextView
-                android:id="@+id/ratingTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="7dp"
-                android:layout_marginTop="9dp"
-                android:text="Rating:"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/gridLayout" />
-
-            <TextView
                 android:id="@+id/genreTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="7dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="8dp"
                 android:text="Genre:"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -99,14 +94,10 @@
 
             <GridLayout
                 android:id="@+id/gridLayout"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                app:columnCount="4"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/genreTextView"
-                app:rowCount="2">
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/genreTextView">
 
                 <Button
                     android:id="@+id/actionText"
@@ -114,45 +105,31 @@
                     android:layout_height="wrap_content"
                     android:tag="0"
                     android:text="Action"
-                    android:textSize="14sp"
-                    app:layout_column="0"
-                    app:layout_gravity="bottom|right"
-                    app:layout_row="0" />
+                    android:textSize="13sp" />
 
                 <Button
                     android:id="@+id/animationText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    
                     android:tag="1"
                     android:text="Animation"
-                    android:textSize="14sp"
-                    app:layout_column="1"
-                    app:layout_gravity="bottom"
-                    app:layout_row="0" />
+                    android:textSize="13sp" />
 
                 <Button
                     android:id="@+id/adventureText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                     
                     android:tag="2"
                     android:text="Adventure"
-                    android:textSize="14sp"
-                    app:layout_column="2"
-                    app:layout_gravity="bottom"
-                    app:layout_row="0" />
+                    android:textSize="13sp" />
 
                 <Button
                     android:id="@+id/dramaText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                      
                     android:tag="3"
-                    android:text="Drama"
-                    android:textSize="14sp"
-                    app:layout_column="3"
-                    app:layout_row="0" />
+                    android:textSize="13sp"
+                    android:text="Drama" />
 
                 <Button
                     android:id="@+id/crimeText"
@@ -160,57 +137,41 @@
                     android:layout_height="wrap_content"
                     android:layout_row="1"
                     android:layout_column="0"
-                      
                     android:tag="4"
                     android:text="Crime"
-                    android:textSize="14sp"
-                    app:layout_column="0"
-                    app:layout_gravity="bottom|right"
-                    app:layout_row="1" />
+                    android:textSize="13sp" />
 
                 <Button
                     android:id="@+id/comedyText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                      
                     android:tag="5"
                     android:text="Comedy"
-                    android:textSize="14sp"
-                    app:layout_column="1"
-                    app:layout_gravity="bottom"
-                    app:layout_row="1" />
+                    android:textSize="13sp" />
 
                 <Button
                     android:id="@+id/documentaryText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                      
                     android:tag="6"
                     android:text="Documentary"
-                    android:textSize="14sp"
-                    app:layout_column="2"
-                    app:layout_gravity="bottom"
-                    app:layout_row="1" />
+                    android:textSize="13sp" />
 
                 <Button
                     android:id="@+id/historicalText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                      
                     android:tag="7"
                     android:text="Historical"
-                    android:textSize="14sp"
-                    app:layout_column="3"
-                    app:layout_gravity="bottom"
-                    app:layout_row="1" />
+                    android:textSize="13sp" />
 
             </GridLayout>
-
 
             <GridLayout
                 android:id="@+id/gridLayout4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 app:columnCount="3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -223,10 +184,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="10dp"
-                      
                     android:tag="19"
                     android:text="1 to 2 Hour"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:visibility="visible"
                     app:layout_column="0"
                     app:layout_row="0" />
@@ -237,10 +197,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="10dp"
-                      
+
                     android:tag="18"
                     android:text="0 to 1 Hour"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:visibility="visible"
                     app:layout_column="1"
                     app:layout_row="0" />
@@ -251,10 +211,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="10dp"
-                      
                     android:tag="20"
                     android:text="2 Hours and above"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:visibility="visible"
                     app:layout_column="2"
                     app:layout_row="0" />
@@ -264,6 +223,7 @@
                 android:id="@+id/gridLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 app:columnCount="4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -276,7 +236,7 @@
                     android:layout_height="40dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="10dp"
-                      
+
                     android:tag="8"
                     android:text="9+"
                     android:textSize="14sp"
@@ -289,7 +249,7 @@
                     android:layout_height="40dp"
                     android:layout_marginStart="27dp"
                     android:layout_marginTop="10dp"
-                      
+
                     android:tag="9"
                     android:text="8+"
                     android:textSize="14sp"
@@ -302,7 +262,7 @@
                     android:layout_height="40dp"
                     android:layout_marginStart="27dp"
                     android:layout_marginTop="10dp"
-                      
+
                     android:tag="10"
                     android:text="7+"
                     android:textSize="14sp"
@@ -315,7 +275,7 @@
                     android:layout_height="40dp"
                     android:layout_marginStart="27dp"
                     android:layout_marginTop="10dp"
-                      
+
                     android:tag="11"
                     android:text="6+"
                     android:textSize="14sp"
@@ -327,7 +287,7 @@
                 android:id="@+id/gridLayout3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="9dp"
+                android:layout_marginTop="16dp"
                 app:columnCount="3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -340,7 +300,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="10dp"
-                      
+
                     android:tag="12"
                     android:text="2010's"
                     app:layout_column="0"
@@ -352,7 +312,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="27dp"
                     android:layout_marginTop="10dp"
-                      
+
                     android:tag="13"
                     android:text="2000's"
                     android:textSize="14sp"
@@ -365,7 +325,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="27dp"
                     android:layout_marginTop="10dp"
-                      
+
                     android:tag="14"
                     android:text="1990's"
                     android:textSize="14sp"
@@ -380,7 +340,7 @@
                     android:layout_column="0"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="10dp"
-                      
+
                     android:tag="15"
                     android:text="1980's"
                     android:textSize="14sp"
@@ -405,7 +365,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="27dp"
                     android:layout_marginTop="10dp"
-                      
+
                     android:tag="17"
                     android:text="1960's and Earlier"
                     android:textSize="14sp"
@@ -416,19 +376,16 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <GridLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:columnCount="2"
-        app:rowCount="1">
+        android:visibility="visible">
 
         <Button
             android:id="@+id/clearFilterButton"
-            android:layout_width="145dp"
-            android:layout_height="74dp"
-            android:layout_row="0"
-            android:layout_column="0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="#534B4B"
             android:onClick="clearOptionsClicked"
             android:text="CLEAR"
@@ -437,13 +394,12 @@
 
         <Button
             android:id="@+id/seeResultButton"
-            android:layout_width="262dp"
-            android:layout_height="73dp"
-            android:layout_row="0"
-            android:layout_column="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
             android:background="#F6C01E"
             android:text="SEE RESULTS"
-            android:textSize="24sp" />
-    </GridLayout>
+            android:textSize="24sp"  />
+    </LinearLayout>
 
 </LinearLayout>
