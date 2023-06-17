@@ -13,7 +13,6 @@
         android:layout_gravity="top">
 
         <ImageView
-            android:id="@+id/magnifierImageView"
             android:layout_width="48dp"
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
@@ -26,6 +25,7 @@
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
             android:hint="Search"
+            android:textColorHint="@color/white"
             android:inputType="text" />
 
         <Button
@@ -167,7 +167,6 @@
             </GridLayout>
 
             <GridLayout
-                android:id="@+id/gridLayout4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"

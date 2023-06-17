@@ -8,7 +8,6 @@
     tools:context=".TrailerActivity">
 
     <Toolbar
-        android:id="@+id/my_toolbar"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
