@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -30,6 +33,7 @@ public class DetailsActivity extends AppCompatActivity {
     private TextView textViewImdbRating;
     private TextView textViewPlot;
     private TextView textViewRuntime;
+    private ImageView imageViewMovie;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +50,11 @@ public class DetailsActivity extends AppCompatActivity {
 
             @Override
             public void onDetailGet(MovieDetail movieDetails) {
+
+                imageViewMovie = findViewById(R.id.imgView);
+                Glide.with(DetailsActivity.this)
+                        .load(movieDetails.getImage())
+                        .into(imageViewMovie);
 
                 textViewId = (TextView) findViewById(R.id.textView2);
                 textViewId.setText(movieDetails.getId());
