@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SearchActivity">
+    tools:context=".SearchFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,7 +33,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#534B4B"
-            android:onClick="cancelEdit"
             android:text="CANCEL"
             android:textColor="#FBFBFB"
             android:textStyle="bold" />
@@ -385,7 +384,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#534B4B"
-            android:onClick="clearOptionsClicked"
             android:text="CLEAR"
             android:textColor="#A39F9F"
             android:textSize="24sp" />

@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/search_badge"
+        android:enabled="true"
+        android:icon="@drawable/searchicon"
+        android:title="@string/search"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/now_playing"
+        android:enabled="true"
+        android:icon="@drawable/playcircle"
+        android:title="@string/now_playing"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/support"
+        android:enabled="true"
+        android:icon="@drawable/supportagent48px"
+        android:title="@string/support"
+        app:showAsAction="ifRoom"/>
+
+</menu>

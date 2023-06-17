@@ -1,6 +1,5 @@
 package edu.northeastern.movieapi.network;
 
-import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 

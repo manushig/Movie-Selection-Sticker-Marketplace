@@ -17,6 +17,8 @@ import edu.northeastern.movieapi.model.MovieDetail;
 import edu.northeastern.movieapi.model.YoutubeVideo;
 import edu.northeastern.movieapi.network.MovieWebService;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class DetailsActivity extends AppCompatActivity {
 
     private static final String TAG = "ResultActivity";
@@ -55,9 +57,6 @@ public class DetailsActivity extends AppCompatActivity {
                 Glide.with(DetailsActivity.this)
                         .load(movieDetails.getImage())
                         .into(imageViewMovie);
-
-                //textViewId = (TextView) findViewById(R.id.textView2);
-               //textViewId.setText(movieDetails.getId());
 
                 textViewTitle = (TextView) findViewById(R.id.textView4);
                 textViewTitle.setText(movieDetails.getTitle());
@@ -104,8 +103,5 @@ public class DetailsActivity extends AppCompatActivity {
 
         movieWebService = new MovieWebService(uiThreadCallback);
         movieWebService.getDetailResult(searchKeyword);
-
-
-
     }
 }

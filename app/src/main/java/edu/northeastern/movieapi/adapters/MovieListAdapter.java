@@ -15,7 +15,6 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-
 import edu.northeastern.movieapi.R;
 import edu.northeastern.movieapi.model.Movie;
 
