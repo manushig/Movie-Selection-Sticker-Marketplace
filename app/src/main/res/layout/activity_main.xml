@@ -15,15 +15,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="68dp"
-            android:background="@color/white"
+
             android:text="Welcome To Group 7 Project A6"
-            android:textColor="@color/black"
+            android:textColor="#F6C01E"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2"
             tools:layout_editor_absoluteX="34dp" />
+<!--        android:background="@color/white"-->
 <!--        #F4D882    #F8F1F1-->
 
         <TextView
@@ -46,11 +47,11 @@
             android:layout_marginStart="109dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="110dp"
-            android:background="#98C662"
+            android:background="#F6C01E"
             android:onClick="openHomeActivity"
             android:padding="10dp"
             android:text="Open Movie Home"
-            android:textColor="#F8F6F6"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.526"
             app:layout_constraintStart_toStartOf="parent"

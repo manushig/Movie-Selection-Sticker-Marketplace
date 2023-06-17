@@ -1,18 +1,15 @@
 package edu.northeastern.movieapi;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class HomeActivity extends AppCompatActivity {
-    BottomAppBar bottomAppBar;
     private int currentSelectedItemIndex = 0;
 
     @Override
@@ -27,7 +24,7 @@ public class HomeActivity extends AppCompatActivity {
                 Class fragmentClass = getFragmentClassBasedOnId(item.getItemId());
                 replaceFragment(fragmentClass);
                 currentSelectedItemIndex = item.getItemId();
-                return false;
+                return true;
             }
         });
 

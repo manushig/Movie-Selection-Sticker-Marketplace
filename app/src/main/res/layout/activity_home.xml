@@ -23,10 +23,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:itemTextColor="@color/tab_item_foreground"
+        app:itemIconTint="@color/tab_item_foreground"
         app:layout_constraintTop_toBottomOf="@id/fragment_container_view"
         app:itemBackground="@color/black"
-        app:itemIconTint="@android:color/white"
-        app:itemTextColor="@android:color/white"
         app:menu="@menu/bottom_navigation_menu" />
 
 
