@@ -56,8 +56,8 @@ public class DetailsActivity extends AppCompatActivity {
                         .load(movieDetails.getImage())
                         .into(imageViewMovie);
 
-                textViewId = (TextView) findViewById(R.id.textView2);
-                textViewId.setText(movieDetails.getId());
+                //textViewId = (TextView) findViewById(R.id.textView2);
+               //textViewId.setText(movieDetails.getId());
 
                 textViewTitle = (TextView) findViewById(R.id.textView4);
                 textViewTitle.setText(movieDetails.getTitle());
