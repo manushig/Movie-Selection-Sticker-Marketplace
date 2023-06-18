@@ -14,27 +14,28 @@
         android:roundIcon="@mipmap/ic_launcher_movie_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieAPI"
+
         tools:targetApi="31">
         <activity
-            android:theme="@style/VideoActivityDialogTheme"
-            android:name=".VideoActivity"
-            android:exported="false" />
+            android:name=".HomeActivity"
+            android:exported="false"
+            android:theme="@style/MovieApiActivityTheme"/>
         <activity
-            android:name=".TrailerActivity"
-            android:exported="false" />
+            android:name=".VideoActivity"
+            android:exported="false"
+            android:theme="@style/VideoActivityDialogTheme" />
         <activity
             android:name=".DetailsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/MovieApiActivityTheme"/>
         <activity
             android:name=".ResultActivity"
             android:exported="false"
-            android:theme="@style/AppTheme"/>
-        <activity
-            android:name=".SearchActivity"
-            android:exported="false" />
+            android:theme="@style/MovieApiActivityTheme"/>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/MovieApiActivityTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

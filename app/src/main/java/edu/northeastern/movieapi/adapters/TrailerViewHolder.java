@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import edu.northeastern.movieapi.R;
-import edu.northeastern.movieapi.model.Movie;
 
 public class TrailerViewHolder extends RecyclerView.ViewHolder {
 

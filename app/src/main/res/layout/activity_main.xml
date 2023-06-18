@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/img_1"
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,15 +16,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="68dp"
-            android:background="#F4D882"
+
+
+
             android:text="Welcome To Group 7 Project A6"
-            android:textColor="#F8F1F1"
+            android:textColor="@color/yellow"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2"
             tools:layout_editor_absoluteX="34dp" />
+<!--        android:background="@color/white"-->
+<!--        #F4D882    #F8F1F1-->
 
         <TextView
             android:id="@+id/textView"
@@ -39,17 +44,16 @@
             tools:layout_editor_absoluteX="71dp" />
 
         <Button
-            android:id="@+id/goSearchButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="109dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="110dp"
-            android:background="#98C662"
-            android:onClick="openSearchActivity"
+            android:background="#F6C01E"
+            android:onClick="openHomeActivity"
             android:padding="10dp"
-            android:text="Let's Go Search Movies!"
-            android:textColor="#F8F6F6"
+            android:text="Open Movie Home"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.526"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,23 +67,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/movieiconmain" />
-
-        <!-- TODO: Move button inside the main flow -->
-        <Button
-            android:id="@+id/trailer_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="#98C662"
-            android:text="Watch trailers"
-            android:onClick="openTrailerActivity"
-            android:textColor="#F8F6F6"
-            android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/goSearchButton" />
+            app:srcCompat="@drawable/movieiconmain"
+            app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

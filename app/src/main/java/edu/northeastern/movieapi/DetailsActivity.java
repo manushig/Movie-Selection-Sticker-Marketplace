@@ -15,7 +15,10 @@ import java.util.List;
 import edu.northeastern.movieapi.model.Movie;
 import edu.northeastern.movieapi.model.MovieDetail;
 import edu.northeastern.movieapi.model.YoutubeVideo;
+import edu.northeastern.movieapi.network.BaseUiThreadCallback;
 import edu.northeastern.movieapi.network.MovieWebService;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class DetailsActivity extends AppCompatActivity {
 
@@ -40,24 +43,13 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail1);
         Intent intent = getIntent();
         String searchKeyword = intent.getStringExtra("movieId");
-        MovieWebService.UiThreadCallback uiThreadCallback = new MovieWebService.UiThreadCallback() {
+        MovieWebService.UiThreadCallback uiThreadCallback = new BaseUiThreadCallback() {
 
-
-            @Override
-            public void onSearchResultGet(List<Movie> movies) {
-
-            }
-
-            @Override
             public void onDetailGet(MovieDetail movieDetails) {
-
                 imageViewMovie = findViewById(R.id.imgView);
                 Glide.with(DetailsActivity.this)
                         .load(movieDetails.getImage())
                         .into(imageViewMovie);
-
-                //textViewId = (TextView) findViewById(R.id.textView2);
-               //textViewId.setText(movieDetails.getId());
 
                 textViewTitle = (TextView) findViewById(R.id.textView4);
                 textViewTitle.setText(movieDetails.getTitle());
@@ -95,17 +87,9 @@ public class DetailsActivity extends AppCompatActivity {
 
                 Log.d(TAG, "movieDetails title = " + movieDetails.getTitle());
             }
-
-            @Override
-            public void onVideoGet(YoutubeVideo youtubeVideo) {
-
-            }
         };
 
         movieWebService = new MovieWebService(uiThreadCallback);
         movieWebService.getDetailResult(searchKeyword);
-
-
-
     }
 }

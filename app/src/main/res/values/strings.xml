@@ -5,6 +5,8 @@
     <string name="PopularTrailers">Popular Trailers</string>
     <string name="result_no_title">Title Information Unavailable</string>
     <string name="result_no_content_rating">Not Rated</string>
-    <string name="result_no_duration">Duration Information Unavailable</string>
-    <string name="result_no_ratings">Ratings Unavailable</string>
+    <string name="search">Search</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="support">Support</string>
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>

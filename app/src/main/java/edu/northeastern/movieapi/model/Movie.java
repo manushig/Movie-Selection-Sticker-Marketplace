@@ -1,9 +1,5 @@
 package edu.northeastern.movieapi.model;
 
-import androidx.annotation.NonNull;
-
-import java.util.List;
-
 public class Movie {
     private String title;
     private String image;

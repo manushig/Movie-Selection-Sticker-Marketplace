@@ -13,7 +13,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
 
 public class NetworkThread extends Thread {
     private String url;
@@ -21,6 +20,9 @@ public class NetworkThread extends Thread {
 
     public interface NetworkCallback {
         void processResponse(String responseData);
+        void onError();
+
+        void onEmptyResult();
     }
 
     public NetworkThread(String url, NetworkCallback networkCallback) {
@@ -45,18 +47,47 @@ public class NetworkThread extends Thread {
                 }
                 // Handle the response data (e.g., parse JSON, update UI)
                 String responseData = response.toString();
-                this.networkCallback.processResponse(responseData);
+                Log.d("RESPONSE_DATA",responseData);
+                if(!preProcessResponseForErrors(responseData)){
+                    this.networkCallback.processResponse(responseData);
+                }
                 reader.close();
                 inputStream.close();
             } else {
+                this.networkCallback.onError();
                 // Handle the error response (e.g., show an error message)
             }
             connection.disconnect();
         } catch (IOException e) {
             e.printStackTrace();
+            this.networkCallback.onError();
             // Handle any exceptions that occur during the network request
 
         }
+    }
+
+    public boolean preProcessResponseForErrors(String responseData){
+        try {
+            JSONObject jsonObject = new JSONObject(responseData);
+            String errorMessage = jsonObject.getString("errorMessage");
+            if (errorMessage.isEmpty()) {
+                return false;
+            }
+            if(!jsonObject.getString("errorMessage").equals("null")){
+                networkCallback.onError();
+                return true;
+            }
+
+            JSONArray moviesArray = jsonObject.getJSONArray("results");
+            if (moviesArray.length() == 0) {
+                networkCallback.onEmptyResult();
+                return true;
+            }
+        } catch (JSONException e) {
+            networkCallback.onError();
+            return true;
+        }
+    return false;
     }
 
 }
