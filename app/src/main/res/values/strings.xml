@@ -9,4 +9,9 @@
     <string name="now_playing">Now Playing</string>
     <string name="support">Support</string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="toast_add_to_favorites">Added to favorites</string>
+    <string name="toast_remove_from_favorites">Removed from favorites</string>
+    <string name="liked_movies">Favorite Movies</string>
+    <string name="favorite_movies_header">Favorite Movies</string>
+    <string name="no_favorites">No favorite movies</string>
 </resources>
