@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -39,15 +41,21 @@ public class DetailsActivity extends AppCompatActivity {
     private TextView textViewRuntime;
     private ImageView imageViewMovie;
 
+    private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail1);
+        ProgressBar progressBar = findViewById(R.id.progressBar);
+
         Intent intent = getIntent();
         String searchKeyword = intent.getStringExtra("movieId");
+
         MovieWebService.UiThreadCallback uiThreadCallback = new BaseUiThreadCallback() {
 
             public void onDetailGet(MovieDetail movieDetails) {
+                progressBar.setVisibility(View.GONE);
                 imageViewMovie = findViewById(R.id.imgView);
                 Glide.with(DetailsActivity.this)
                         .load(movieDetails.getImage())
@@ -158,7 +166,7 @@ public class DetailsActivity extends AppCompatActivity {
                 Log.d(TAG, "movieDetails title = " + movieDetails.getTitle());
             }
         };
-
+        progressBar.setVisibility(View.VISIBLE);
         movieWebService = new MovieWebService(uiThreadCallback);
         movieWebService.getDetailResult(searchKeyword);
     }

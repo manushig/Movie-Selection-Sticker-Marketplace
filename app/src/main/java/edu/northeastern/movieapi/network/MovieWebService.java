@@ -17,7 +17,7 @@ import edu.northeastern.movieapi.model.YoutubeVideo;
 public class MovieWebService {
 
 //    private static final String API_KEY = "k_2luv1h1i";k_0gmz1nay
-    private static final String API_KEY = "k_o55njenh";
+    private static final String API_KEY = "k_jbltv1g8";
     private static final String BASE_URL = "https://imdb-api.com/API/AdvancedSearch/" + API_KEY;
     private static final String DETAIL_SEARCH_URL = "https://imdb-api.com/en/API/Title/";
     private static final String YOUTUBE_SEARCH_URL = "https://imdb-api.com/en/API/YouTubeTrailer/";
