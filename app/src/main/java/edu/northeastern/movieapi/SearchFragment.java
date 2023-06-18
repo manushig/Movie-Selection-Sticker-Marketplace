@@ -545,12 +545,106 @@ public class SearchFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_search, container, false);
+
+//        if (savedInstanceState != null) {
+//            for (int i = 0; i < buttonNum; i++) {
+//                this.optionsBoolean[i] = savedInstanceState.getBoolean("tag" + i + "clicked");
+//                if (optionsBoolean[i]) {
+//                    switch (i) {
+//                        case 0:
+//                            actionText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 1:
+//                            animationText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 2:
+//                            adventureText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 3:
+//                            dramaText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 4:
+//                            crimeText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 5:
+//                            comedyText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 6:
+//                            documentaryText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 7:
+//                            historicText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 8:
+//                            nineScoreText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 9:
+//                            eightScoreText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 10:
+//                            sevenScoreText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 11:
+//                            sixScoreText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 12:
+//                            s2010Text.setBackgroundColor(bgColor);
+//                            break;
+//                        case 13:
+//                            s2000Text.setBackgroundColor(bgColor);
+//                            break;
+//                        case 14:
+//                            s1990Text.setBackgroundColor(bgColor);
+//                            break;
+//                        case 15:
+//                            s1980Text.setBackgroundColor(bgColor);
+//                            break;
+//                        case 16:
+//                            s1970Text.setBackgroundColor(bgColor);
+//                            break;
+//                        case 17:
+//                            s1960Text.setBackgroundColor(bgColor);
+//                            break;
+//                        case 18:
+//                            zeroToOneText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 19:
+//                            oneToTwoText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 20:
+//                            twoAndAboveText.setBackgroundColor(bgColor);
+//                            break;
+//                        default:
+//                            break;
+//                    }
+//                }
+//            }
+//            this.ratingSelectedNum = savedInstanceState.getInt("ratingSelectedNum");
+//            this.yearSelectedNum = savedInstanceState.getInt("yearSelectedNum");
+//            this.timeSelectedNum = savedInstanceState.getInt("timeSelectedNum");
+//            this.genresSelected = savedInstanceState.getBoolean("genresSelected");
+//            this.ratingSelected = savedInstanceState.getBoolean("ratingSelected");
+//            this.yearSelected = savedInstanceState.getBoolean("yearSelected");
+//            this.timeSelected = savedInstanceState.getBoolean("timeSelected");
+//        }
+//        //The savedInstanceState didn't call before, do initialize
+//        else {
+//            genresSelected = false;
+//            ratingSelected = false;
+//            timeSelected = false;
+//            yearSelected = false;
+//            for (int i = 0; i < buttonNum; i++) {
+//                optionsBoolean[i] = false;
+//            }
+//        }
+
+        return rootView;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onViewCreated(view,savedInstanceState);
         //Initialize view
         initView(view);
         searchEditText.setOnClickListener(v -> {
@@ -561,8 +655,9 @@ public class SearchFragment extends Fragment {
         });
         //If the savedInstanceState have called, make these action
         if (savedInstanceState != null) {
+            Log.i("info","saveinsatance called");
             for (int i = 0; i < buttonNum; i++) {
-                this.optionsBoolean[i] = savedInstanceState.getBoolean("tag" + i + "clicked");
+                optionsBoolean[i] = savedInstanceState.getBoolean("tag" + i + "clicked");
                 if (optionsBoolean[i]) {
                     switch (i) {
                         case 0:
@@ -645,8 +740,8 @@ public class SearchFragment extends Fragment {
         else {
             genresSelected = false;
             ratingSelected = false;
-            yearSelected = false;
             timeSelected = false;
+            yearSelected = false;
             for (int i = 0; i < buttonNum; i++) {
                 optionsBoolean[i] = false;
             }
