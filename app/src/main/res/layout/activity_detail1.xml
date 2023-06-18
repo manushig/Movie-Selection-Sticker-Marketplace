@@ -118,7 +118,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Year: "
+                    android:text="Year "
+                    android:textStyle="bold"
                     android:textColor="@android:color/white" />
 
                 <TextView
@@ -143,7 +144,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Release Date: "
+                    android:text="Release Date "
+                    android:textStyle="bold"
                     android:textColor="@android:color/white" />
 
                 <TextView
@@ -168,7 +170,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Awards: "
+                    android:text="Awards "
+                    android:textStyle="bold"
                     android:textColor="@android:color/white" />
 
                 <TextView
@@ -193,7 +196,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Directors: "
+                    android:text="Directors "
+                    android:textStyle="bold"
                     android:textColor="@android:color/white" />
 
                 <TextView
@@ -218,7 +222,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Stars: "
+                    android:text="Stars "
+                    android:textStyle="bold"
                     android:textColor="@android:color/white" />
 
                 <TextView
@@ -243,7 +248,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Genres: "
+                    android:text="Genres "
+                    android:textStyle="bold"
                     android:textColor="@android:color/white" />
 
                 <TextView
@@ -268,7 +274,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Content Rating: "
+                    android:text="Content Rating "
+                    android:textStyle="bold"
                     android:textColor="@android:color/white" />
 
                 <TextView
@@ -293,7 +300,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Imdb Rating: "
+                    android:text="Imdb Rating "
+                    android:textStyle="bold"
                     android:textColor="@android:color/white" />
 
                 <TextView
@@ -318,7 +326,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Plot: "
+                    android:text="Plot "
+                    android:textStyle="bold"
                     android:textColor="@android:color/white" />
 
                 <TextView
@@ -344,7 +353,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Runtime: "
+                    android:text="Runtime "
+                    android:textStyle="bold"
                     android:textColor="@android:color/white" />
 
                 <TextView
