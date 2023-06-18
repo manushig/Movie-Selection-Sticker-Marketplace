@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
 import java.util.List;
+import java.util.Objects;
 
 import edu.northeastern.movieapi.model.Movie;
 import edu.northeastern.movieapi.model.MovieDetail;
@@ -37,58 +40,133 @@ public class DetailsActivity extends AppCompatActivity {
     private TextView textViewPlot;
     private TextView textViewRuntime;
     private ImageView imageViewMovie;
+
+    private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail1);
+        ProgressBar progressBar = findViewById(R.id.progressBar);
+
         Intent intent = getIntent();
         String searchKeyword = intent.getStringExtra("movieId");
+
         MovieWebService.UiThreadCallback uiThreadCallback = new BaseUiThreadCallback() {
 
             public void onDetailGet(MovieDetail movieDetails) {
+                progressBar.setVisibility(View.GONE);
                 imageViewMovie = findViewById(R.id.imgView);
                 Glide.with(DetailsActivity.this)
                         .load(movieDetails.getImage())
                         .into(imageViewMovie);
 
                 textViewTitle = (TextView) findViewById(R.id.textView4);
-                textViewTitle.setText(movieDetails.getTitle());
+                if (movieDetails.getTitle() == null ||
+                        Objects.equals(movieDetails.getTitle(), "") ||
+                        Objects.equals(movieDetails.getTitle(), "null")) {
+                    textViewTitle.setText("Movie Title not found");
+                } else {
+                    textViewTitle.setText(movieDetails.getTitle());
+                }
+
 
                 textViewYear = (TextView) findViewById(R.id.textView6);
-                textViewYear.setText(movieDetails.getYear());
+                if (movieDetails.getYear() == null || Objects.equals(movieDetails.getYear(), "")
+                        || Objects.equals(movieDetails.getYear(), "null")) {
+                    textViewYear.setText("Year not found");
+                } else {
+                    textViewYear.setText(movieDetails.getYear());
+                }
+
 
                 textViewReleaseDate = (TextView) findViewById(R.id.textView8);
-                textViewReleaseDate.setText(movieDetails.getReleaseDate());
+                if (movieDetails.getReleaseDate() == null
+                        || Objects.equals(movieDetails.getReleaseDate(), "") ||
+                        Objects.equals(movieDetails.getReleaseDate(), "null")) {
+                    textViewReleaseDate.setText("Release Date not found");
+                } else {
+                    textViewReleaseDate.setText(movieDetails.getReleaseDate());
+                }
+
 
                 textViewAwards = (TextView) findViewById(R.id.textView10);
-                textViewAwards.setText(movieDetails.getAwards());
+                if (movieDetails.getAwards() == null || Objects.equals(movieDetails.getAwards(), "")
+                        || Objects.equals(movieDetails.getAwards(), "null")) {
+                    textViewAwards.setText("Awards not found");
+                } else {
+                    textViewAwards.setText(movieDetails.getAwards());
+                }
+
 
                 textViewDirectors = (TextView) findViewById(R.id.textView12);
-                textViewDirectors.setText(movieDetails.getDirectors());
+                if (movieDetails.getDirectors() == null || Objects.equals(movieDetails.getDirectors(), "")
+                        || Objects.equals(movieDetails.getDirectors(), "null")) {
+                    textViewDirectors.setText("Directors not found");
+                } else {
+                    textViewDirectors.setText(movieDetails.getDirectors());
+                }
+
 
                 textViewStars = (TextView) findViewById(R.id.textView14);
-                textViewStars.setText(movieDetails.getStars());
+                if (movieDetails.getStars() == null || Objects.equals(movieDetails.getStars(), "")
+                        || Objects.equals(movieDetails.getStars(), "null")) {
+                    textViewStars.setText("Stars not found");
+                } else {
+                    textViewStars.setText(movieDetails.getStars());
+                }
+
 
                 textViewGenres = (TextView) findViewById(R.id.textView16);
-                textViewGenres.setText(movieDetails.getGenres());
+                if (movieDetails.getGenres() == null || Objects.equals(movieDetails.getGenres(), "")
+                        || Objects.equals(movieDetails.getGenres(), "null")) {
+                    textViewGenres.setText("Genre not found");
+                } else {
+                    textViewGenres.setText(movieDetails.getGenres());
+                }
+
 
                 textViewContentRating = (TextView) findViewById(R.id.textView18);
-                textViewContentRating.setText(movieDetails.getContentRating());
+                if (movieDetails.getContentRating() == null
+                        || Objects.equals(movieDetails.getContentRating(), "")
+                        || Objects.equals(movieDetails.getContentRating(), "null")) {
+                    textViewContentRating.setText("Content Rating not found");
+                } else {
+                    textViewContentRating.setText(movieDetails.getContentRating());
+                }
+
 
                 textViewImdbRating = (TextView) findViewById(R.id.textView20);
-                textViewImdbRating.setText(movieDetails.getImDbRating());
+                if (movieDetails.getImDbRating() == null || Objects.equals(movieDetails.getImDbRating(), "")
+                        || Objects.equals(movieDetails.getImDbRating(), "null")) {
+                    textViewImdbRating.setText("IMDB Rating not found");
+                } else {
+                    textViewImdbRating.setText(movieDetails.getImDbRating());
+                }
+
 
                 textViewPlot = (TextView) findViewById(R.id.textView22);
-                textViewPlot.setText(movieDetails.getPlot());
+                if (movieDetails.getPlot() == null || Objects.equals(movieDetails.getPlot(), "")
+                        || Objects.equals(movieDetails.getPlot(), "null")) {
+                    textViewPlot.setText("Plot not found");
+                } else {
+                    textViewPlot.setText(movieDetails.getPlot());
+                }
+
 
                 textViewRuntime = (TextView) findViewById(R.id.textView24);
-                textViewRuntime.setText(movieDetails.getRuntimeStr());
+                if (movieDetails.getRuntimeStr() == null || Objects.equals(movieDetails.getRuntimeStr(), "")
+                        || Objects.equals(movieDetails.getRuntimeStr(), "null")) {
+                    textViewRuntime.setText("Runtime not found");
+                } else {
+                    textViewRuntime.setText(movieDetails.getRuntimeStr());
+                }
 
 
                 Log.d(TAG, "movieDetails title = " + movieDetails.getTitle());
             }
         };
-
+        progressBar.setVisibility(View.VISIBLE);
         movieWebService = new MovieWebService(uiThreadCallback);
         movieWebService.getDetailResult(searchKeyword);
     }
