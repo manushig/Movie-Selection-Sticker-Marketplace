@@ -38,7 +38,7 @@ public class ResultActivity extends AppCompatActivity {
 
         ProgressBar progressBar = findViewById(R.id.progressBar);
         Intent intent = getIntent();
-        String searchKeyword = intent.getStringExtra("searchKeyword");
+        String searchKeyword = intent.getStringExtra("searchQueryPath");
 
         MovieWebService.UiThreadCallback uiThreadCallback = new MovieWebService.UiThreadCallback() {
             @Override

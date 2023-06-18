@@ -473,6 +473,7 @@ public class SearchFragment extends Fragment {
     }
 
     private String createApiLinkSum() {
+        apiLinkSum = new StringBuilder();
         for (int i = 0; i < 8; i++) {
             if (optionsBoolean[i]){
                 genresSelected = true;
@@ -498,10 +499,6 @@ public class SearchFragment extends Fragment {
             }
         }
         if (apiLinkSum.toString().equals("")){
-            //Make the full link of API including all filters data
-            apiLinkSum.append("https://imdb-api.com/API/AdvancedSearch/k_05231n2i");
-
-            apiLinkSum.append("?");
             if (!searchEditText.getText().toString().equals("")) {
                 apiLinkSum.append("title=");
                 apiLinkSum.append(searchEditText.getText().toString());
@@ -530,6 +527,10 @@ public class SearchFragment extends Fragment {
             if (timeSelected) {
                 apiLinkSum.append("moviemeter=");
                 apiLinkSum.append(timeSum);
+            }
+
+            if (apiLinkSum.length() == 0) {
+                return "";
             }
 
             int indexToDelete = apiLinkSum.lastIndexOf("&");
@@ -692,18 +693,16 @@ public class SearchFragment extends Fragment {
         cancelEditTextButton.setOnClickListener(v -> cancelEdit());
 
         seeResultButton.setOnClickListener(v -> {
-            String searchQuery = searchEditText.getText().toString();
-            if (TextUtils.isEmpty(searchQuery)) {
-                Toast.makeText(requireActivity(),"Please input strings in search bar",Toast.LENGTH_SHORT).show();
-                return;
-            }
-
             String searchKeyWord = createApiLinkSum();
             Log.i("apiLinkSum", searchKeyWord);
 
+            if (TextUtils.isEmpty(searchKeyWord)) {
+                Toast.makeText(requireActivity(),"Please input valid search strings in search bar or a valid filter",Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             Intent intent = new Intent(getActivity(), ResultActivity.class);
-            intent.putExtra("searchKeyword", searchKeyWord);
-            intent.putExtra("searchKeyword", searchEditText.getText().toString());
+            intent.putExtra("searchQueryPath", searchKeyWord);
             startActivity(intent);
         });
     }
