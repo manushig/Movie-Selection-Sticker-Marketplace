@@ -11,13 +11,15 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class HomeActivity extends AppCompatActivity {
     private int currentSelectedItemIndex = 0;
+    BottomNavigationView bottomNavigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -71,6 +73,17 @@ public class HomeActivity extends AppCompatActivity {
         } else {
             initialFragment = getFragmentClassBasedOnId(savedInstanceState.getInt("current_selected_item_index"));
             replaceFragment(initialFragment);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (currentSelectedItemIndex != R.id.search_badge) {
+            replaceFragment(SearchFragment.class);
+            bottomNavigationView.setSelectedItemId(R.id.search_badge);
+            currentSelectedItemIndex = R.id.search_badge;
+        } else {
+            super.onBackPressed();
         }
     }
 }

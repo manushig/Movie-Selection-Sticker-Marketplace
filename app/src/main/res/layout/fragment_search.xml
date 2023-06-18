@@ -32,7 +32,7 @@
             android:padding="10dp"
             android:textColor="@color/white"
             android:textColorHighlight="@color/white"
-            android:textColorHint="@color/white" />
+            android:textColorHint="@color/white"/>
 
         <Button
             android:id="@+id/cancelEditTextButton"
