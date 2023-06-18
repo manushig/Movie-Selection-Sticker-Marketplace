@@ -5,6 +5,7 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -22,7 +23,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Class fragmentClass = getFragmentClassBasedOnId(item.getItemId());
-                replaceFragment(fragmentClass);
+                replaceFragment(fragmentClass, item.getItemId());
                 currentSelectedItemIndex = item.getItemId();
                 return true;
             }
@@ -53,24 +54,37 @@ public class HomeActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
-    private void replaceFragment(Class fragment) {
-        getSupportFragmentManager().beginTransaction()
-                .setReorderingAllowed(true)
-                .replace(R.id.fragment_container_view, fragment, null)
-                .commit();
+    private void replaceFragment(Class fragment, int index) {
+        String tag = "fragment_" + index;
+        Fragment fragmentByTag = getSupportFragmentManager().findFragmentByTag(tag);
+        if (fragmentByTag == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .replace(R.id.fragment_container_view, fragment, null, tag)
+                    .commit();
+        } else {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .setReorderingAllowed(true)
+                    .replace(R.id.fragment_container_view, fragmentByTag, tag)
+                    .commit();
+        }
+
     }
 
     private void showInitialFragment(Bundle savedInstanceState) {
         Class initialFragment = null;
         if (savedInstanceState == null) {
             initialFragment = SearchFragment.class;
+            String tag = "fragment_" + R.id.search_badge;
             getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
-                    .add(R.id.fragment_container_view, initialFragment, null)
+                    .add(R.id.fragment_container_view, initialFragment, null, tag)
                     .commit();
         } else {
-            initialFragment = getFragmentClassBasedOnId(savedInstanceState.getInt("current_selected_item_index"));
-            replaceFragment(initialFragment);
+            int itemIndex = savedInstanceState.getInt("current_selected_item_index");
+            initialFragment = getFragmentClassBasedOnId(itemIndex);
+            replaceFragment(initialFragment, itemIndex);
         }
     }
 }

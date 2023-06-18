@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -394,7 +395,7 @@ public class SearchFragment extends Fragment {
         clearFilterButton = view.findViewById(R.id.clearFilterButton);
         cancelEditTextButton = view.findViewById(R.id.cancelEditTextButton);
 
-        searchEditText.setFocusable(false);
+//        searchEditText.setFocusable(false);
         bgColor = ContextCompat.getColor(requireContext(), R.color.bg_color);
         textColor = ContextCompat.getColor(requireContext(), R.color.text_color);
 
@@ -481,6 +482,109 @@ public class SearchFragment extends Fragment {
         timeSum = new StringBuilder();
     }
 
+//    @Override
+//    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+//        super.onViewStateRestored(savedInstanceState);
+//        if (savedInstanceState != null) {
+//            Log.i("info","saveinsatance called");
+//
+//            for (int i = 0; i < buttonNum; i++) {
+//                optionsBoolean[i] = savedInstanceState.getBoolean("tag" + i + "clicked");
+//                if (optionsBoolean[i]) {
+//                    switch (i) {
+//                        case 0:
+//                            Log.i("info","action called");
+//                            buttonSelected(actionText,i);
+//                            break;
+//                        case 1:
+//                            animationText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 2:
+//                            adventureText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 3:
+//                            dramaText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 4:
+//                            crimeText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 5:
+//                            comedyText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 6:
+//                            documentaryText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 7:
+//                            historicText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 8:
+//                            nineScoreText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 9:
+//                            eightScoreText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 10:
+//                            sevenScoreText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 11:
+//                            sixScoreText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 12:
+//                            s2010Text.setBackgroundColor(bgColor);
+//                            break;
+//                        case 13:
+//                            s2000Text.setBackgroundColor(bgColor);
+//                            break;
+//                        case 14:
+//                            s1990Text.setBackgroundColor(bgColor);
+//                            break;
+//                        case 15:
+//                            s1980Text.setBackgroundColor(bgColor);
+//                            break;
+//                        case 16:
+//                            s1970Text.setBackgroundColor(bgColor);
+//                            break;
+//                        case 17:
+//                            s1960Text.setBackgroundColor(bgColor);
+//                            break;
+//                        case 18:
+//                            zeroToOneText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 19:
+//                            oneToTwoText.setBackgroundColor(bgColor);
+//                            break;
+//                        case 20:
+//                            twoAndAboveText.setBackgroundColor(bgColor);
+//                            break;
+//                        default:
+//                            break;
+//                    }
+//                }
+//            }
+//
+//            this.ratingSelectedNum = savedInstanceState.getInt("ratingSelectedNum");
+//            this.yearSelectedNum = savedInstanceState.getInt("yearSelectedNum");
+//            this.timeSelectedNum = savedInstanceState.getInt("timeSelectedNum");
+//            this.genresSelected = savedInstanceState.getBoolean("genresSelected");
+//            this.ratingSelected = savedInstanceState.getBoolean("ratingSelected");
+//            this.yearSelected = savedInstanceState.getBoolean("yearSelected");
+//            this.timeSelected = savedInstanceState.getBoolean("timeSelected");
+//            this.ratingSum.append(savedInstanceState.getString("ratingSum"));
+//            this.yearSum.append(savedInstanceState.getString("yearSum"));
+//            this.genresSum.append(savedInstanceState.getString("genresSum"));
+//            this.timeSum.append(savedInstanceState.getString("timeSum"));
+//        } else {
+//
+//            genresSelected = false;
+//            ratingSelected = false;
+//            timeSelected = false;
+//            yearSelected = false;
+//            for (int i = 0; i < buttonNum; i++) {
+//                optionsBoolean[i] = false;
+//            }
+//        }
+//    }
+
     private void initListeners(){
 
         nineScoreText.setOnClickListener(this::onClick);
@@ -503,7 +607,6 @@ public class SearchFragment extends Fragment {
         comedyText.setOnClickListener(this::onClick);
         documentaryText.setOnClickListener(this::onClick);
         historicText.setOnClickListener(this::onClick);
-
 
         zeroToOneText.setOnClickListener(this::onClick);
         oneToTwoText.setOnClickListener(this::onClick);
@@ -585,7 +688,6 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_search, container, false);
-
         return rootView;
     }
 
@@ -594,12 +696,13 @@ public class SearchFragment extends Fragment {
         super.onViewCreated(view,savedInstanceState);
         //Initialize view
         initView(view);
-        searchEditText.setOnClickListener(v -> {
-            searchEditText.setFocusableInTouchMode(true);
-            searchEditText.requestFocus();
-            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.showSoftInput(searchEditText, InputMethodManager.SHOW_IMPLICIT);
-        });
+        initListeners();
+//        searchEditText.setOnClickListener(v -> {
+//            searchEditText.setFocusableInTouchMode(true);
+//            searchEditText.requestFocus();
+//            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+//            imm.showSoftInput(searchEditText, InputMethodManager.SHOW_IMPLICIT);
+//        });
         //If the savedInstanceState have called, make these action
         if (savedInstanceState != null) {
             Log.i("info","saveinsatance called");
@@ -609,7 +712,8 @@ public class SearchFragment extends Fragment {
                 if (optionsBoolean[i]) {
                     switch (i) {
                         case 0:
-                            actionText.setBackgroundColor(bgColor);
+                            Log.i("info","action called");
+                            buttonSelected(actionText,i);
                             break;
                         case 1:
                             animationText.setBackgroundColor(bgColor);
@@ -689,7 +793,6 @@ public class SearchFragment extends Fragment {
             this.genresSum.append(savedInstanceState.getString("genresSum"));
             this.timeSum.append(savedInstanceState.getString("timeSum"));
         } else {
-            initListeners();
 
             genresSelected = false;
             ratingSelected = false;
