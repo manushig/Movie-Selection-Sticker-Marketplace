@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +50,9 @@ public class SearchFragment extends Fragment {
         outState.putBoolean("ratingSelected", ratingSelected);
         outState.putBoolean("yearSelected", yearSelected);
         outState.putBoolean("timeSelected", timeSelected);
+        outState.putInt("ratingSelectedNum",ratingSelectedNum);
+        outState.putInt("yearSelectedNum",yearSelectedNum);
+        outState.putInt("timeSelectedNum",timeSelectedNum);
     }
 
     /**
@@ -493,48 +497,45 @@ public class SearchFragment extends Fragment {
                 break;
             }
         }
-        //Make the full link of API including all filters data
-        apiLinkSum.append("https://imdb-api.com/API/AdvancedSearch/k_05231n2i");
+        if (apiLinkSum.toString().equals("")){
+            //Make the full link of API including all filters data
+            apiLinkSum.append("https://imdb-api.com/API/AdvancedSearch/k_05231n2i");
 
-        apiLinkSum.append("?");
-        if (!searchEditText.getText().toString().equals("")) {
-            apiLinkSum.append("title=");
-            apiLinkSum.append(searchEditText.getText().toString());
-            apiLinkSum.append("&");
-        } else {
-            apiLinkSum.deleteCharAt(apiLinkSum.lastIndexOf("&"));
-        }
+            apiLinkSum.append("?");
+            if (!searchEditText.getText().toString().equals("")) {
+                apiLinkSum.append("title=");
+                apiLinkSum.append(searchEditText.getText().toString());
+                apiLinkSum.append("&");
+            }
 
-        if (ratingSelected) {
-            apiLinkSum.append("user_rating=");
-            apiLinkSum.append(ratingSum);
-            apiLinkSum.append("&");
-        } else {
-            apiLinkSum.deleteCharAt(apiLinkSum.lastIndexOf("&"));
-        }
+            if (ratingSelected) {
+                apiLinkSum.append("user_rating=");
+                apiLinkSum.append(ratingSum);
+                apiLinkSum.append("&");
+            }
 
-        if (yearSelected) {
-            apiLinkSum.append("release_date=");
-            apiLinkSum.append(yearSum);
-            apiLinkSum.append("&");
-        } else {
-            apiLinkSum.deleteCharAt(apiLinkSum.lastIndexOf("&"));
-        }
+            if (yearSelected) {
+                apiLinkSum.append("release_date=");
+                apiLinkSum.append(yearSum);
+                apiLinkSum.append("&");
+            }
 
-        if (genresSelected) {
-            apiLinkSum.append("genres=");
-            apiLinkSum.append(genresSum);
-            apiLinkSum.deleteCharAt(apiLinkSum.length() - 1);
-            apiLinkSum.append("&");
-        } else {
-            apiLinkSum.deleteCharAt(apiLinkSum.lastIndexOf("&"));
-        }
+            if (genresSelected) {
+                apiLinkSum.append("genres=");
+                apiLinkSum.append(genresSum);
+                apiLinkSum.deleteCharAt(apiLinkSum.length() - 1);
+                apiLinkSum.append("&");
+            }
 
-        if (timeSelected) {
-            apiLinkSum.append("moviemeter=");
-            apiLinkSum.append(timeSum);
-        } else {
-            apiLinkSum.deleteCharAt(apiLinkSum.lastIndexOf("&"));
+            if (timeSelected) {
+                apiLinkSum.append("moviemeter=");
+                apiLinkSum.append(timeSum);
+            }
+
+            int indexToDelete = apiLinkSum.lastIndexOf("&");
+            if (indexToDelete == apiLinkSum.length()-1) {
+                apiLinkSum.deleteCharAt(indexToDelete);
+            }
         }
 
         return apiLinkSum.toString();
@@ -631,6 +632,9 @@ public class SearchFragment extends Fragment {
                     }
                 }
             }
+            this.ratingSelectedNum = savedInstanceState.getInt("ratingSelectedNum");
+            this.yearSelectedNum = savedInstanceState.getInt("yearSelectedNum");
+            this.timeSelectedNum = savedInstanceState.getInt("timeSelectedNum");
             this.genresSelected = savedInstanceState.getBoolean("genresSelected");
             this.ratingSelected = savedInstanceState.getBoolean("ratingSelected");
             this.yearSelected = savedInstanceState.getBoolean("yearSelected");
@@ -688,6 +692,12 @@ public class SearchFragment extends Fragment {
         cancelEditTextButton.setOnClickListener(v -> cancelEdit());
 
         seeResultButton.setOnClickListener(v -> {
+            String searchQuery = searchEditText.getText().toString();
+            if (TextUtils.isEmpty(searchQuery)) {
+                Toast.makeText(requireActivity(),"Please input strings in search bar",Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             String searchKeyWord = createApiLinkSum();
             Log.i("apiLinkSum", searchKeyWord);
 
