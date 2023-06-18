@@ -53,6 +53,10 @@ public class SearchFragment extends Fragment {
         outState.putInt("ratingSelectedNum",ratingSelectedNum);
         outState.putInt("yearSelectedNum",yearSelectedNum);
         outState.putInt("timeSelectedNum",timeSelectedNum);
+        outState.putString("yearSum",yearSum.toString());
+        outState.putString("genresSum",genresSum.toString());
+        outState.putString("timeSum",timeSum.toString());
+        outState.putString("ratingSum",ratingSum.toString());
     }
 
     /**
@@ -391,7 +395,6 @@ public class SearchFragment extends Fragment {
         cancelEditTextButton = view.findViewById(R.id.cancelEditTextButton);
 
         searchEditText.setFocusable(false);
-
         bgColor = ContextCompat.getColor(requireContext(), R.color.bg_color);
         textColor = ContextCompat.getColor(requireContext(), R.color.text_color);
 
@@ -470,10 +473,46 @@ public class SearchFragment extends Fragment {
                     break;
             }
         }
+
+        apiLinkSum = new StringBuilder();
+        genresSum = new StringBuilder();
+        ratingSum = new StringBuilder();
+        yearSum = new StringBuilder();
+        timeSum = new StringBuilder();
+    }
+
+    private void initListeners(){
+
+        nineScoreText.setOnClickListener(this::onClick);
+        eightScoreText.setOnClickListener(this::onClick);
+        sevenScoreText.setOnClickListener(this::onClick);
+        sixScoreText.setOnClickListener(this::onClick);
+
+        s2010Text.setOnClickListener(this::onClick);
+        s2000Text.setOnClickListener(this::onClick);
+        s1990Text.setOnClickListener(this::onClick);
+        s1980Text.setOnClickListener(this::onClick);
+        s1970Text.setOnClickListener(this::onClick);
+        s1960Text.setOnClickListener(this::onClick);
+
+        actionText.setOnClickListener(this::onClick);
+        animationText.setOnClickListener(this::onClick);
+        adventureText.setOnClickListener(this::onClick);
+        dramaText.setOnClickListener(this::onClick);
+        crimeText.setOnClickListener(this::onClick);
+        comedyText.setOnClickListener(this::onClick);
+        documentaryText.setOnClickListener(this::onClick);
+        historicText.setOnClickListener(this::onClick);
+
+
+        zeroToOneText.setOnClickListener(this::onClick);
+        oneToTwoText.setOnClickListener(this::onClick);
+        twoAndAboveText.setOnClickListener(this::onClick);
     }
 
     private String createApiLinkSum() {
         apiLinkSum = new StringBuilder();
+
         for (int i = 0; i < 8; i++) {
             if (optionsBoolean[i]){
                 genresSelected = true;
@@ -547,98 +586,6 @@ public class SearchFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_search, container, false);
 
-//        if (savedInstanceState != null) {
-//            for (int i = 0; i < buttonNum; i++) {
-//                this.optionsBoolean[i] = savedInstanceState.getBoolean("tag" + i + "clicked");
-//                if (optionsBoolean[i]) {
-//                    switch (i) {
-//                        case 0:
-//                            actionText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 1:
-//                            animationText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 2:
-//                            adventureText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 3:
-//                            dramaText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 4:
-//                            crimeText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 5:
-//                            comedyText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 6:
-//                            documentaryText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 7:
-//                            historicText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 8:
-//                            nineScoreText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 9:
-//                            eightScoreText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 10:
-//                            sevenScoreText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 11:
-//                            sixScoreText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 12:
-//                            s2010Text.setBackgroundColor(bgColor);
-//                            break;
-//                        case 13:
-//                            s2000Text.setBackgroundColor(bgColor);
-//                            break;
-//                        case 14:
-//                            s1990Text.setBackgroundColor(bgColor);
-//                            break;
-//                        case 15:
-//                            s1980Text.setBackgroundColor(bgColor);
-//                            break;
-//                        case 16:
-//                            s1970Text.setBackgroundColor(bgColor);
-//                            break;
-//                        case 17:
-//                            s1960Text.setBackgroundColor(bgColor);
-//                            break;
-//                        case 18:
-//                            zeroToOneText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 19:
-//                            oneToTwoText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 20:
-//                            twoAndAboveText.setBackgroundColor(bgColor);
-//                            break;
-//                        default:
-//                            break;
-//                    }
-//                }
-//            }
-//            this.ratingSelectedNum = savedInstanceState.getInt("ratingSelectedNum");
-//            this.yearSelectedNum = savedInstanceState.getInt("yearSelectedNum");
-//            this.timeSelectedNum = savedInstanceState.getInt("timeSelectedNum");
-//            this.genresSelected = savedInstanceState.getBoolean("genresSelected");
-//            this.ratingSelected = savedInstanceState.getBoolean("ratingSelected");
-//            this.yearSelected = savedInstanceState.getBoolean("yearSelected");
-//            this.timeSelected = savedInstanceState.getBoolean("timeSelected");
-//        }
-//        //The savedInstanceState didn't call before, do initialize
-//        else {
-//            genresSelected = false;
-//            ratingSelected = false;
-//            timeSelected = false;
-//            yearSelected = false;
-//            for (int i = 0; i < buttonNum; i++) {
-//                optionsBoolean[i] = false;
-//            }
-//        }
-
         return rootView;
     }
 
@@ -656,6 +603,7 @@ public class SearchFragment extends Fragment {
         //If the savedInstanceState have called, make these action
         if (savedInstanceState != null) {
             Log.i("info","saveinsatance called");
+
             for (int i = 0; i < buttonNum; i++) {
                 optionsBoolean[i] = savedInstanceState.getBoolean("tag" + i + "clicked");
                 if (optionsBoolean[i]) {
@@ -728,6 +676,7 @@ public class SearchFragment extends Fragment {
                     }
                 }
             }
+
             this.ratingSelectedNum = savedInstanceState.getInt("ratingSelectedNum");
             this.yearSelectedNum = savedInstanceState.getInt("yearSelectedNum");
             this.timeSelectedNum = savedInstanceState.getInt("timeSelectedNum");
@@ -735,9 +684,13 @@ public class SearchFragment extends Fragment {
             this.ratingSelected = savedInstanceState.getBoolean("ratingSelected");
             this.yearSelected = savedInstanceState.getBoolean("yearSelected");
             this.timeSelected = savedInstanceState.getBoolean("timeSelected");
-        }
-        //The savedInstanceState didn't call before, do initialize
-        else {
+            this.ratingSum.append(savedInstanceState.getString("ratingSum"));
+            this.yearSum.append(savedInstanceState.getString("yearSum"));
+            this.genresSum.append(savedInstanceState.getString("genresSum"));
+            this.timeSum.append(savedInstanceState.getString("timeSum"));
+        } else {
+            initListeners();
+
             genresSelected = false;
             ratingSelected = false;
             timeSelected = false;
@@ -751,38 +704,6 @@ public class SearchFragment extends Fragment {
 //        Intent intent = new Intent(SearchActivity.this, ResultActivity.class);
 //        intent.putExtra("searchKeyword", searchEditText.getText().toString());
 //        startActivity(intent);
-
-        apiLinkSum = new StringBuilder();
-        genresSum = new StringBuilder();
-        ratingSum = new StringBuilder();
-        yearSum = new StringBuilder();
-        timeSum = new StringBuilder();
-
-        nineScoreText.setOnClickListener(this::onClick);
-        eightScoreText.setOnClickListener(this::onClick);
-        sevenScoreText.setOnClickListener(this::onClick);
-        sixScoreText.setOnClickListener(this::onClick);
-
-        s2010Text.setOnClickListener(this::onClick);
-        s2000Text.setOnClickListener(this::onClick);
-        s1990Text.setOnClickListener(this::onClick);
-        s1980Text.setOnClickListener(this::onClick);
-        s1970Text.setOnClickListener(this::onClick);
-        s1960Text.setOnClickListener(this::onClick);
-
-        actionText.setOnClickListener(this::onClick);
-        animationText.setOnClickListener(this::onClick);
-        adventureText.setOnClickListener(this::onClick);
-        dramaText.setOnClickListener(this::onClick);
-        crimeText.setOnClickListener(this::onClick);
-        comedyText.setOnClickListener(this::onClick);
-        documentaryText.setOnClickListener(this::onClick);
-        historicText.setOnClickListener(this::onClick);
-
-
-        zeroToOneText.setOnClickListener(this::onClick);
-        oneToTwoText.setOnClickListener(this::onClick);
-        twoAndAboveText.setOnClickListener(this::onClick);
 
         clearFilterButton.setOnClickListener(v -> clearOptionsClicked());
         cancelEditTextButton.setOnClickListener(v -> cancelEdit());
