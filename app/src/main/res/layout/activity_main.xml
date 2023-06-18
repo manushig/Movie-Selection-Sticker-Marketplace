@@ -20,7 +20,7 @@
 
 
             android:text="Welcome To Group 7 Project A6"
-            android:textColor="#F6C01E"
+            android:textColor="@color/yellow"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

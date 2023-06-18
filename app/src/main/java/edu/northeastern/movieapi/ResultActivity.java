@@ -8,6 +8,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +20,7 @@ import edu.northeastern.movieapi.adapters.MovieListAdapter;
 import edu.northeastern.movieapi.model.Movie;
 import edu.northeastern.movieapi.model.MovieDetail;
 import edu.northeastern.movieapi.model.YoutubeVideo;
+import edu.northeastern.movieapi.network.BaseUiThreadCallback;
 import edu.northeastern.movieapi.network.MovieWebService;
 
 public class ResultActivity extends AppCompatActivity {
@@ -40,7 +42,7 @@ public class ResultActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String searchKeyword = intent.getStringExtra("searchQueryPath");
 
-        MovieWebService.UiThreadCallback uiThreadCallback = new MovieWebService.UiThreadCallback() {
+        MovieWebService.UiThreadCallback uiThreadCallback = new BaseUiThreadCallback() {
             @Override
             public void onSearchResultGet(List<Movie> movies) {
                 progressBar.setVisibility(View.GONE);
@@ -51,13 +53,15 @@ public class ResultActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onDetailGet(MovieDetail movieDetails) {
-                Log.d(TAG, "movieDetails title = " + movieDetails.getTitle());
+            public void onError() {
+                progressBar.setVisibility(View.GONE);
+                AlertDialogHelper.showErrorDialog(ResultActivity.this);
             }
 
             @Override
-            public void onVideoGet(YoutubeVideo youtubeVideo) {
-
+            public void onEmptyResult() {
+                progressBar.setVisibility(View.GONE);
+                AlertDialogHelper.showEmptyResult(ResultActivity.this);
             }
         };
 
