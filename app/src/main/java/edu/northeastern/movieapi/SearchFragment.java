@@ -54,10 +54,6 @@ public class SearchFragment extends Fragment {
         outState.putInt("ratingSelectedNum",ratingSelectedNum);
         outState.putInt("yearSelectedNum",yearSelectedNum);
         outState.putInt("timeSelectedNum",timeSelectedNum);
-        outState.putString("yearSum",yearSum.toString());
-        outState.putString("genresSum",genresSum.toString());
-        outState.putString("timeSum",timeSum.toString());
-        outState.putString("ratingSum",ratingSum.toString());
     }
 
     /**
@@ -67,16 +63,12 @@ public class SearchFragment extends Fragment {
         name.setBackgroundColor(Color.TRANSPARENT);
         optionsBoolean[tagNum] = false;
         if (tagNum >= 0 && tagNum < 8) {
-            genresSum.delete(genresSum.indexOf(buttonApiString[tagNum]), buttonApiString[tagNum].length() + 1);
         } else if (tagNum >= 8 && tagNum < 12) {
             ratingSelectedNum--;
-            ratingSum.delete(ratingSum.indexOf(buttonApiString[tagNum]), buttonApiString[tagNum].length() + 1);
         } else if (tagNum >= 12 && tagNum < 18) {
             yearSelectedNum--;
-            yearSum.delete(yearSum.indexOf(buttonApiString[tagNum]), buttonApiString[tagNum].length() + 1);
-        } else {
+        } else if (tagNum >= 18 && tagNum < 21) {
             timeSelectedNum--;
-            timeSum.delete(timeSum.indexOf(buttonApiString[tagNum]), buttonApiString[tagNum].length() + 1);
         }
     }
 
@@ -86,17 +78,13 @@ public class SearchFragment extends Fragment {
     private void buttonSelected(Button name, int tagNum){
         name.setBackgroundColor(bgColor);
         optionsBoolean[tagNum] = true;
-        if (tagNum >= 0 && tagNum < 8) {
-            genresSum.append(buttonApiString[tagNum]+",");
-        } else if (tagNum >= 8 && tagNum < 12) {
+
+      if (tagNum >= 8 && tagNum < 12) {
             ratingSelectedNum++;
-            ratingSum.append(buttonApiString[tagNum]);
         } else if (tagNum >= 12 && tagNum < 18) {
             yearSelectedNum++;
-            yearSum.append(buttonApiString[tagNum]);
-        } else {
+        } else if (tagNum >= 18 && tagNum < buttonNum){
             timeSelectedNum++;
-            timeSum.append(buttonApiString[tagNum]);
         }
     }
 
@@ -395,7 +383,7 @@ public class SearchFragment extends Fragment {
         clearFilterButton = view.findViewById(R.id.clearFilterButton);
         cancelEditTextButton = view.findViewById(R.id.cancelEditTextButton);
 
-//        searchEditText.setFocusable(false);
+        searchEditText.setFocusable(false);
         bgColor = ContextCompat.getColor(requireContext(), R.color.bg_color);
         textColor = ContextCompat.getColor(requireContext(), R.color.text_color);
 
@@ -408,28 +396,28 @@ public class SearchFragment extends Fragment {
         for (int i = 0; i < buttonNum; i++) {
             switch (i) {
                 case 0:
-                    buttonApiString[i] = "action";
+                    buttonApiString[i] = "action,";
                     break;
                 case 1:
-                    buttonApiString[i] = "animation";
+                    buttonApiString[i] = "animation,";
                     break;
                 case 2:
-                    buttonApiString[i] = "adventure";
+                    buttonApiString[i] = "adventure,";
                     break;
                 case 3:
-                    buttonApiString[i] = "drama";
+                    buttonApiString[i] = "drama,";
                     break;
                 case 4:
-                    buttonApiString[i] = "crime";
+                    buttonApiString[i] = "crime,";
                     break;
                 case 5:
-                    buttonApiString[i] = "comedy";
+                    buttonApiString[i] = "comedy,";
                     break;
                 case 6:
-                    buttonApiString[i] = "documentary";
+                    buttonApiString[i] = "documentary,";
                     break;
                 case 7:
-                    buttonApiString[i] = "history";
+                    buttonApiString[i] = "history,";
                     break;
                 case 8:
                     buttonApiString[i] = "9.0,10";
@@ -482,109 +470,6 @@ public class SearchFragment extends Fragment {
         timeSum = new StringBuilder();
     }
 
-//    @Override
-//    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-//        super.onViewStateRestored(savedInstanceState);
-//        if (savedInstanceState != null) {
-//            Log.i("info","saveinsatance called");
-//
-//            for (int i = 0; i < buttonNum; i++) {
-//                optionsBoolean[i] = savedInstanceState.getBoolean("tag" + i + "clicked");
-//                if (optionsBoolean[i]) {
-//                    switch (i) {
-//                        case 0:
-//                            Log.i("info","action called");
-//                            buttonSelected(actionText,i);
-//                            break;
-//                        case 1:
-//                            animationText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 2:
-//                            adventureText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 3:
-//                            dramaText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 4:
-//                            crimeText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 5:
-//                            comedyText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 6:
-//                            documentaryText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 7:
-//                            historicText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 8:
-//                            nineScoreText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 9:
-//                            eightScoreText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 10:
-//                            sevenScoreText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 11:
-//                            sixScoreText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 12:
-//                            s2010Text.setBackgroundColor(bgColor);
-//                            break;
-//                        case 13:
-//                            s2000Text.setBackgroundColor(bgColor);
-//                            break;
-//                        case 14:
-//                            s1990Text.setBackgroundColor(bgColor);
-//                            break;
-//                        case 15:
-//                            s1980Text.setBackgroundColor(bgColor);
-//                            break;
-//                        case 16:
-//                            s1970Text.setBackgroundColor(bgColor);
-//                            break;
-//                        case 17:
-//                            s1960Text.setBackgroundColor(bgColor);
-//                            break;
-//                        case 18:
-//                            zeroToOneText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 19:
-//                            oneToTwoText.setBackgroundColor(bgColor);
-//                            break;
-//                        case 20:
-//                            twoAndAboveText.setBackgroundColor(bgColor);
-//                            break;
-//                        default:
-//                            break;
-//                    }
-//                }
-//            }
-//
-//            this.ratingSelectedNum = savedInstanceState.getInt("ratingSelectedNum");
-//            this.yearSelectedNum = savedInstanceState.getInt("yearSelectedNum");
-//            this.timeSelectedNum = savedInstanceState.getInt("timeSelectedNum");
-//            this.genresSelected = savedInstanceState.getBoolean("genresSelected");
-//            this.ratingSelected = savedInstanceState.getBoolean("ratingSelected");
-//            this.yearSelected = savedInstanceState.getBoolean("yearSelected");
-//            this.timeSelected = savedInstanceState.getBoolean("timeSelected");
-//            this.ratingSum.append(savedInstanceState.getString("ratingSum"));
-//            this.yearSum.append(savedInstanceState.getString("yearSum"));
-//            this.genresSum.append(savedInstanceState.getString("genresSum"));
-//            this.timeSum.append(savedInstanceState.getString("timeSum"));
-//        } else {
-//
-//            genresSelected = false;
-//            ratingSelected = false;
-//            timeSelected = false;
-//            yearSelected = false;
-//            for (int i = 0; i < buttonNum; i++) {
-//                optionsBoolean[i] = false;
-//            }
-//        }
-//    }
-
     private void initListeners(){
 
         nineScoreText.setOnClickListener(this::onClick);
@@ -619,24 +504,28 @@ public class SearchFragment extends Fragment {
         for (int i = 0; i < 8; i++) {
             if (optionsBoolean[i]){
                 genresSelected = true;
+                genresSum.append(buttonApiString[i]);
                 break;
             }
         }
         for (int i = 8; i < 12; i++) {
             if (optionsBoolean[i]){
                 ratingSelected = true;
+                ratingSum.append(buttonApiString[i]);
                 break;
             }
         }
         for (int i = 12; i < 18; i++) {
             if (optionsBoolean[i]){
                 yearSelected = true;
+                yearSum.append(buttonApiString[i]);
                 break;
             }
         }
         for (int i = 18; i < buttonNum; i++) {
             if (optionsBoolean[i]){
                 timeSelected = true;
+                timeSum.append(buttonApiString[i]);
                 break;
             }
         }
@@ -697,12 +586,12 @@ public class SearchFragment extends Fragment {
         //Initialize view
         initView(view);
         initListeners();
-//        searchEditText.setOnClickListener(v -> {
-//            searchEditText.setFocusableInTouchMode(true);
-//            searchEditText.requestFocus();
-//            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-//            imm.showSoftInput(searchEditText, InputMethodManager.SHOW_IMPLICIT);
-//        });
+        searchEditText.setOnClickListener(v -> {
+            searchEditText.setFocusableInTouchMode(true);
+            searchEditText.requestFocus();
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(searchEditText, InputMethodManager.SHOW_IMPLICIT);
+        });
         //If the savedInstanceState have called, make these action
         if (savedInstanceState != null) {
             Log.i("info","saveinsatance called");
@@ -788,10 +677,6 @@ public class SearchFragment extends Fragment {
             this.ratingSelected = savedInstanceState.getBoolean("ratingSelected");
             this.yearSelected = savedInstanceState.getBoolean("yearSelected");
             this.timeSelected = savedInstanceState.getBoolean("timeSelected");
-            this.ratingSum.append(savedInstanceState.getString("ratingSum"));
-            this.yearSum.append(savedInstanceState.getString("yearSum"));
-            this.genresSum.append(savedInstanceState.getString("genresSum"));
-            this.timeSum.append(savedInstanceState.getString("timeSum"));
         } else {
 
             genresSelected = false;
@@ -802,11 +687,6 @@ public class SearchFragment extends Fragment {
                 optionsBoolean[i] = false;
             }
         }
-        // https://imdb-api.com/API/AdvancedSearch/k_2luv1h1i
-//String passed to searchKeyword should be like this:  ?user_rating=8.0,&release_date=2010-01-01,&genres=action,adventure&moviemeter=2,3
-//        Intent intent = new Intent(SearchActivity.this, ResultActivity.class);
-//        intent.putExtra("searchKeyword", searchEditText.getText().toString());
-//        startActivity(intent);
 
         clearFilterButton.setOnClickListener(v -> clearOptionsClicked());
         cancelEditTextButton.setOnClickListener(v -> cancelEdit());

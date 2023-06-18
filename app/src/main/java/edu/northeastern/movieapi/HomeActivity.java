@@ -93,7 +93,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (currentSelectedItemIndex != R.id.search_badge) {
-            replaceFragment(SearchFragment.class);
+            replaceFragment(SearchFragment.class,currentSelectedItemIndex);
             bottomNavigationView.setSelectedItemId(R.id.search_badge);
             currentSelectedItemIndex = R.id.search_badge;
         } else {
