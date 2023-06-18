@@ -69,6 +69,10 @@ public class NetworkThread extends Thread {
     public boolean preProcessResponseForErrors(String responseData){
         try {
             JSONObject jsonObject = new JSONObject(responseData);
+            String errorMessage = jsonObject.getString("errorMessage");
+            if (errorMessage.isEmpty()) {
+                return false;
+            }
             if(!jsonObject.getString("errorMessage").equals("null")){
                 networkCallback.onError();
                 return true;
