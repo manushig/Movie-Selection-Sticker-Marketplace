@@ -1,11 +1,13 @@
 package edu.northeastern.movieapi.adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -13,8 +15,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import edu.northeastern.movieapi.R;
 import edu.northeastern.movieapi.model.Movie;
@@ -25,14 +31,19 @@ public class FavoriteMovieAdapter extends RecyclerView.Adapter<FavoriteMovieAdap
 
     private OnItemClickListener mListener;
 
+    private Map<String, Movie> selectedMovies;
     private Context context;
+    private Gson gson;
 
+TextView textViewEmptyList;
     public interface OnItemClickListener {
         void onDeleteClick(int position);
     }
-    public FavoriteMovieAdapter(List<Movie> favoriteMoviesList) {
+    public FavoriteMovieAdapter(List<Movie> favoriteMoviesList, Map<String, Movie> selectedMovies, TextView textViewEmptyList) {
         this.favoriteMoviesList = favoriteMoviesList;
-
+        this.selectedMovies  = selectedMovies;
+        this.gson = new Gson();
+this.textViewEmptyList = textViewEmptyList;
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -106,6 +117,58 @@ public class FavoriteMovieAdapter extends RecyclerView.Adapter<FavoriteMovieAdap
             holder.textViewMovieRating.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, 0);
         }
 
+        holder.imageViewDelete.setOnClickListener(v -> {
+
+            if (selectedMovies.containsKey(movie.getId())) {
+                selectedMovies.remove(movie.getId());
+
+                Toast.makeText(context, "Movie removed: " + movie.getTitle(), Toast.LENGTH_SHORT).show();
+
+                favoriteMoviesList.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, favoriteMoviesList.size());
+
+            }
+
+            saveSelectedMoviesToSharedPreferences();
+            if (favoriteMoviesList.isEmpty()) {
+                textViewEmptyList.setVisibility(View.VISIBLE);
+            }
+
+
+        });
+
+    }
+
+    private void saveSelectedMoviesToSharedPreferences() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("FavoriteMovies", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putStringSet("SelectedMovies", getSelectedMoviesJsonSet());
+        editor.apply();
+    }
+    private List<String> getSelectedMoviesJsonList() {
+        List<String> selectedMoviesJsonList = new ArrayList<>();
+        for (Movie movie : selectedMovies.values()) {
+            String movieJson = gson.toJson(movie);
+            selectedMoviesJsonList.add(movieJson);
+        }
+        return selectedMoviesJsonList;
+    }
+
+    private String[] getSelectedMoviesJsonArray() {
+        List<String> selectedMoviesJsonList = getSelectedMoviesJsonList();
+        return selectedMoviesJsonList.toArray(new String[0]);
+    }
+
+    private String getSelectedMoviesJsonString() {
+        String[] selectedMoviesJsonArray = getSelectedMoviesJsonArray();
+        return gson.toJson(selectedMoviesJsonArray);
+    }
+
+    private HashSet<String> getSelectedMoviesJsonSet() {
+        String selectedMoviesJsonString = getSelectedMoviesJsonString();
+        String[] selectedMoviesJsonArray = gson.fromJson(selectedMoviesJsonString, String[].class);
+        return new HashSet<>(java.util.Arrays.asList(selectedMoviesJsonArray));
     }
 
     @Override
@@ -113,7 +176,7 @@ public class FavoriteMovieAdapter extends RecyclerView.Adapter<FavoriteMovieAdap
         return favoriteMoviesList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView imageViewMovie;
         private TextView textViewMovieTitle;
@@ -122,6 +185,8 @@ public class FavoriteMovieAdapter extends RecyclerView.Adapter<FavoriteMovieAdap
         private TextView textViewMovieRating;
         private TextView textViewContentRating;
         private ImageView imageViewDelete;
+
+
 
         public ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);

@@ -1,5 +1,7 @@
 package edu.northeastern.movieapi;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -27,7 +29,7 @@ import java.util.Map;
 import java.util.Set;
 
 import edu.northeastern.movieapi.adapters.FavoriteMovieAdapter;
-import edu.northeastern.movieapi.adapters.MovieListAdapter;
+
 import edu.northeastern.movieapi.model.Movie;
 
 public class FavoriteMovieFragment extends Fragment {
@@ -43,6 +45,8 @@ public class FavoriteMovieFragment extends Fragment {
 
     private RecyclerView recyclerView;
 
+    private List<Movie> favoriteMoviesList;
+
     public FavoriteMovieFragment() {
         // Required empty public constructor
     }
@@ -50,9 +54,10 @@ public class FavoriteMovieFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPreferences = requireContext().getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+        sharedPreferences = requireContext().getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE);
         gson = new Gson();
         favoriteMoviesMap = getFavoriteMoviesMapFromSharedPreferences();
+        favoriteMoviesList = new ArrayList<>(favoriteMoviesMap.values());
     }
 
     @Override
@@ -64,7 +69,6 @@ public class FavoriteMovieFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         textViewEmptyList = view.findViewById(R.id.textViewEmptyList);
 
-        List<Movie> favoriteMoviesList = new ArrayList<>(favoriteMoviesMap.values());
 
         recyclerView = view.findViewById(R.id.recyclerViewFMovies);
 
@@ -72,7 +76,7 @@ public class FavoriteMovieFragment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        favoriteMovieAdapter = new FavoriteMovieAdapter(favoriteMoviesList);
+        favoriteMovieAdapter = new FavoriteMovieAdapter(favoriteMoviesList, favoriteMoviesMap, textViewEmptyList);
 
         recyclerView.setAdapter(favoriteMovieAdapter);
 
@@ -104,24 +108,39 @@ public class FavoriteMovieFragment extends Fragment {
 
     private void saveFavoriteMoviesMapToSharedPreferences(Map<String, Movie> favoriteMoviesMap) {
         Gson gson = new Gson();
-        String moviesJson = gson.toJson(favoriteMoviesMap);
+        String moviesJson = gson.toJson(favoriteMoviesMap.values());
         sharedPreferences.edit().putString(PREFERENCES_KEY, moviesJson).apply();
+    }
+
+    private void saveSelectedMoviesToSharedPreferences() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("FavoriteMovies", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        String selectedMoviesJson = gson.toJson(favoriteMoviesMap.values());
+        editor.putString("SelectedMovies", selectedMoviesJson);
+        editor.apply();
     }
 
 
     private void deleteFavoriteMovie(int position) {
-        String[] movieIds = favoriteMoviesMap.keySet().toArray(new String[0]);
-        String movieId = movieIds[position];
-        Movie deletedMovie = favoriteMoviesMap.get(movieId);
-        favoriteMoviesMap.remove(movieId);
-        saveFavoriteMoviesMapToSharedPreferences(favoriteMoviesMap);
-        favoriteMovieAdapter.notifyItemRemoved(position); // Notify the adapter of item removal
-        Toast.makeText(requireContext(), "Movie removed: " + deletedMovie.getTitle(), Toast.LENGTH_SHORT).show();
+        Movie movie = favoriteMoviesList.get(position);
+        String movieId = movie.getId();
+
+        if (favoriteMoviesMap.containsKey(movieId)) {
+            favoriteMoviesMap.remove(movieId);
+            Toast.makeText(requireContext(), "Movie removed: " + movie.getTitle(), Toast.LENGTH_SHORT).show();
+
+            favoriteMoviesList.remove(position);
+            favoriteMovieAdapter.notifyItemRemoved(position);
+        }
+
+        saveSelectedMoviesToSharedPreferences();
+
         checkIfEmptyList();
     }
 
+
     private void checkIfEmptyList() {
-        if (favoriteMoviesMap.isEmpty()) {
+        if (favoriteMoviesList.isEmpty()) {
             textViewEmptyList.setVisibility(View.VISIBLE);
         } else {
             textViewEmptyList.setVisibility(View.GONE);
