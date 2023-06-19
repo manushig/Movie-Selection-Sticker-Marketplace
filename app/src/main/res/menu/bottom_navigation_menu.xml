@@ -7,6 +7,12 @@
         android:title="@string/search"
         app:showAsAction="ifRoom"/>
     <item
+        android:id="@+id/liked_movies"
+        android:enabled="true"
+        android:icon="@drawable/baseline_favorite_24"
+        android:title="@string/favorites"
+        app:showAsAction="ifRoom"/>
+    <item
         android:id="@+id/now_playing"
         android:enabled="true"
         android:icon="@drawable/playcircle"

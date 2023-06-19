@@ -46,7 +46,8 @@ public class HomeActivity extends AppCompatActivity {
             return TrailerFragment.class;
         } else if (itemId == R.id.support) {
             return SupportFragment.class;
-        }
+        }else if (itemId == R.id.liked_movies) {
+            return FavoriteMovieFragment.class;}
         return null;
     }
 

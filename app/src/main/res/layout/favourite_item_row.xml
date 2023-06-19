@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/constraintLayoutMovieItem"
+    android:id="@+id/constraintLayoutFavoriteItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/black"
     android:padding="8dp">
 
     <ImageView
-        android:id="@+id/imageViewMovie"
+        android:id="@+id/imageViewFMovie"
         android:layout_width="100dp"
         android:layout_height="150dp"
         android:layout_marginEnd="8dp"
@@ -17,65 +17,51 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageViewPlay"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@drawable/playcircle"
-        android:contentDescription="Play Button"
-        app:layout_constraintBottom_toBottomOf="@id/imageViewMovie"
-        app:layout_constraintEnd_toEndOf="@id/imageViewMovie"
-        app:layout_constraintStart_toStartOf="@id/imageViewMovie"
-        app:layout_constraintTop_toTopOf="@id/imageViewMovie" />
-
-
-
     <TextView
-        android:id="@+id/textViewMovieTitle"
+        android:id="@+id/textViewFMovieTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:textSize="16sp"
         android:textStyle="bold"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@id/textViewContentRating"
-        app:layout_constraintStart_toEndOf="@id/imageViewMovie"
-        app:layout_constraintTop_toTopOf="@id/imageViewMovie" />
+        app:layout_constraintBottom_toTopOf="@id/textViewFContentRating"
+        app:layout_constraintStart_toEndOf="@id/imageViewFMovie"
+        app:layout_constraintTop_toTopOf="@id/imageViewFMovie" />
 
     <TextView
-        android:id="@+id/textViewContentRating"
+        android:id="@+id/textViewFContentRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@id/textViewMovieDuration"
-        app:layout_constraintStart_toEndOf="@id/imageViewMovie"
-        app:layout_constraintTop_toBottomOf="@id/textViewMovieTitle" />
+        app:layout_constraintBottom_toTopOf="@id/textViewFMovieDuration"
+        app:layout_constraintStart_toEndOf="@id/imageViewFMovie"
+        app:layout_constraintTop_toBottomOf="@id/textViewFMovieTitle" />
 
     <TextView
-        android:id="@+id/textViewMovieDuration"
+        android:id="@+id/textViewFMovieDuration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@id/textViewMovieRating"
-        app:layout_constraintStart_toEndOf="@id/imageViewMovie"
-        app:layout_constraintTop_toBottomOf="@id/textViewContentRating" />
-
+        app:layout_constraintBottom_toTopOf="@id/textViewFMovieRating"
+        app:layout_constraintStart_toEndOf="@id/imageViewFMovie"
+        app:layout_constraintTop_toBottomOf="@id/textViewFContentRating" />
 
     <ImageView
-        android:id="@+id/imageViewHeart"
+        android:id="@+id/imageViewDelete"
         android:layout_width="100dp"
         android:layout_height="150dp"
         android:layout_marginEnd="8dp"
         android:scaleType="center"
-        android:src="@drawable/baseline_favorite_border_24"
+        android:src="@drawable/baseline_delete_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewMovieRating"
+        android:id="@+id/textViewFMovieRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -83,7 +69,7 @@
         android:drawablePadding="4dp"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/imageViewMovie"
-        app:layout_constraintTop_toBottomOf="@id/textViewMovieDuration" />
+        app:layout_constraintStart_toEndOf="@id/imageViewFMovie"
+        app:layout_constraintTop_toBottomOf="@id/textViewFMovieDuration" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

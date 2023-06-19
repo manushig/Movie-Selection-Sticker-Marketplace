@@ -9,9 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -21,59 +21,50 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import edu.northeastern.movieapi.R;
 import edu.northeastern.movieapi.model.Movie;
 
-public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieViewHolder> {
+public class FavoriteMovieAdapter extends RecyclerView.Adapter<FavoriteMovieAdapter.ViewHolder> {
 
-    private List<Movie> movies;
-    private Map<String, Movie> selectedMovies;
-
-    private Gson gson;
-    private Context context;
+    private List<Movie> favoriteMoviesList;
 
     private OnItemClickListener mListener;
 
+    private Map<String, Movie> selectedMovies;
+    private Context context;
+    private Gson gson;
+
+TextView textViewEmptyList;
     public interface OnItemClickListener {
-        void onItemClick(int position);
-
-        void onImageClick(int position);
-
-        void onFavoriteClick(int position);
+        void onDeleteClick(int position);
+    }
+    public FavoriteMovieAdapter(List<Movie> favoriteMoviesList, Map<String, Movie> selectedMovies, TextView textViewEmptyList) {
+        this.favoriteMoviesList = favoriteMoviesList;
+        this.selectedMovies  = selectedMovies;
+        this.gson = new Gson();
+this.textViewEmptyList = textViewEmptyList;
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
 
-    public MovieListAdapter(List<Movie> movies, Context context, Map<String, Movie> selectedMovies) {
-        this.movies = movies;
-        this.context = context;
-        this.selectedMovies  = selectedMovies;
-        this.gson = new Gson();
-    }
-
 
     @NonNull
     @Override
-    public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.movie_item_row, parent, false);
-        return new MovieViewHolder(view, mListener);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        context = parent.getContext();
+        LayoutInflater inflater
+                = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.favourite_item_row, parent, false);
+        return new ViewHolder(view, mListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MovieListAdapter.MovieViewHolder holder, int position) {
-        Movie movie = movies.get(position);
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Movie movie = favoriteMoviesList.get(position);
 
-        // Update the layout dynamically
-        ConstraintSet constraintSet = new ConstraintSet();
-        constraintSet.clone(holder.constraintLayout);
-
-        // Set the movie-specific attributes
-        // Load image resource using Glide or any other image loading library
         Glide.with(holder.itemView)
                 .load(movie.getImage())
                 .into(holder.imageViewMovie);
@@ -126,29 +117,27 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
             holder.textViewMovieRating.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, 0);
         }
 
-        boolean isSelected = selectedMovies.containsKey(movie.getId());
+        holder.imageViewDelete.setOnClickListener(v -> {
 
-        if (selectedMovies.containsKey(movie.getId())) {
-            holder.imageViewHeart.setImageResource(R.drawable.baseline_favorite_24);
-        } else {
-            holder.imageViewHeart.setImageResource(R.drawable.baseline_favorite_border_24);
-        }
-
-        holder.imageViewHeart.setOnClickListener(v -> {
             if (selectedMovies.containsKey(movie.getId())) {
                 selectedMovies.remove(movie.getId());
-                holder.imageViewHeart.setImageResource(R.drawable.baseline_favorite_border_24);
-                Toast.makeText(context, "Removed from favorites", Toast.LENGTH_SHORT).show();
-            } else {
-                selectedMovies.put(movie.getId(), movie);
-                holder.imageViewHeart.setImageResource(R.drawable.baseline_favorite_24);
-                Toast.makeText(context, "Added to favorites", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(context, "Movie removed: " + movie.getTitle(), Toast.LENGTH_SHORT).show();
+
+                favoriteMoviesList.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, favoriteMoviesList.size());
+
             }
+
             saveSelectedMoviesToSharedPreferences();
+            if (favoriteMoviesList.isEmpty()) {
+                textViewEmptyList.setVisibility(View.VISIBLE);
+            }
+
+
         });
 
-        // Apply the updated layout
-        constraintSet.applyTo(holder.constraintLayout);
     }
 
     private void saveSelectedMoviesToSharedPreferences() {
@@ -184,57 +173,42 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
 
     @Override
     public int getItemCount() {
-        return movies.size();
+        return favoriteMoviesList.size();
     }
 
-    public static class MovieViewHolder extends RecyclerView.ViewHolder {
-        ConstraintLayout constraintLayout;
-        ImageView imageViewMovie;
-        TextView textViewMovieTitle;
-        TextView textViewContentRating;
-        TextView textViewMovieRating;
-        TextView textViewMovieDuration;
-        ImageView imageViewPlay;
-        ImageView imageViewHeart;
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public MovieViewHolder(View itemView, final OnItemClickListener listener) {
+        private ImageView imageViewMovie;
+        private TextView textViewMovieTitle;
+
+        private TextView textViewMovieDuration;
+        private TextView textViewMovieRating;
+        private TextView textViewContentRating;
+        private ImageView imageViewDelete;
+
+
+
+        public ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
 
-            imageViewPlay = itemView.findViewById(R.id.imageViewPlay);
-            constraintLayout = itemView.findViewById(R.id.constraintLayoutMovieItem);
-            imageViewMovie = itemView.findViewById(R.id.imageViewMovie);
-            textViewMovieTitle = itemView.findViewById(R.id.textViewMovieTitle);
-            textViewContentRating = itemView.findViewById(R.id.textViewContentRating);
-            textViewMovieRating = itemView.findViewById(R.id.textViewMovieRating);
-            textViewMovieDuration = itemView.findViewById(R.id.textViewMovieDuration);
-            imageViewHeart = itemView.findViewById(R.id.imageViewHeart);
+            imageViewMovie = itemView.findViewById(R.id.imageViewFMovie);
+            textViewMovieTitle = itemView.findViewById(R.id.textViewFMovieTitle);
+            textViewContentRating   = itemView.findViewById(R.id.textViewFContentRating);
+            textViewMovieDuration   = itemView.findViewById(R.id.textViewFMovieDuration);
+            textViewMovieRating   = itemView.findViewById(R.id.textViewFMovieRating);
+            imageViewDelete = itemView.findViewById(R.id.imageViewDelete);
 
-            imageViewPlay.setOnClickListener(v -> {
+
+            imageViewDelete.setOnClickListener(v -> {
                 if (listener != null) {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
-                        listener.onImageClick(position);
-                    }
-                }
-            });
-
-            constraintLayout.setOnClickListener(v -> {
-                if (listener != null) {
-                    int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION) {
-                        listener.onItemClick(position);
-                    }
-                }
-            });
-
-            imageViewHeart.setOnClickListener(v -> {
-                if (listener != null) {
-                    int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION) {
-                        listener.onFavoriteClick(position);
+                        listener.onDeleteClick(position);
                     }
                 }
             });
         }
+
+
     }
 }
