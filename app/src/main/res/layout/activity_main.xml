@@ -52,7 +52,7 @@
             android:background="#F6C01E"
             android:onClick="openHomeActivity"
             android:padding="10dp"
-            android:text="Open Movie Home"
+            android:text="@string/home_message"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.526"
