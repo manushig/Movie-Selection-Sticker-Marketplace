@@ -9,7 +9,7 @@ import androidx.appcompat.app.AlertDialog;
 public class AlertDialogHelper {
 
     static void showErrorDialog(Activity activity) {
-        showDialog(activity, "An error occurred", "Try again later");
+        showDialog(activity, "Issue with API.", "Please contact Support Team");
     }
 
     static void showEmptyResult(Activity activity) {
