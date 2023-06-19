@@ -32,12 +32,14 @@
 
     <TextView
         android:id="@+id/textViewMovieTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:textSize="16sp"
         android:textStyle="bold"
         android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintBottom_toTopOf="@id/textViewContentRating"
         app:layout_constraintStart_toEndOf="@id/imageViewMovie"
         app:layout_constraintTop_toTopOf="@id/imageViewMovie" />
