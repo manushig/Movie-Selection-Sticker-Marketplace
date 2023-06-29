@@ -44,6 +44,7 @@
             tools:layout_editor_absoluteX="71dp" />
 
         <Button
+            android:id="@+id/btnHome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="109dp"
@@ -58,6 +59,40 @@
             app:layout_constraintHorizontal_bias="0.526"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <Button
+            android:id="@+id/btnChat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="109dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="110dp"
+            android:background="#F6C01E"
+            android:onClick="openChatActivity"
+            android:padding="10dp"
+            android:text="@string/chat_message"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.526"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnHome" />
+
+        <Button
+            android:id="@+id/btnAbout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="109dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="110dp"
+            android:background="#F6C01E"
+            android:onClick="openAboutActivity"
+            android:padding="10dp"
+            android:text="@string/about_message"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.526"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnChat" />
 
         <ImageView
             android:id="@+id/imageView2"

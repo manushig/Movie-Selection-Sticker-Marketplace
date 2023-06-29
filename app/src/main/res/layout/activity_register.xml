@@ -1,0 +1,86 @@
+<!-- activity_register.xml -->
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_dark"
+    tools:context=".RegisterActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/logoImageView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/movieiconmain"
+            app:layout_constraintBottom_toTopOf="@+id/emailEditText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/edittext_rounded_border"
+            android:hint="@string/textedit_email_hint"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="16dp"
+            android:textColorHint="@color/primaryText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logoImageView"
+            app:layout_constraintWidth_percent="0.8" />
+
+        <EditText
+            android:id="@+id/firstNameEditText"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edittext_rounded_border"
+            android:hint="@string/textedit_firstname_hint"
+            android:paddingLeft="16dp"
+            android:textColorHint="@color/primaryText"
+            app:layout_constraintEnd_toEndOf="@+id/emailEditText"
+            app:layout_constraintStart_toStartOf="@+id/emailEditText"
+            app:layout_constraintTop_toBottomOf="@+id/emailEditText"
+            app:layout_constraintWidth_percent="0.8" />
+
+        <EditText
+            android:id="@+id/lastNameEditText"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edittext_rounded_border"
+            android:hint="@string/textedit_lastname_hint"
+            android:paddingLeft="16dp"
+            android:textColorHint="@color/primaryText"
+            app:layout_constraintEnd_toEndOf="@+id/firstNameEditText"
+            app:layout_constraintStart_toStartOf="@+id/firstNameEditText"
+            app:layout_constraintTop_toBottomOf="@+id/firstNameEditText"
+            app:layout_constraintWidth_percent="0.8" />
+
+        <Button
+            android:id="@+id/registerButton"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/primary_button_background"
+            android:text="@string/btn_register"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/lastNameEditText"
+            app:layout_constraintStart_toStartOf="@+id/lastNameEditText"
+            app:layout_constraintTop_toBottomOf="@+id/lastNameEditText"
+            app:layout_constraintWidth_percent="0.5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
