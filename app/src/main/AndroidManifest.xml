@@ -16,6 +16,9 @@
         android:theme="@style/Theme.MovieAPI"
         tools:targetApi="31">
         <activity
+            android:name="edu.northeastern.stickers.StickerReceivedHistoryActivity"
+            android:exported="false" />
+        <activity
             android:name="edu.northeastern.stickers.StickerHomeActivity"
             android:exported="false" />
         <activity
