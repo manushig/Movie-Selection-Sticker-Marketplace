@@ -24,4 +24,7 @@
     <string name="textedit_firstname_hint">First Name</string>
     <string name="textedit_lastname_hint">Last Name</string>
     <string name="btn_register">Register</string>
+    <string name="Store">Store</string>
+    <string name="Inbox">Inbox</string>
+    <string name="history">History</string>
 </resources>

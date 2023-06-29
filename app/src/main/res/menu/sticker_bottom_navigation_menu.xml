@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/sticker_store"
+        android:enabled="true"
+        android:icon="@drawable/local_mall"
+        android:title="@string/Store"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/sticker_inbox"
+        android:enabled="true"
+        android:icon="@drawable/all_inbox"
+        android:title="@string/Inbox"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/sticker_history"
+        android:enabled="true"
+        android:icon="@drawable/work_history"
+        android:title="@string/history"
+        app:showAsAction="ifRoom"/>
+
+</menu>
