@@ -16,14 +16,20 @@
     <string name="chat_message">Chat</string>
     <string name="about_message">About</string>
     <!-- Login -->
-    <string name="textedit_username_hint">Username</string>
     <string name="textview_register">Don\'t have an account? Register</string>
     <string name="btn_login">Login</string>
+    <string name="valid_email">Enter valid email.</string>
+    <string name="unregistered_email">This email is not registered</string>
     <!-- Register -->
     <string name="textedit_email_hint">Email</string>
     <string name="textedit_firstname_hint">First Name</string>
     <string name="textedit_lastname_hint">Last Name</string>
     <string name="btn_register">Register</string>
+    <string name="dummy_password">pass123</string>
+    <string name="valid_firstname">Enter valid first name.</string>
+    <string name="valid_lastname">Enter valid last name.</string>
+    <string name="unsuccessful_registration">Registration is not successful.</string>
+
     <string name="Store">Store</string>
     <string name="Inbox">Inbox</string>
     <string name="history">History</string>
