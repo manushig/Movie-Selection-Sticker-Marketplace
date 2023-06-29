@@ -15,7 +15,7 @@ import java.util.List;
 
 import edu.northeastern.movieapi.R;
 import edu.northeastern.stickers.StickerReceivedHistoryActivity;
-import edu.northeastern.stickers.models.UserStickerActivity;
+import edu.northeastern.stickers.UserStickerActivity;
 
 public class UserStickerActivityAdapter extends RecyclerView.Adapter<UserStickerActivityAdapter.UserStickerActivityHolder> {
     private Context context;

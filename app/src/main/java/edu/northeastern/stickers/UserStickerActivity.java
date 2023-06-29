@@ -1,6 +1,8 @@
-package edu.northeastern.stickers.models;
+package edu.northeastern.stickers;
 
 import java.util.List;
+
+import edu.northeastern.stickers.models.Users;
 
 public class UserStickerActivity {
     Users user;
