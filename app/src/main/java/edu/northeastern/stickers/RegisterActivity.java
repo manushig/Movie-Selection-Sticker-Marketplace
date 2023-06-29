@@ -1,8 +1,10 @@
-package edu.northeastern.movieapi;
+package edu.northeastern.stickers;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import edu.northeastern.movieapi.R;
 
 public class RegisterActivity extends AppCompatActivity {
 

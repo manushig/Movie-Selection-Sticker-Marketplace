@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 
+import edu.northeastern.stickers.AboutActivity;
+import edu.northeastern.stickers.LoginActivity;
+
 
 public class MainActivity extends AppCompatActivity {
     public void openHomeActivity(View view){
