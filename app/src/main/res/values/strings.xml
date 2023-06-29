@@ -13,7 +13,7 @@
     <string name="favorites">Favorites</string>
     <string name="no_favorites">No favorite movies</string>
     <string name="home_message">Movies Home</string>
-    <string name="chat_message">Movies Chat</string>
+    <string name="chat_message">Chat</string>
     <string name="about_message">About</string>
     <!-- Login -->
     <string name="textedit_username_hint">Username</string>
