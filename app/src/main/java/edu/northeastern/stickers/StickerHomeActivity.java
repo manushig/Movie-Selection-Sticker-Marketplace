@@ -15,17 +15,22 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import edu.northeastern.movieapi.FavoriteMovieFragment;
+import edu.northeastern.movieapi.MainActivity;
 import edu.northeastern.movieapi.R;
 
 
-public class StickerHomeActivity extends AppCompatActivity implements LogoutDialogListener{
+public class StickerHomeActivity extends AppCompatActivity implements LogoutDialogListener {
     BottomNavigationView bottomNavigationView;
     private int currentSelectedItemIndex = 0;
     private ImageView logoutImageView;
+    private FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sticker_home);
+
+        auth = FirebaseAuth.getInstance();
 
         logoutImageView = findViewById(R.id.logoutImageView);
 
@@ -100,14 +105,20 @@ public class StickerHomeActivity extends AppCompatActivity implements LogoutDial
         }
         return null;
     }
+
     @Override
     public void onBackPressed() {
         if (currentSelectedItemIndex != R.id.sticker_store) {
-            replaceFragment(StickerStoreFragment.class,currentSelectedItemIndex);
+            replaceFragment(StickerStoreFragment.class, currentSelectedItemIndex);
             bottomNavigationView.setSelectedItemId(R.id.sticker_store);
             currentSelectedItemIndex = R.id.sticker_store;
         } else {
-            super.onBackPressed();
+            if (auth.getCurrentUser() != null) {
+                startActivity(new Intent(StickerHomeActivity.this, MainActivity.class));
+                finish();
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 

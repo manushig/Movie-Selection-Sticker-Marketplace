@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 progressBar.setVisibility(View.GONE);
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                finish();
             }
         });
 
@@ -69,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                             if(task.isSuccessful())
                             {
                                 startActivity(new Intent(LoginActivity.this, StickerHomeActivity.class));
+                                finish();
                             }
                             else {
                                 Toast.makeText(LoginActivity.this, R.string.unregistered_email, Toast.LENGTH_SHORT).show();
