@@ -76,6 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
                                             startActivity(new Intent(RegisterActivity.this, StickerHomeActivity.class));
+                                            finish();
                                         }
                                     }
                                 });
