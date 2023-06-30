@@ -28,7 +28,7 @@ public class StickerPackAdapter extends RecyclerView.Adapter<StickerPackAdapter.
     private final List<StickerSection> stickerSectionPackList;
     private final Map<String, List<StickerPack>> stickerPackMap;
 
-    private FragmentManager parentFragmentManager;
+    private final FragmentManager parentFragmentManager;
     private final LayoutInflater inflater;
 
     public StickerPackAdapter(Context context, FragmentManager parentFragmentManager, List<StickerSection> stickerSectionPackList, Map<String, List<StickerPack>> stickerPackMap) {
@@ -48,24 +48,38 @@ public class StickerPackAdapter extends RecyclerView.Adapter<StickerPackAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull StickerViewHolder holder, int position) {
-        String sectionName = stickerSectionPackList.get(holder.getAdapterPosition()).getStickerPack();
+        String sectionName = stickerSectionPackList.get(holder.getBindingAdapterPosition()).getStickerPack();
         holder.stickerName.setText(sectionName);
 
 
         for (StickerPack stickerPack : stickerPackMap.get(sectionName)) {
-            ImageView imageView = new ImageView(holder.itemView.getContext());
+            View view = inflater.inflate(R.layout.sticker_layout, null, false);
+            ImageView imageView = view.findViewById(R.id.stickImageView);
+            TextView textView = view.findViewById(R.id.CountTextView);
             Glide.with(holder.itemView.getContext())
                     .load(stickerPack.getStickerPath())
                     .apply(new RequestOptions().override(350, 350))
                     .into(imageView);
-            imageView.setOnClickListener(new View.OnClickListener() {
+
+            view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 //                    ItemListDialogFragment itemListDialogFragment;
-                    ItemListDialogFragment.newInstance(stickerPack.getStickerID()).show(parentFragmentManager, "sheet");
+                    ItemListDialogFragment.newInstance(stickerPack.getStickerID(),
+                            stickerPack.getStickerPath())
+                            .show(parentFragmentManager, "sheet");
                 }
             });
-            holder.linearLayout.addView(imageView);
+
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                  //  ItemListDialogFragment itemListDialogFragment;
+                    ItemListDialogFragment.newInstance(stickerPack.getStickerID(), sectionName).show(parentFragmentManager, "sheet");
+                    return true;
+                }
+            });
+            holder.linearLayout.addView(view);
         }
     }
 
@@ -74,7 +88,7 @@ public class StickerPackAdapter extends RecyclerView.Adapter<StickerPackAdapter.
         return stickerSectionPackList.size();
     }
 
-    public class StickerViewHolder extends RecyclerView.ViewHolder {
+    public static class StickerViewHolder extends RecyclerView.ViewHolder {
         TextView stickerName;
         LinearLayout linearLayout;
         View itemView;

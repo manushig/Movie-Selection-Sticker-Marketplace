@@ -5,6 +5,8 @@ public class StickerPack {
     private String stickerName;
     private String stickerPath;
 
+    private int sentCount;
+
     public StickerPack() {
     }
 
@@ -36,5 +38,13 @@ public class StickerPack {
 
     public void setStickerPath(String stickerPath) {
         this.stickerPath = stickerPath;
+    }
+
+    public int getSentCount() {
+        return sentCount;
+    }
+
+    public void setSentCount(int sentCount) {
+        this.sentCount = sentCount;
     }
 }
