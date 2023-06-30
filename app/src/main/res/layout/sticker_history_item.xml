@@ -13,6 +13,7 @@
         android:layout_marginStart="37dp"
         android:layout_marginTop="31dp"
         android:text="Recieved From User:"
+        android:textColor="#FFC107"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,6 +25,7 @@
         android:layout_marginStart="37dp"
         android:layout_marginTop="15dp"
         android:text="recieved Sticker ID:"
+        android:textColor="#FFC107"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/receivedFromUserText" />
@@ -35,6 +37,7 @@
         android:layout_marginStart="39dp"
         android:layout_marginTop="15dp"
         android:text="received Time:"
+        android:textColor="#FFC107"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recievedStickerIdText" />

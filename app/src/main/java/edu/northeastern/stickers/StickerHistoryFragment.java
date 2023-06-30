@@ -17,6 +17,7 @@ import java.util.List;
 
 import edu.northeastern.movieapi.R;
 import edu.northeastern.stickers.adapters.UserStickerHistoryAdapter;
+import edu.northeastern.stickers.models.UserStickerHistory;
 
 public class StickerHistoryFragment extends Fragment {
     private RecyclerView recyclerDisplay;
@@ -43,7 +44,7 @@ public class StickerHistoryFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return inflater.inflate(R.layout.fragment_sticker_history, container, false);
     }
 
     private void createListData(){

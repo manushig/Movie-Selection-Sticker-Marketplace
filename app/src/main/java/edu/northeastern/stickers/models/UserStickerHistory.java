@@ -1,4 +1,4 @@
-package edu.northeastern.stickers;
+package edu.northeastern.stickers.models;
 
 import java.util.List;
 

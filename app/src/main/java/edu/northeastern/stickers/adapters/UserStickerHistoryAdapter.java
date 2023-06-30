@@ -15,7 +15,7 @@ import java.util.List;
 
 import edu.northeastern.movieapi.R;
 import edu.northeastern.stickers.StickerReceivedHistoryActivity;
-import edu.northeastern.stickers.UserStickerHistory;
+import edu.northeastern.stickers.models.UserStickerHistory;
 
 public class UserStickerHistoryAdapter extends RecyclerView.Adapter<UserStickerHistoryAdapter.UserStickerHistoryHolder> {
     private Context context;
@@ -30,7 +30,7 @@ public class UserStickerHistoryAdapter extends RecyclerView.Adapter<UserStickerH
     @NonNull
     @Override
     public UserStickerHistoryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.sticker_activity_user_item,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.sticker_user_item,parent,false);
         return new UserStickerHistoryHolder(view);
     }
 
