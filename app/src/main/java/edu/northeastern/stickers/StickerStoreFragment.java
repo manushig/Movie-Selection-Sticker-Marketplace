@@ -51,8 +51,6 @@ public class StickerStoreFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Toolbar toolbar = view.findViewById(R.id.toolbar);
-        ImageView iconImageView = view.findViewById(R.id.downloadImageView);
 
         RecyclerView recyclerView = view.findViewById(R.id.RecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -60,15 +58,6 @@ public class StickerStoreFragment extends Fragment {
         adapter = new StickerPackAdapter(getContext(), getParentFragmentManager(),stickerSections, stickerSectionMap);
         recyclerView.setAdapter(adapter);
 //        progressBar = view.findViewById(R.id.progressBar);
-
-
-        int desiredIconSize = 100; // in pixels
-
-        Glide.with(this)
-                .asGif()
-                .load(R.drawable.download)
-                .apply(new RequestOptions().override(desiredIconSize, desiredIconSize))
-                .into(iconImageView);
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance()
                 .getReference("Sticker").child("StickerPack");
