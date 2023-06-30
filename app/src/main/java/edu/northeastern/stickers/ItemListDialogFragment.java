@@ -1,6 +1,7 @@
 package edu.northeastern.stickers;
 
 import android.annotation.SuppressLint;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -107,7 +108,8 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        final RecyclerView recyclerView =  view.findViewById(R.id.list);
+        TextView sendCounttextView = view.findViewById(R.id.sendCounttextView);
+        final RecyclerView recyclerView = view.findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
         ImageView sendStickerImage = view.findViewById(R.id.sendimageView);
@@ -115,6 +117,27 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
                 .load(stickerPath)
                 .apply(new RequestOptions().override(150, 150))
                 .into(sendStickerImage);
+
+        FirebaseDatabase.getInstance().getReference("Users")
+                .child(FirebaseAuth.getInstance().getUid())
+                .child("SentStickerCount").child(stickerId).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        int count = 0;
+                        if (snapshot.getValue() != null) {
+                            count = Integer.parseInt(snapshot.getValue().toString());
+                        }
+
+                        sendCounttextView.setText(view.getResources()
+                                .getQuantityString(R.plurals.you_have_sent_this_sticker_n_times, count, count));
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
 
     @Override
