@@ -30,7 +30,7 @@ public class UserStickerHistoryAdapter extends RecyclerView.Adapter<UserStickerH
     @NonNull
     @Override
     public UserStickerHistoryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.sticker_user_item,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.sticker_user_item,null,false);
         return new UserStickerHistoryHolder(view);
     }
 
@@ -46,13 +46,15 @@ public class UserStickerHistoryAdapter extends RecyclerView.Adapter<UserStickerH
     }
 
     class UserStickerHistoryHolder extends  RecyclerView.ViewHolder{
-        private TextView userName, stickerSentActivity;
+        private TextView userNameText, userName;
+        private RecyclerView childRecyclerOfDisplay;
 
         public UserStickerHistoryHolder(@NonNull View itemView) {
             super(itemView);
-            userName = itemView.findViewById(R.id.userNameText);
-            stickerSentActivity = itemView.findViewById(R.id.numOfStickersText);
+            userNameText = itemView.findViewById(R.id.userNameText);
+            userName = itemView.findViewById(R.id.userName);
             receivedHistoryButton = itemView.findViewById(R.id.stickerRecievedHistoryButton);
+            childRecyclerOfDisplay = itemView.findViewById(R.id.sticker_user_item_child);
             receivedHistoryButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -64,9 +66,7 @@ public class UserStickerHistoryAdapter extends RecyclerView.Adapter<UserStickerH
 
         void SetDetails(UserStickerHistory userStickerHistory){
             userName.setText(userStickerHistory.getUser().getName());
-            for (UserStickerHistory.StickerSentCount stickerSentCount : userStickerHistory.getStickerSentCountList()){
-                stickerSentActivity.setText(stickerSentCount.getStickerId() + stickerSentCount.getSentCountNumber());
-            }
+
         }
     }
 }
