@@ -29,6 +29,11 @@
     <string name="valid_firstname">Enter valid first name.</string>
     <string name="valid_lastname">Enter valid last name.</string>
     <string name="unsuccessful_registration">Registration is not successful.</string>
+    <!-- Logout -->
+    <string name="logout_title">Logout</string>
+    <string name="logout_message">Are you sure you want to logout?</string>
+    <string name="logout_yes">Yes</string>
+    <string name="logout_no">No</string>
 
     <string name="Store">Store</string>
     <string name="Inbox">Inbox</string>
@@ -36,4 +41,5 @@
     <string name="StickerStore">Sticker Store</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

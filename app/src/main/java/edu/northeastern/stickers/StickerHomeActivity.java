@@ -4,24 +4,40 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import edu.northeastern.movieapi.FavoriteMovieFragment;
 import edu.northeastern.movieapi.R;
 
 
-public class StickerHomeActivity extends AppCompatActivity {
+public class StickerHomeActivity extends AppCompatActivity implements LogoutDialogListener{
     BottomNavigationView bottomNavigationView;
     private int currentSelectedItemIndex = 0;
-
+    private ImageView logoutImageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sticker_home);
+
+        logoutImageView = findViewById(R.id.logoutImageView);
+
+        logoutImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LogoutDialogFragment dialog = new LogoutDialogFragment();
+                dialog.setLogoutDialogListener((LogoutDialogListener) StickerHomeActivity.this);
+                dialog.show(getSupportFragmentManager(), "logout_dialog");
+            }
+        });
+
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -93,5 +109,12 @@ public class StickerHomeActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public void onLogoutConfirmed() {
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(StickerHomeActivity.this, LoginActivity.class));
+        finish();
     }
 }
