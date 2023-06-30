@@ -1,14 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
 
-    android:id="@+id/list"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipToPadding="false"
-    android:paddingTop="@dimen/list_item_spacing_half"
-    android:paddingBottom="@dimen/list_item_spacing_half"
-    tools:context="edu.northeastern.stickers.ItemListDialogFragment"
-    tools:listitem="@layout/fragment_item_list_dialog_list_dialog_item"
-    />
+    android:background="@color/cardview_light_background"
+    android:layout_height="match_parent">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/list_item_spacing_half"
+        android:paddingBottom="@dimen/list_item_spacing_half"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sendimageView"
+        app:layout_constraintVertical_bias="0.0"
+        tools:context="edu.northeastern.stickers.ItemListDialogFragment"
+        tools:listitem="@layout/fragment_item_list_dialog_list_dialog_item" />
+
+    <TextView
+        android:id="@+id/sendStickertextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="5dp"
+        android:text="Send Sticker"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/sendDetailtextView"
+        app:layout_constraintEnd_toStartOf="@+id/sendCounttextView"
+        app:layout_constraintStart_toEndOf="@+id/sendimageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/sendimageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/supportagent48px"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/sendCounttextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/sendDetailtextView"
+        app:layout_constraintStart_toEndOf="@+id/sendStickertextView"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="counter" />
+
+    <TextView
+        android:id="@+id/sendDetailtextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Select the user you want to send this sticker to"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/list"
+        app:layout_constraintStart_toEndOf="@+id/sendimageView"
+        app:layout_constraintTop_toBottomOf="@+id/sendStickertextView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

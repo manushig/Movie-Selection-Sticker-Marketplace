@@ -39,7 +39,11 @@
     <string name="Inbox">Inbox</string>
     <string name="history">History</string>
     <string name="StickerStore">Sticker Store</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <plurals name="you_have_sent_this_sticker_n_times">
+        <item quantity="one">• You\'ve sent it %1$d time</item>
+        <item quantity="other">• You\'ve have sent it %1$d times</item>
+    </plurals>
+
 
 </resources>

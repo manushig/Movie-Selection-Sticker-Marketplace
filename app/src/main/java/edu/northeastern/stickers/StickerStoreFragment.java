@@ -19,6 +19,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,6 +44,7 @@ public class StickerStoreFragment extends Fragment {
     StickerPackAdapter adapter;
     ArrayList<StickerSection> stickerSections = new ArrayList<>();
     Map<String, List<StickerPack>> stickerSectionMap = new HashMap<>();
+    private HashMap<String, StickerPack> stickerMap;
 
     @Nullable
     @Override
@@ -67,6 +71,7 @@ public class StickerStoreFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 stickerSections.clear();
                 stickerSectionMap.clear();
+                stickerMap = new HashMap<>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     List<StickerPack> stickerPackList = new ArrayList<>();
                     for (DataSnapshot snapshot1 : snapshot.getChildren()) {
@@ -74,12 +79,28 @@ public class StickerStoreFragment extends Fragment {
                                 snapshot1.child("Name").getValue(String.class),
                                 snapshot1.child("StickerPath").getValue(String.class));
                         stickerPackList.add(stickerPack);
+                        stickerMap.put(snapshot1.getKey(), stickerPack);
                     }
                     stickerSections.add(new StickerSection(snapshot.getKey()));
                     stickerSectionMap.put(snapshot.getKey(), stickerPackList);
                 }
 
-                adapter.notifyDataSetChanged();
+                FirebaseDatabase.getInstance().getReference("Users")
+                        .child(FirebaseAuth.getInstance().getUid())
+                        .child("SentStickerCount").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                                    stickerMap.get(snapshot1.getKey()).setSentCount(Integer.parseInt(snapshot1.getValue().toString()));
+                                }
+                                adapter.notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
             }
 
             @Override
@@ -87,5 +108,8 @@ public class StickerStoreFragment extends Fragment {
 
             }
         });
+
+
+
     }
 }

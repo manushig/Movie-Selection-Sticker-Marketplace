@@ -1,10 +1,14 @@
 package edu.northeastern.stickers;
 
+import android.annotation.SuppressLint;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -18,9 +22,12 @@ import com.google.firebase.database.ValueEventListener;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,17 +53,20 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_STICKER_ID = "sticker_id";
+    private static final String ARG_STICKER_PATH = "sticker_path";
     private FragmentItemListDialogListDialogBinding binding;
 
     ArrayList<Users> userList = new ArrayList<>();
     private RecyclerView.Adapter adapter;
     private String stickerId;
+    private String stickerPath;
 
     // TODO: Customize parameters
-    public static ItemListDialogFragment newInstance(String stickerId) {
+    public static ItemListDialogFragment newInstance(String stickerId, String stickerPath) {
         final ItemListDialogFragment fragment = new ItemListDialogFragment();
         final Bundle args = new Bundle();
         args.putString(ARG_STICKER_ID, stickerId);
+        args.putString(ARG_STICKER_PATH, stickerPath);
         fragment.setArguments(args);
         return fragment;
     }
@@ -69,6 +79,7 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
         binding = FragmentItemListDialogListDialogBinding.inflate(inflater, container, false);
         adapter = new ItemAdapter(userList);
         stickerId = getArguments().getString(ARG_STICKER_ID);
+        stickerPath = getArguments().getString(ARG_STICKER_PATH);
         DatabaseReference databaseReference = FirebaseDatabase.getInstance()
                 .getReference("Users");
 
@@ -97,9 +108,36 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        final RecyclerView recyclerView = (RecyclerView) view;
+        TextView sendCounttextView = view.findViewById(R.id.sendCounttextView);
+        final RecyclerView recyclerView = view.findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
+        ImageView sendStickerImage = view.findViewById(R.id.sendimageView);
+        Glide.with(view.getContext())
+                .load(stickerPath)
+                .apply(new RequestOptions().override(150, 150))
+                .into(sendStickerImage);
+
+        FirebaseDatabase.getInstance().getReference("Users")
+                .child(FirebaseAuth.getInstance().getUid())
+                .child("SentStickerCount").child(stickerId).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        int count = 0;
+                        if (snapshot.getValue() != null) {
+                            count = Integer.parseInt(snapshot.getValue().toString());
+                        }
+
+                        sendCounttextView.setText(view.getResources()
+                                .getQuantityString(R.plurals.you_have_sent_this_sticker_n_times, count, count));
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
 
     @Override
@@ -135,8 +173,10 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
 
         }
 
+        @SuppressLint("ClickableViewAccessibility")
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
+
 
             holder.text.setText(items.get(holder.getBindingAdapterPosition()).getName());
             holder.text.setOnClickListener(new View.OnClickListener() {

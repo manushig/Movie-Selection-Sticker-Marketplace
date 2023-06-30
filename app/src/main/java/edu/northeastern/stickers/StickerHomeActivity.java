@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -47,9 +48,9 @@ public class StickerHomeActivity extends AppCompatActivity implements LogoutDial
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                currentSelectedItemIndex = item.getItemId();
                 Class fragmentClass = getFragmentClassBasedOnId(item.getItemId());
                 replaceFragment(fragmentClass, item.getItemId());
-                currentSelectedItemIndex = item.getItemId();
                 return true;
             }
         });
@@ -62,6 +63,12 @@ public class StickerHomeActivity extends AppCompatActivity implements LogoutDial
         showInitialFragment(savedInstanceState);
     }
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putInt("current_selected_item_index", currentSelectedItemIndex);
+        super.onSaveInstanceState(outState);
+    }
+
     private void showInitialFragment(Bundle savedInstanceState) {
         Class initialFragment = null;
         if (savedInstanceState == null) {
@@ -72,9 +79,8 @@ public class StickerHomeActivity extends AppCompatActivity implements LogoutDial
                     .add(R.id.fragment_container_view, initialFragment, null, tag)
                     .commit();
         } else {
-            int itemIndex = savedInstanceState.getInt("current_selected_item_index");
-            initialFragment = getFragmentClassBasedOnId(itemIndex);
-            replaceFragment(initialFragment, itemIndex);
+            initialFragment = getFragmentClassBasedOnId(currentSelectedItemIndex);
+            replaceFragment(initialFragment, currentSelectedItemIndex);
         }
     }
 
