@@ -1,42 +1,49 @@
 package edu.northeastern.stickers;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.northeastern.movieapi.R;
-import edu.northeastern.stickers.adapters.UserStickerActivityAdapter;
+import edu.northeastern.stickers.adapters.UserStickerHistoryAdapter;
 
 public class StickerHistoryFragment extends Fragment {
     private RecyclerView recyclerDisplay;
-    private UserStickerActivityAdapter adapter;
-    private List<UserStickerActivity> usersStickerActivityList;
+    private UserStickerHistoryAdapter adapter;
+    private List<UserStickerHistory> usersStickerActivityList;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display_stickers);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        recyclerDisplay = findViewById(R.id.recyclerOfDisplay);
+        recyclerDisplay = view.findViewById(R.id.recyclerOfDisplay);
 
-        recyclerDisplay.setLayoutManager(new LinearLayoutManager(this));
-        usersStickerActivityList = new ArrayList<UserStickerActivity>();
+        recyclerDisplay.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        usersStickerActivityList = new ArrayList<UserStickerHistory>();
 
         createListData();
 
-        adapter = new UserStickerActivityAdapter(this, usersStickerActivityList);
+        adapter = new UserStickerHistoryAdapter(this.getContext(), usersStickerActivityList);
         recyclerDisplay.setAdapter(adapter);
-        recyclerDisplay.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        recyclerDisplay.addItemDecoration(new DividerItemDecoration(this.getContext(), LinearLayoutManager.VERTICAL));
 
+    }
 
-
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     private void createListData(){

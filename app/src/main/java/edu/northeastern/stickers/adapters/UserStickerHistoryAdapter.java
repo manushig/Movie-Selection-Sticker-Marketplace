@@ -15,40 +15,40 @@ import java.util.List;
 
 import edu.northeastern.movieapi.R;
 import edu.northeastern.stickers.StickerReceivedHistoryActivity;
-import edu.northeastern.stickers.UserStickerActivity;
+import edu.northeastern.stickers.UserStickerHistory;
 
-public class UserStickerActivityAdapter extends RecyclerView.Adapter<UserStickerActivityAdapter.UserStickerActivityHolder> {
+public class UserStickerHistoryAdapter extends RecyclerView.Adapter<UserStickerHistoryAdapter.UserStickerHistoryHolder> {
     private Context context;
-    private List<UserStickerActivity> userStickerActivityList;
+    private List<UserStickerHistory> userStickerHistoryList;
     private Button receivedHistoryButton;
 
-    public UserStickerActivityAdapter(Context context, List<UserStickerActivity> userStickerActivityList) {
+    public UserStickerHistoryAdapter(Context context, List<UserStickerHistory> userStickerHistoryList) {
         this.context = context;
-        this.userStickerActivityList = userStickerActivityList;
+        this.userStickerHistoryList = userStickerHistoryList;
     }
 
     @NonNull
     @Override
-    public UserStickerActivityHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public UserStickerHistoryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.sticker_activity_user_item,parent,false);
-        return new UserStickerActivityHolder(view);
+        return new UserStickerHistoryHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UserStickerActivityHolder holder, int position) {
-        UserStickerActivity userStickerActivity = userStickerActivityList.get(position);
-        holder.SetDetails(userStickerActivity);
+    public void onBindViewHolder(@NonNull UserStickerHistoryHolder holder, int position) {
+        UserStickerHistory userStickerHistory = userStickerHistoryList.get(position);
+        holder.SetDetails(userStickerHistory);
     }
 
     @Override
     public int getItemCount() {
-        return userStickerActivityList.size();
+        return userStickerHistoryList.size();
     }
 
-    class UserStickerActivityHolder extends  RecyclerView.ViewHolder{
+    class UserStickerHistoryHolder extends  RecyclerView.ViewHolder{
         private TextView userName, stickerSentActivity;
 
-        public UserStickerActivityHolder(@NonNull View itemView) {
+        public UserStickerHistoryHolder(@NonNull View itemView) {
             super(itemView);
             userName = itemView.findViewById(R.id.userNameText);
             stickerSentActivity = itemView.findViewById(R.id.numOfStickersText);
@@ -62,9 +62,9 @@ public class UserStickerActivityAdapter extends RecyclerView.Adapter<UserSticker
             });
         }
 
-        void SetDetails(UserStickerActivity userStickerActivity){
-            userName.setText(userStickerActivity.getUser().getName());
-            for (UserStickerActivity.StickerSentCount stickerSentCount : userStickerActivity.getStickerSentCountList()){
+        void SetDetails(UserStickerHistory userStickerHistory){
+            userName.setText(userStickerHistory.getUser().getName());
+            for (UserStickerHistory.StickerSentCount stickerSentCount : userStickerHistory.getStickerSentCountList()){
                 stickerSentActivity.setText(stickerSentCount.getStickerId() + stickerSentCount.getSentCountNumber());
             }
         }

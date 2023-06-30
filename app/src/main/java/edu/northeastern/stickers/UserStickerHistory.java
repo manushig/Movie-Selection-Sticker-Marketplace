@@ -4,12 +4,12 @@ import java.util.List;
 
 import edu.northeastern.stickers.models.Users;
 
-public class UserStickerActivity {
+public class UserStickerHistory {
     Users user;
     List<StickerSentCount> stickerSentCountList;
     List<StickerReceivedCount> stickerReceivedCountList;
 
-    public UserStickerActivity(Users user, List<StickerSentCount> stickerSentCountList,List<StickerReceivedCount> stickerReceivedCountList) {
+    public UserStickerHistory(Users user, List<StickerSentCount> stickerSentCountList, List<StickerReceivedCount> stickerReceivedCountList) {
         this.user = user;
         this.stickerSentCountList = stickerSentCountList;
         this.stickerReceivedCountList = stickerReceivedCountList;
