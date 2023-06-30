@@ -18,7 +18,6 @@ import com.google.firebase.database.ValueEventListener;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +57,6 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
         final ItemListDialogFragment fragment = new ItemListDialogFragment();
         final Bundle args = new Bundle();
         args.putString(ARG_STICKER_ID, stickerId);
-        Log.d("yoo", stickerId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -149,9 +147,26 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
                     String currentUserUid = FirebaseAuth.getInstance().getUid();
                     String otherUserUid = items.get(holder.getBindingAdapterPosition()).getUserId();
 
+                    updateCurrentUserStickerCount(databaseReference, currentUserUid);
+
                     updateCurrentUserHistory(databaseReference, currentUserUid, otherUserUid);
                     sendToOtherUser(databaseReference, otherUserUid, currentUserUid);
 
+                }
+            });
+        }
+
+        private void updateCurrentUserStickerCount(DatabaseReference databaseReference, String currentUserUid) {
+            DatabaseReference stickerRef = databaseReference.child(currentUserUid).child("SentStickerCount")
+                    .child(stickerId);
+            stickerRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if (task.getResult().exists()) {
+                        stickerRef.setValue(Integer.parseInt(task.getResult().getValue().toString()) + 1);
+                    } else {
+                        stickerRef.setValue(1);
+                    }
                 }
             });
         }
