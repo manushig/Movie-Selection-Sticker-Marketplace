@@ -56,7 +56,8 @@ public class StickerStoreFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.RecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new StickerPackAdapter(getContext(), stickerSections, stickerSectionMap);
+
+        adapter = new StickerPackAdapter(getContext(), getParentFragmentManager(),stickerSections, stickerSectionMap);
         recyclerView.setAdapter(adapter);
 //        progressBar = view.findViewById(R.id.progressBar);
 

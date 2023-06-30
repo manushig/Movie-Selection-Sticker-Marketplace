@@ -1,10 +1,18 @@
 package edu.northeastern.stickers.models;
 
 public class Users {
+
+    private String userId;
     private String email;
     private String name;
 
     public Users() {
+    }
+
+    public Users(String userId, String email, String name) {
+        this.email = email;
+        this.name = name;
+        this.userId = userId;
     }
 
     public Users(String email, String name) {
@@ -28,4 +36,11 @@ public class Users {
         this.name = name;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 }

@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import edu.northeastern.movieapi.R;
+import edu.northeastern.stickers.ItemListDialogFragment;
 import edu.northeastern.stickers.models.StickerPack;
 import edu.northeastern.stickers.models.StickerSection;
 
@@ -25,12 +27,15 @@ public class StickerPackAdapter extends RecyclerView.Adapter<StickerPackAdapter.
 
     private final List<StickerSection> stickerSectionPackList;
     private final Map<String, List<StickerPack>> stickerPackMap;
+
+    private FragmentManager parentFragmentManager;
     private final LayoutInflater inflater;
 
-    public StickerPackAdapter(Context context, List<StickerSection> stickerSectionPackList, Map<String, List<StickerPack>> stickerPackMap) {
+    public StickerPackAdapter(Context context, FragmentManager parentFragmentManager, List<StickerSection> stickerSectionPackList, Map<String, List<StickerPack>> stickerPackMap) {
         this.stickerSectionPackList = stickerSectionPackList;
         this.stickerPackMap = stickerPackMap;
         inflater = LayoutInflater.from(context);
+        this.parentFragmentManager = parentFragmentManager;
     }
 
 
@@ -53,6 +58,13 @@ public class StickerPackAdapter extends RecyclerView.Adapter<StickerPackAdapter.
                     .load(stickerPack.getStickerPath())
                     .apply(new RequestOptions().override(350, 350))
                     .into(imageView);
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    ItemListDialogFragment itemListDialogFragment;
+                    ItemListDialogFragment.newInstance(stickerPack.getStickerID()).show(parentFragmentManager, "sheet");
+                }
+            });
             holder.linearLayout.addView(imageView);
         }
     }
