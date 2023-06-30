@@ -12,6 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +28,8 @@ import edu.northeastern.stickers.models.UserStickerHistory;
 public class StickerHistoryFragment extends Fragment {
     private RecyclerView recyclerDisplay;
     private UserStickerHistoryAdapter adapter;
-    private List<UserStickerHistory> usersStickerActivityList;
+    private List<UserStickerHistory> usersStickerHistoryList;
+    private List<UserStickerHistory.StickerSentCount> stickerSentCountList;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -31,11 +38,11 @@ public class StickerHistoryFragment extends Fragment {
         recyclerDisplay = view.findViewById(R.id.recyclerOfDisplay);
 
         recyclerDisplay.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        usersStickerActivityList = new ArrayList<UserStickerHistory>();
+        usersStickerHistoryList = new ArrayList<UserStickerHistory>();
 
         createListData();
 
-        adapter = new UserStickerHistoryAdapter(this.getContext(), usersStickerActivityList);
+        adapter = new UserStickerHistoryAdapter(this.getContext(), usersStickerHistoryList);
         recyclerDisplay.setAdapter(adapter);
         recyclerDisplay.addItemDecoration(new DividerItemDecoration(this.getContext(), LinearLayoutManager.VERTICAL));
 
@@ -48,23 +55,31 @@ public class StickerHistoryFragment extends Fragment {
     }
 
     private void createListData(){
-//        usersStickerActivityList = new ArrayList<>();
-//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users");
-//        reference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-//                    UserStickerActivity newUserActivity = new UserStickerActivity(snapshot.getValue(),);
-//                    usersStickerActivityList.add(newUserActivity);
-//                }
-//                adapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//
-//        });
+        usersStickerHistoryList = new ArrayList<>();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    UserStickerHistory newUserActivity = new UserStickerHistory(snapshot.getValue().toString());
+                    usersStickerHistoryList.add(newUserActivity);
+                }
+                //                 StickerPack stickerPack = new StickerPack(snapshot1.getKey(),
+                //                                snapshot1.child("Name").getValue(String.class),
+                //                                snapshot1.child("StickerPath").getValue(String.class));
+                for (DataSnapshot snapshotChild : dataSnapshot.child("SentStickerCount").getChildren()){
+                    UserStickerHistory.StickerSentCount newUserSent = new UserStickerHistory.StickerSentCount(snapshotChild.toString(),Integer.parseInt(snapshotChild.getValue().toString()));
+                    stickerSentCountList.add(newUserSent);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
     }
 }

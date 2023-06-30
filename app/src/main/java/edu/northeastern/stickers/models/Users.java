@@ -2,45 +2,45 @@ package edu.northeastern.stickers.models;
 
 public class Users {
 
-    private String userId;
-    private String email;
-    private String name;
+    private java.lang.String userId;
+    private java.lang.String email;
+    private java.lang.String name;
 
     public Users() {
     }
 
-    public Users(String userId, String email, String name) {
+    public Users(java.lang.String userId, java.lang.String email, java.lang.String name) {
         this.email = email;
         this.name = name;
         this.userId = userId;
     }
 
-    public Users(String email, String name) {
+    public Users(java.lang.String email, java.lang.String name) {
         this.email = email;
         this.name = name;
     }
 
-    public String getEmail() {
+    public java.lang.String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(java.lang.String email) {
         this.email = email;
     }
 
-    public String getName() {
+    public java.lang.String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(java.lang.String name) {
         this.name = name;
     }
 
-    public String getUserId() {
+    public java.lang.String getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(java.lang.String userId) {
         this.userId = userId;
     }
 }

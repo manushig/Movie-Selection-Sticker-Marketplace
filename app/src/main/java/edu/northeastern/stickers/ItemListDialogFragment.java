@@ -1,7 +1,6 @@
 package edu.northeastern.stickers;
 
 import android.annotation.SuppressLint;
-import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -22,9 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -52,17 +49,17 @@ import edu.northeastern.stickers.models.Users;
 public class ItemListDialogFragment extends BottomSheetDialogFragment {
 
     // TODO: Customize parameter argument names
-    private static final String ARG_STICKER_ID = "sticker_id";
-    private static final String ARG_STICKER_PATH = "sticker_path";
+    private static final java.lang.String ARG_STICKER_ID = "sticker_id";
+    private static final java.lang.String ARG_STICKER_PATH = "sticker_path";
     private FragmentItemListDialogListDialogBinding binding;
 
     ArrayList<Users> userList = new ArrayList<>();
     private RecyclerView.Adapter adapter;
-    private String stickerId;
-    private String stickerPath;
+    private java.lang.String stickerId;
+    private java.lang.String stickerPath;
 
     // TODO: Customize parameters
-    public static ItemListDialogFragment newInstance(String stickerId, String stickerPath) {
+    public static ItemListDialogFragment newInstance(java.lang.String stickerId, java.lang.String stickerPath) {
         final ItemListDialogFragment fragment = new ItemListDialogFragment();
         final Bundle args = new Bundle();
         args.putString(ARG_STICKER_ID, stickerId);
@@ -184,8 +181,8 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
                 public void onClick(View v) {
                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
-                    String currentUserUid = FirebaseAuth.getInstance().getUid();
-                    String otherUserUid = items.get(holder.getBindingAdapterPosition()).getUserId();
+                    java.lang.String currentUserUid = FirebaseAuth.getInstance().getUid();
+                    java.lang.String otherUserUid = items.get(holder.getBindingAdapterPosition()).getUserId();
 
                     updateCurrentUserStickerCount(databaseReference, currentUserUid);
 
@@ -196,7 +193,7 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
             });
         }
 
-        private void updateCurrentUserStickerCount(DatabaseReference databaseReference, String currentUserUid) {
+        private void updateCurrentUserStickerCount(DatabaseReference databaseReference, java.lang.String currentUserUid) {
             DatabaseReference stickerRef = databaseReference.child(currentUserUid).child("SentStickerCount")
                     .child(stickerId);
             stickerRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -211,19 +208,19 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
             });
         }
 
-        private void sendToOtherUser(DatabaseReference databaseReference, String otherUserUid, String currentUserUid) {
+        private void sendToOtherUser(DatabaseReference databaseReference, java.lang.String otherUserUid, java.lang.String currentUserUid) {
             databaseReference.child(otherUserUid).child("ReceivedHistory")
                     .child(UUID.randomUUID().toString())
                     .setValue(new ReceivingInfo(currentUserUid, stickerId,
-                            String.valueOf(Calendar.getInstance().getTime())));
+                            java.lang.String.valueOf(Calendar.getInstance().getTime())));
 
         }
 
-        private void updateCurrentUserHistory(DatabaseReference databaseReference, String currentUserUid, String otherUserUid) {
+        private void updateCurrentUserHistory(DatabaseReference databaseReference, java.lang.String currentUserUid, java.lang.String otherUserUid) {
             databaseReference.child(currentUserUid).child("SentHistory")
                     .child(UUID.randomUUID().toString())
                     .setValue(new SendingInfo(otherUserUid, stickerId,
-                            String.valueOf(Calendar.getInstance().getTime())))
+                            java.lang.String.valueOf(Calendar.getInstance().getTime())))
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

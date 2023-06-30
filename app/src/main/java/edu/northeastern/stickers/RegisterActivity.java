@@ -51,10 +51,10 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 progressBar.setVisibility(View.GONE);
 
-                String email = emailEditText.getText().toString();
-                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-                String password = String.valueOf(R.string.dummy_password);
-                String name = firstNameEditText.getText().toString().trim().concat(" ").concat(lastNameEditText.getText().toString().trim());
+                java.lang.String email = emailEditText.getText().toString();
+                java.lang.String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+                java.lang.String password = java.lang.String.valueOf(R.string.dummy_password);
+                java.lang.String name = firstNameEditText.getText().toString().trim().concat(" ").concat(lastNameEditText.getText().toString().trim());
 
                 if (!email.matches(emailPattern) || TextUtils.isEmpty(email)) {
                     Toast.makeText(RegisterActivity.this, R.string.valid_email, Toast.LENGTH_SHORT).show();
@@ -95,17 +95,17 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        String email = emailEditText.getText().toString();
+        java.lang.String email = emailEditText.getText().toString();
         outState.putString("email", email);
         emailCursorPosition = emailEditText.getSelectionStart();
         outState.putInt("emailCursorPosition", emailCursorPosition);
 
-        String firstName = firstNameEditText.getText().toString();
+        java.lang.String firstName = firstNameEditText.getText().toString();
         outState.putString("firstName", firstName);
         firstNameCursorPosition = firstNameEditText.getSelectionStart();
         outState.putInt("firstNameCursorPosition", firstNameCursorPosition);
 
-        String lastName = lastNameEditText.getText().toString();
+        java.lang.String lastName = lastNameEditText.getText().toString();
         outState.putString("lastName", lastName);
         lastNameCursorPosition = lastNameEditText.getSelectionStart();
         outState.putInt("lastNameCursorPosition", lastNameCursorPosition);
@@ -116,19 +116,19 @@ public class RegisterActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
 
         if (savedInstanceState != null) {
-            String email = savedInstanceState.getString("email");
+            java.lang.String email = savedInstanceState.getString("email");
             emailEditText.setText(email);
             emailCursorPosition = savedInstanceState.getInt("emailCursorPosition");
             EditText editEmailText = (EditText) emailEditText;
             editEmailText.setSelection(emailCursorPosition);
 
-            String firstName = savedInstanceState.getString("firstName");
+            java.lang.String firstName = savedInstanceState.getString("firstName");
             firstNameEditText.setText(firstName);
             firstNameCursorPosition = savedInstanceState.getInt("firstNameCursorPosition");
             EditText editFirstNameText = (EditText) firstNameEditText;
             editFirstNameText.setSelection(firstNameCursorPosition);
 
-            String lastName = savedInstanceState.getString("lastName");
+            java.lang.String lastName = savedInstanceState.getString("lastName");
             lastNameEditText.setText(lastName);
             lastNameCursorPosition = savedInstanceState.getInt("lastNameCursorPosition");
             EditText editLastNameText = (EditText) lastNameEditText;

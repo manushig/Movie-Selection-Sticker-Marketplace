@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -30,14 +31,19 @@ public class UserStickerHistoryAdapter extends RecyclerView.Adapter<UserStickerH
     @NonNull
     @Override
     public UserStickerHistoryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.sticker_user_item,null,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.sticker_user_item, null, false);
         return new UserStickerHistoryHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull UserStickerHistoryHolder holder, int position) {
         UserStickerHistory userStickerHistory = userStickerHistoryList.get(position);
-        holder.SetDetails(userStickerHistory);
+        holder.userName.setText(userStickerHistory.getUserId().toString());
+        UserHistoryChildAdapter childAdapter;
+        childAdapter = new UserHistoryChildAdapter(userStickerHistoryList.get(position).getStickerSentCountList(), context);
+        holder.childRecyclerOfDisplay.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+        holder.childRecyclerOfDisplay.setAdapter(childAdapter);
+        childAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -45,7 +51,7 @@ public class UserStickerHistoryAdapter extends RecyclerView.Adapter<UserStickerH
         return userStickerHistoryList.size();
     }
 
-    class UserStickerHistoryHolder extends  RecyclerView.ViewHolder{
+    class UserStickerHistoryHolder extends RecyclerView.ViewHolder {
         private TextView userNameText, userName;
         private RecyclerView childRecyclerOfDisplay;
 
@@ -54,7 +60,7 @@ public class UserStickerHistoryAdapter extends RecyclerView.Adapter<UserStickerH
             userNameText = itemView.findViewById(R.id.userNameText);
             userName = itemView.findViewById(R.id.userName);
             receivedHistoryButton = itemView.findViewById(R.id.stickerRecievedHistoryButton);
-            childRecyclerOfDisplay = itemView.findViewById(R.id.sticker_user_item_child);
+            childRecyclerOfDisplay = itemView.findViewById(R.id.childRecyclerOfDisplay);
             receivedHistoryButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -62,11 +68,6 @@ public class UserStickerHistoryAdapter extends RecyclerView.Adapter<UserStickerH
                     context.startActivity(intent);
                 }
             });
-        }
-
-        void SetDetails(UserStickerHistory userStickerHistory){
-            userName.setText(userStickerHistory.getUser().getName());
-
         }
     }
 }

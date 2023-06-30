@@ -2,21 +2,23 @@ package edu.northeastern.stickers.models;
 
 import java.util.List;
 
-import edu.northeastern.stickers.models.Users;
-
 public class UserStickerHistory {
-    Users user;
+    String userId;
     List<StickerSentCount> stickerSentCountList;
     List<StickerReceivedCount> stickerReceivedCountList;
 
-    public UserStickerHistory(Users user, List<StickerSentCount> stickerSentCountList, List<StickerReceivedCount> stickerReceivedCountList) {
-        this.user = user;
+    public UserStickerHistory(String userId) {
+        this.userId = userId;
+    }
+
+    public UserStickerHistory(String userId, List<StickerSentCount> stickerSentCountList, List<StickerReceivedCount> stickerReceivedCountList) {
+        super();
         this.stickerSentCountList = stickerSentCountList;
         this.stickerReceivedCountList = stickerReceivedCountList;
     }
 
-    public Users getUser() {
-        return user;
+    public String getUserId() {
+        return userId;
     }
 
     public List<StickerSentCount> getStickerSentCountList() {
@@ -30,16 +32,16 @@ public class UserStickerHistory {
     /**
      * Class to fetch data in this user's sending sticker activity
      */
-    public class StickerSentCount {
-        String stickerId;
+    public static class StickerSentCount {
+        java.lang.String stickerId;
         int sentCountNumber;
 
-        public StickerSentCount(String stickerId, int sentCountNumber) {
+        public StickerSentCount(java.lang.String stickerId, int sentCountNumber) {
             this.stickerId = stickerId;
             this.sentCountNumber = sentCountNumber;
         }
 
-        public String getStickerId() {
+        public java.lang.String getStickerId() {
             return stickerId;
         }
 
@@ -52,10 +54,10 @@ public class UserStickerHistory {
      */
     class StickerReceivedCount {
         Users userSentSticker;
-        String stickerId;
-        String time;
+        java.lang.String stickerId;
+        java.lang.String time;
 
-        public StickerReceivedCount(Users userSentSticker, String stickerId, String time) {
+        public StickerReceivedCount(Users userSentSticker, java.lang.String stickerId, java.lang.String time) {
             this.userSentSticker = userSentSticker;
             this.stickerId = stickerId;
             this.time = time;
@@ -65,11 +67,11 @@ public class UserStickerHistory {
             return userSentSticker;
         }
 
-        public String getStickerId() {
+        public java.lang.String getStickerId() {
             return stickerId;
         }
 
-        public String getTime() {
+        public java.lang.String getTime() {
             return time;
         }
     }

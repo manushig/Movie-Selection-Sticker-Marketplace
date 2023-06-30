@@ -1,25 +1,25 @@
 package edu.northeastern.stickers.models;
 
 public class StickerInboxCollector {
-    public String senderId;
-    public String dateSent;
-    public String sticker;
+    public Users senderId;
+    public Users dateSent;
+    public Users sticker;
 
-    public StickerInboxCollector(String senderId, String dateSent, String sticker) {
+    public StickerInboxCollector(Users senderId, Users dateSent, Users sticker) {
         this.senderId = senderId;
         this.dateSent = dateSent;
         this.sticker = sticker;
     }
 
-    public String getSenderId() {
+    public Users getSenderId() {
         return this.senderId;
     }
 
-    public String getDateSent() {
+    public Users getDateSent() {
         return this.dateSent;
     }
 
-    public String getSticker() {
+    public Users getSticker() {
         return this.sticker;
     }
 }
