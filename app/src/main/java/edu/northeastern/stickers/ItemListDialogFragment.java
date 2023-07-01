@@ -39,13 +39,6 @@ import edu.northeastern.stickers.models.ReceivingInfo;
 import edu.northeastern.stickers.models.SendingInfo;
 import edu.northeastern.stickers.models.Users;
 
-/**
- * <p>A fragment that shows a list of items as a modal bottom sheet.</p>
- * <p>You can show this modal bottom sheet from your activity like this:</p>
- * <pre>
- *     ItemListDialogFragment.newInstance(30).show(getSupportFragmentManager(), "dialog");
- * </pre>
- */
 public class ItemListDialogFragment extends BottomSheetDialogFragment {
 
     // TODO: Customize parameter argument names

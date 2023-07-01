@@ -51,11 +51,10 @@ public class StickerPackAdapter extends RecyclerView.Adapter<StickerPackAdapter.
         String sectionName = stickerSectionPackList.get(holder.getBindingAdapterPosition()).getStickerPack();
         holder.stickerName.setText(sectionName);
 
-
+        holder.linearLayout.removeAllViews();
         for (StickerPack stickerPack : stickerPackMap.get(sectionName)) {
             View view = inflater.inflate(R.layout.sticker_layout, null, false);
             ImageView imageView = view.findViewById(R.id.stickImageView);
-            TextView textView = view.findViewById(R.id.CountTextView);
             Glide.with(holder.itemView.getContext())
                     .load(stickerPack.getStickerPath())
                     .apply(new RequestOptions().override(350, 350))
