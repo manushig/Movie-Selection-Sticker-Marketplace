@@ -17,10 +17,10 @@ public class NotificationSender {
                 OkHttpClient client = new OkHttpClient();
 
                 MediaType mediaType = MediaType.parse("application/json");
-               // RequestBody requestBody = RequestBody.create(mediaType, buildNotificationPayload(fcmToken, title, body, stickerPath));
+
                 String payloadObj=null;
                 try {
-                    payloadObj = payload(fcmToken,title,body,stickerPath).toString();
+                    payloadObj = buildNotificationPayload(fcmToken,title,body,stickerPath).toString();
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
@@ -47,18 +47,7 @@ public class NotificationSender {
         }).start();
     }
 
-    private static String buildNotificationPayload(String fcmToken, String title, String body, String stickerPath) {
-        return "{"
-                + "\"to\": \"" + fcmToken + "\","
-                + "\"notification\": {"
-                + "\"title\": \"" + title + "\","
-                + "\"body\": \"" + body + "\","
-                + "\"image\": \"" + stickerPath + "\""
-                + "}"
-                + "}";
-    }
-
-    private static JSONObject payload(String fcmToken, String title, String body, String stickerPath) throws JSONException {
+    private static JSONObject buildNotificationPayload(String fcmToken, String title, String body, String stickerPath) throws JSONException {
         JSONObject notification = new JSONObject();
         JSONObject jsonObject = new JSONObject();
 
