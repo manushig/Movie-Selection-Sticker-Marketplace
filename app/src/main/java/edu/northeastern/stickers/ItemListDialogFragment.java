@@ -224,10 +224,12 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                databaseReference.child(currentUserUid).addValueEventListener(new ValueEventListener() {
+                                DatabaseReference databaseRef =  databaseReference.child(currentUserUid);
+                                databaseRef.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         testNotificationCode(snapshot, stickerPath, otherUserUid);
+                                        databaseRef.removeEventListener(this);
                                     }
 
                                     @Override

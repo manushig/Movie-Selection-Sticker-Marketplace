@@ -89,7 +89,7 @@ public class MessagingService extends FirebaseMessagingService {
 
     private void showNotificationWithBigPicture(String title, String body, Bitmap bigPicture) {
         Intent intent = new Intent(this, StickerHomeActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE);
 
         NotificationCompat.BigPictureStyle bigPictureStyle = new NotificationCompat.BigPictureStyle()
                 .bigPicture(bigPicture)

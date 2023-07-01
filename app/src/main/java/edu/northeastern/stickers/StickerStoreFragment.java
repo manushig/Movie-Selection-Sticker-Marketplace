@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,6 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +29,7 @@ import edu.northeastern.movieapi.R;
 import edu.northeastern.stickers.adapters.StickerPackAdapter;
 import edu.northeastern.stickers.models.StickerPack;
 import edu.northeastern.stickers.models.StickerSection;
+import edu.northeastern.stickers.models.Users;
 
 public class StickerStoreFragment extends Fragment {
 
@@ -52,6 +56,22 @@ public class StickerStoreFragment extends Fragment {
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance()
                 .getReference("Sticker").child("StickerPack");
+
+
+
+        TextView welcomeUserTextView = view.findViewById(R.id.welcomeUsertextView);
+        FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+               String userName = snapshot.getValue(Users.class).getName();
+                welcomeUserTextView.setText(view.getResources().getString(R.string.weclome_user,userName));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
