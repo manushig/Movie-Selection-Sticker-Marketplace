@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="16dp"
-        android:text="> You sent a massage."
+        android:text="> You sent a message."
         android:textColor="#FFC107"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
