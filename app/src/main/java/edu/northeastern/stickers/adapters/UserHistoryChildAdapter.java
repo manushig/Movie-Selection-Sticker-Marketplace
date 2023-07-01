@@ -33,18 +33,15 @@ public class UserHistoryChildAdapter extends RecyclerView.Adapter<UserHistoryChi
 
     @Override
     public void onBindViewHolder(@NonNull UserHistoryChildHolder holder, int position) {
-        holder.stickerId.setText(stickerSentCountList.get(position).getStickerId());
-        holder.countNumber.setText(stickerSentCountList.get(position).getSentCountNumber());
+        if (stickerSentCountList != null) {
+            holder.stickerId.setText(stickerSentCountList.get(position).getStickerId());
+            holder.countNumber.setText(String.valueOf(stickerSentCountList.get(position).getSentCountNumber()));
+        }
     }
 
     @Override
     public int getItemCount() {
-        return 0;
-//        try{
-//            return stickerSentCountList.size();
-//        } catch (Exception e){
-//            return 0;
-//        }
+        return stickerSentCountList.size();
     }
 
     public class UserHistoryChildHolder extends RecyclerView.ViewHolder {
