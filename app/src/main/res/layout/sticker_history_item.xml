@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/receivedFromUser"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/black">
 
     <TextView
         android:id="@+id/receivedFromUserText"
@@ -43,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/recievedStickerIdText" />
 
     <TextView
-        android:id="@+id/textView26"
+        android:id="@+id/receivedFromUserID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="37dp"

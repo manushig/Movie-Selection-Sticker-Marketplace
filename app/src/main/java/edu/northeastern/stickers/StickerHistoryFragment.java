@@ -61,23 +61,39 @@ public class StickerHistoryFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserStickerHistory newUserActivity;
+                List<UserStickerHistory.StickerSentCount>  stickerSentCountList = new ArrayList<>();
+                List<UserStickerHistory.StickerReceivedCount> stickerReceivedCountList = new ArrayList<>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     if (snapshot.child("SentStickerCount").exists()){
-                        List<UserStickerHistory.StickerSentCount>  stickerSentCountList = new ArrayList<>();
                         DataSnapshot sentStickerCountSnapshot = snapshot.child("SentStickerCount");
                         for (DataSnapshot snapshotChild : sentStickerCountSnapshot.getChildren()){
                             UserStickerHistory.StickerSentCount newUserSent = new UserStickerHistory.StickerSentCount(snapshotChild.getKey(),Integer.parseInt(snapshotChild.getValue().toString()));
                             stickerSentCountList.add(newUserSent);
                         }
-                        newUserActivity = new UserStickerHistory(snapshot.getKey(),stickerSentCountList);
-                    } else {
-                        newUserActivity = new UserStickerHistory(snapshot.getKey());
                     }
+
+                    if (snapshot.child("ReceivedHistory").exists()){
+                        DataSnapshot receiveCountSnapshot = snapshot.child("ReceivedHistory");
+                        for (DataSnapshot snapshotChild : receiveCountSnapshot.getChildren()){
+                            UserStickerHistory.StickerReceivedCount newUserReceive = new UserStickerHistory.StickerReceivedCount(snapshotChild.child(
+                                    "receivedFromUserID").getValue().toString(),snapshotChild.child("receivedTimestamp").getValue().toString(),snapshotChild.child(
+                                    "stickerReceivedID").getValue().toString());
+                            stickerReceivedCountList.add(newUserReceive);
+                        }
+                    }
+
+                    if(!stickerReceivedCountList.isEmpty() && !stickerSentCountList.isEmpty()){
+                        newUserActivity = new UserStickerHistory(snapshot.getKey(),stickerSentCountList,stickerReceivedCountList);
+                    } else if (!stickerSentCountList.isEmpty()){
+                        newUserActivity = new UserStickerHistory(snapshot.getKey(),stickerSentCountList,null);
+                    } else if (!stickerReceivedCountList.isEmpty()){
+                        newUserActivity = new UserStickerHistory(snapshot.getKey(),null,stickerReceivedCountList);
+                    } else{
+                        newUserActivity = new UserStickerHistory(snapshot.getKey(),null,null);
+                    }
+
                     usersStickerHistoryList.add(newUserActivity);
                 }
-                //                 StickerPack stickerPack = new StickerPack(snapshot1.getKey(),
-                //                                snapshot1.child("Name").getValue(String.class),
-                //                                snapshot1.child("StickerPath").getValue(String.class));
                 adapter.notifyDataSetChanged();
             }
 
