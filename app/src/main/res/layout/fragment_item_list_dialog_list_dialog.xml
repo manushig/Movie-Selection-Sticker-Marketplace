@@ -31,6 +31,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="5dp"
+        android:layout_marginBottom="8dp"
         android:text="Send Sticker"
         android:textColor="@color/black"
         android:textSize="16sp"
@@ -54,11 +55,16 @@
         android:id="@+id/sendCounttextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/custom_border_sticker"
         android:textColor="@color/black"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/sendStickertextView"
+        android:textStyle="bold"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/sendDetailtextView"
         app:layout_constraintStart_toEndOf="@+id/sendStickertextView"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="counter" />
 
     <TextView
