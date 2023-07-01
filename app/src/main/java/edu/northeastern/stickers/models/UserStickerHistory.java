@@ -1,5 +1,6 @@
 package edu.northeastern.stickers.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserStickerHistory {
@@ -9,10 +10,16 @@ public class UserStickerHistory {
 
     public UserStickerHistory(String userId) {
         this.userId = userId;
+        this.stickerSentCountList = new ArrayList<>();
+    }
+
+    public UserStickerHistory(String userId, List<StickerSentCount> stickerSentCountList) {
+        this.userId = userId;
+        this.stickerSentCountList = stickerSentCountList;
     }
 
     public UserStickerHistory(String userId, List<StickerSentCount> stickerSentCountList, List<StickerReceivedCount> stickerReceivedCountList) {
-        super();
+        this.userId = userId;
         this.stickerSentCountList = stickerSentCountList;
         this.stickerReceivedCountList = stickerReceivedCountList;
     }
@@ -46,9 +53,15 @@ public class UserStickerHistory {
         }
 
         public int getSentCountNumber() {
-            return sentCountNumber;
+
+            try {
+                return sentCountNumber;
+            } catch (Exception e) {
+                return 0;
+            }
         }
     }
+
     /**
      * Class to fetch data in this user's receiving sticker activity
      */

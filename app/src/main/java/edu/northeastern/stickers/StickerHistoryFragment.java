@@ -29,7 +29,6 @@ public class StickerHistoryFragment extends Fragment {
     private RecyclerView recyclerDisplay;
     private UserStickerHistoryAdapter adapter;
     private List<UserStickerHistory> usersStickerHistoryList;
-    private List<UserStickerHistory.StickerSentCount> stickerSentCountList;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -57,20 +56,28 @@ public class StickerHistoryFragment extends Fragment {
     private void createListData(){
         usersStickerHistoryList = new ArrayList<>();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users");
+
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                UserStickerHistory newUserActivity;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    UserStickerHistory newUserActivity = new UserStickerHistory(snapshot.getValue().toString());
+                    if (snapshot.child("SentStickerCount").exists()){
+                        List<UserStickerHistory.StickerSentCount>  stickerSentCountList = new ArrayList<>();
+                        DataSnapshot sentStickerCountSnapshot = snapshot.child("SentStickerCount");
+                        for (DataSnapshot snapshotChild : sentStickerCountSnapshot.getChildren()){
+                            UserStickerHistory.StickerSentCount newUserSent = new UserStickerHistory.StickerSentCount(snapshotChild.getKey(),Integer.parseInt(snapshotChild.getValue().toString()));
+                            stickerSentCountList.add(newUserSent);
+                        }
+                        newUserActivity = new UserStickerHistory(snapshot.getKey(),stickerSentCountList);
+                    } else {
+                        newUserActivity = new UserStickerHistory(snapshot.getKey());
+                    }
                     usersStickerHistoryList.add(newUserActivity);
                 }
                 //                 StickerPack stickerPack = new StickerPack(snapshot1.getKey(),
                 //                                snapshot1.child("Name").getValue(String.class),
                 //                                snapshot1.child("StickerPath").getValue(String.class));
-                for (DataSnapshot snapshotChild : dataSnapshot.child("SentStickerCount").getChildren()){
-                    UserStickerHistory.StickerSentCount newUserSent = new UserStickerHistory.StickerSentCount(snapshotChild.toString(),Integer.parseInt(snapshotChild.getValue().toString()));
-                    stickerSentCountList.add(newUserSent);
-                }
                 adapter.notifyDataSetChanged();
             }
 

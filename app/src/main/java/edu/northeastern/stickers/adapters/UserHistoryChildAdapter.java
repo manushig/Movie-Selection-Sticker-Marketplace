@@ -16,8 +16,8 @@ import edu.northeastern.stickers.models.UserStickerHistory;
 
 public class UserHistoryChildAdapter extends RecyclerView.Adapter<UserHistoryChildAdapter.UserHistoryChildHolder> {
 
-    List<UserStickerHistory.StickerSentCount> stickerSentCountList;
-    Context context;
+    private List<UserStickerHistory.StickerSentCount> stickerSentCountList;
+    private Context context;
 
     public UserHistoryChildAdapter(List<UserStickerHistory.StickerSentCount> stickerSentCountList, Context context) {
         this.stickerSentCountList = stickerSentCountList;
@@ -39,7 +39,11 @@ public class UserHistoryChildAdapter extends RecyclerView.Adapter<UserHistoryChi
 
     @Override
     public int getItemCount() {
-        return stickerSentCountList.size();
+        try{
+            return stickerSentCountList.size();
+        } catch (Exception e){
+            return 0;
+        }
     }
 
     public class UserHistoryChildHolder extends RecyclerView.ViewHolder {

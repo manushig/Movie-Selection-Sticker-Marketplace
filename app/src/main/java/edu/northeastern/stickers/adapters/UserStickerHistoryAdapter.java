@@ -39,11 +39,13 @@ public class UserStickerHistoryAdapter extends RecyclerView.Adapter<UserStickerH
     public void onBindViewHolder(@NonNull UserStickerHistoryHolder holder, int position) {
         UserStickerHistory userStickerHistory = userStickerHistoryList.get(position);
         holder.userName.setText(userStickerHistory.getUserId().toString());
+
         UserHistoryChildAdapter childAdapter;
-        childAdapter = new UserHistoryChildAdapter(userStickerHistoryList.get(position).getStickerSentCountList(), context);
+        childAdapter = new UserHistoryChildAdapter(userStickerHistory.getStickerSentCountList(), context);
         holder.childRecyclerOfDisplay.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         holder.childRecyclerOfDisplay.setAdapter(childAdapter);
         childAdapter.notifyDataSetChanged();
+
     }
 
     @Override
