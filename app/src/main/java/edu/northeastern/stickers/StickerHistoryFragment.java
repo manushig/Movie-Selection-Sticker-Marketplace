@@ -74,8 +74,9 @@ public class StickerHistoryFragment extends Fragment {
                 if (dataSnapshot.child(uid).child("SentHistory").exists()){
                     DataSnapshot sentStickerHistorySnapshot = dataSnapshot.child(uid).child("SentHistory");
                     for (DataSnapshot snapshotChild : sentStickerHistorySnapshot.getChildren()){
+                        String sendToUserId = snapshotChild.child("sendToUserID").getValue().toString();
                         newUserHistory = new UserStickerHistory(
-                                snapshotChild.child("sendToUserID").getValue().toString(),
+                                dataSnapshot.child(sendToUserId).child("name").getValue().toString(),
                                 snapshotChild.child("sentTimestamp").getValue().toString(),
                                 snapshotChild.child("stickerSentID").getValue().toString());
                         usersStickerHistoryList.add(newUserHistory);
