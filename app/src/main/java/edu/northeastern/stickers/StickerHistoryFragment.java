@@ -31,7 +31,8 @@ public class StickerHistoryFragment extends Fragment {
     private RecyclerView recyclerDisplay;
     private UserStickerHistoryAdapter adapter;
     private List<UserStickerHistory> usersStickerHistoryList;
-    DatabaseReference reference;
+    DatabaseReference referenceOfUser;
+    DatabaseReference referenceOfSticker;
     FirebaseUser user;
     String uid;
 
@@ -63,9 +64,11 @@ public class StickerHistoryFragment extends Fragment {
 
     private void createListData(){
         usersStickerHistoryList = new ArrayList<>();
-        reference = FirebaseDatabase.getInstance().getReference().child("Users");
+        referenceOfUser = FirebaseDatabase.getInstance().getReference().child("Users");
+        referenceOfSticker = FirebaseDatabase.getInstance().getReference().child("Sticker")
+                .child("StickerPack");
 
-        reference.addValueEventListener(new ValueEventListener() {
+        referenceOfUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserStickerHistory newUserHistory;
@@ -75,10 +78,11 @@ public class StickerHistoryFragment extends Fragment {
                     DataSnapshot sentStickerHistorySnapshot = dataSnapshot.child(uid).child("SentHistory");
                     for (DataSnapshot snapshotChild : sentStickerHistorySnapshot.getChildren()){
                         String sendToUserId = snapshotChild.child("sendToUserID").getValue().toString();
+                        String sentStickerId = snapshotChild.child("stickerSentID").getValue().toString();
                         newUserHistory = new UserStickerHistory(
                                 dataSnapshot.child(sendToUserId).child("name").getValue().toString(),
                                 snapshotChild.child("sentTimestamp").getValue().toString(),
-                                snapshotChild.child("stickerSentID").getValue().toString());
+                                sentStickerId);
                         usersStickerHistoryList.add(newUserHistory);
                     }
                 }
@@ -97,12 +101,34 @@ public class StickerHistoryFragment extends Fragment {
 //                    usersStickerHistoryList.add(newUserHistory);
                 }
 
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
 
         });
+
+        referenceOfSticker.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (UserStickerHistory usersStickerHistory : usersStickerHistoryList){
+                    String stickerId = usersStickerHistory.getStickerId();
+                    for (DataSnapshot snapshot1 : snapshot.getChildren()){
+                        for (DataSnapshot snapshot2 : snapshot1.getChildren()){
+                            if (snapshot2.getKey().toString().equals(stickerId)){
+                                usersStickerHistory.setStickerPath(snapshot2.child("StickerPath").toString());
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 }

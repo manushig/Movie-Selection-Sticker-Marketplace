@@ -6,6 +6,7 @@ public class UserStickerHistory {
     private String userId;
     private String time;
     private String stickerId;
+    private String stickerPath;
     private List<StickerSentCount> stickerSentCountList;
     private List<StickerReceivedCount> stickerReceivedCountList;
 
@@ -13,9 +14,14 @@ public class UserStickerHistory {
         this.userId = userId;
         this.time = time;
         this.stickerId = stickerId;
+        this.stickerPath = "";
     }
 
-//    public UserStickerHistory(String userId, List<StickerSentCount> stickerSentCountList, List<StickerReceivedCount> stickerReceivedCountList) {
+    public void setStickerPath(String stickerPath) {
+        this.stickerPath = stickerPath;
+    }
+
+    //    public UserStickerHistory(String userId, List<StickerSentCount> stickerSentCountList, List<StickerReceivedCount> stickerReceivedCountList) {
 //        this(userId);
 //        this.stickerReceivedCountList = stickerReceivedCountList;
 //        this.stickerSentCountList = stickerSentCountList;
@@ -30,6 +36,7 @@ public class UserStickerHistory {
     public String getStickerId() {
         return stickerId;
     }
+    public String getStickerPath(){return stickerPath;}
 
 
     public List<StickerSentCount> getStickerSentCountList() {

@@ -6,11 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -46,6 +51,11 @@ public class UserStickerHistoryAdapter extends RecyclerView.Adapter<UserStickerH
         childAdapter = new UserHistoryChildAdapter(userStickerHistory.getStickerSentCountList(), context);
 //        holder.childRecyclerOfDisplay.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
 //        holder.childRecyclerOfDisplay.setAdapter(childAdapter);
+        if (!userStickerHistory.getStickerPath().isEmpty()){
+            Picasso.get().load(userStickerHistory.getStickerPath()).into(holder.imageView);
+        } else {
+            holder.imageView.setVisibility(View.INVISIBLE);
+        }
         childAdapter.notifyDataSetChanged();
 
     }
@@ -56,14 +66,18 @@ public class UserStickerHistoryAdapter extends RecyclerView.Adapter<UserStickerH
     }
 
     class UserStickerHistoryHolder extends RecyclerView.ViewHolder {
-        private TextView userNameText, userName,stickerId,time, timeText;
+        private TextView userNameText, userName, stickerId, time, timeText;
         private RecyclerView childRecyclerOfDisplay;
+        private ImageView imageView;
+
 
         public UserStickerHistoryHolder(@NonNull View itemView) {
             super(itemView);
             userNameText = itemView.findViewById(R.id.userNameText);
             userName = itemView.findViewById(R.id.userName);
             timeText = itemView.findViewById(R.id.timeText);
+            imageView = itemView.findViewById(R.id.stickerItemImage);
+
 //            receivedHistoryButton = itemView.findViewById(R.id.stickerRecievedHistoryButton);
 //            childRecyclerOfDisplay = itemView.findViewById(R.id.childRecyclerOfDisplay);
             stickerId = itemView.findViewById(R.id.stickerId);

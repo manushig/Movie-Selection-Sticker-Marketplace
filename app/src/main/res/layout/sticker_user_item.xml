@@ -74,6 +74,16 @@
         app:layout_constraintStart_toEndOf="@+id/timeText"
         app:layout_constraintTop_toTopOf="@+id/timeText" />
 
+    <ImageView
+        android:id="@+id/stickerItemImage"
+        android:layout_width="80dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="43dp"
+        app:layout_constraintStart_toEndOf="@+id/numOfStickersText"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
     <!--    <androidx.recyclerview.widget.RecyclerView-->
 <!--        android:id="@+id/childRecyclerOfDisplay"-->
 <!--        android:layout_marginStart="10dp"-->
