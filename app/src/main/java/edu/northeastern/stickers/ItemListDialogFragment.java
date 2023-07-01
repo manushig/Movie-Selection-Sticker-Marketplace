@@ -221,8 +221,13 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
+
+                                testNotificationCode(); // Dummy code .... Replace it
+
                                 Toast.makeText(getContext(), "Sent Successfully!", Toast.LENGTH_SHORT).show();
                                 dismiss();
+
+
                             }
                         }
                     });
@@ -233,5 +238,15 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
             return items.size();
         }
 
+        private void testNotificationCode() {
+            String title = "You've Got a Sticker!";
+            String receivedByUserName = "Manushi Gupta";
+            String message = "\"A new sticker has been received from " + receivedByUserName + ".";
+            String fcmToken = "cqao7Is8SGiPB8n6OB0m66:APA91bEMzd838FcPQfuMcDEd50mBCWKssTaCXH2Tsyy859Wsgm7eGXGw7HOK-mKc7-VMBjiizTl3ezyIzcO7CG4x0Ri9u9Myr4Ed1b8unCPgUKy_FYH4cPEuyzqzS1Xq2uSsxbKB53Pb"; //  Can get this value from Users Table
+            String stickerPath = "https://firebasestorage.googleapis.com/v0/b/a8-stick-it-to--em-8342d.appspot.com/o/Animal%20Pack%2Fcow.png?alt=media&token=abab86b3-bf02-4543-8658-ff6d0c3bb5b4";
+
+            NotificationSender notificationSender = new NotificationSender();
+            notificationSender.sendNotification(fcmToken, title, message, stickerPath);
+        }
     }
 }

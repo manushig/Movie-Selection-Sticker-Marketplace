@@ -34,7 +34,8 @@
     <string name="logout_message">Are you sure you want to logout?</string>
     <string name="logout_yes">Yes</string>
     <string name="logout_no">No</string>
-
+    <!-- Notifications -->
+    <string name="notification_title">New Sticker received.</string>
     <string name="Store">Store</string>
     <string name="Inbox">Inbox</string>
     <string name="history">History</string>

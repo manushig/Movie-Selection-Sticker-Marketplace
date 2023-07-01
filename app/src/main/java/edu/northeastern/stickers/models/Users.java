@@ -5,7 +5,7 @@ public class Users {
     private java.lang.String userId;
     private java.lang.String email;
     private java.lang.String name;
-
+    private String fcmToken;
     public Users() {
     }
 
@@ -18,6 +18,21 @@ public class Users {
     public Users(java.lang.String email, java.lang.String name) {
         this.email = email;
         this.name = name;
+    }
+
+    public Users(String email, String name, String userId, String fcmToken) {
+        this.email = email;
+        this.name = name;
+        this.userId = userId;
+        this.fcmToken = fcmToken;
+    }
+
+    public String getFcmToken() {
+        return fcmToken;
+    }
+
+    public void setFcmToken(String fcmToken) {
+        this.fcmToken = fcmToken;
     }
 
     public java.lang.String getEmail() {

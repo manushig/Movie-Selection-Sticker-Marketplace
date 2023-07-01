@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     public void openAboutActivity(View view) {
         Intent intent = new Intent(this, AboutActivity.class);
         startActivity(intent);
+        finish();
     }
 
 
@@ -53,8 +54,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (auth.getCurrentUser() == null) {
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    finish();
                 } else {
                     startActivity(new Intent(MainActivity.this, StickerHomeActivity.class));
+                    finish();
                 }
             }
         });

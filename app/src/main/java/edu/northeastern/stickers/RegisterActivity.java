@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import edu.northeastern.movieapi.R;
 import edu.northeastern.stickers.models.Users;
-
+import edu.northeastern.stickers.services.MessagingService;
 public class RegisterActivity extends AppCompatActivity {
     private TextView emailEditText, firstNameEditText, lastNameEditText;
     private Button registerButton;
@@ -75,6 +75,9 @@ public class RegisterActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
+                                            MessagingService messagingService = new MessagingService();
+                                            messagingService.getAndSaveFcmToken();
+
                                             startActivity(new Intent(RegisterActivity.this, StickerHomeActivity.class));
                                             finish();
                                         }
