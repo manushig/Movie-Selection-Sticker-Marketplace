@@ -62,21 +62,21 @@ public class StickerHistoryFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_sticker_history, container, false);
     }
 
-    private void createListData(){
+    private void createListData() {
         usersStickerHistoryList = new ArrayList<>();
-        referenceOfUser = FirebaseDatabase.getInstance().getReference().child("Users");
-        referenceOfSticker = FirebaseDatabase.getInstance().getReference().child("Sticker")
-                .child("StickerPack");
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        referenceOfUser = database.getReference().child("Users");
+
 
         referenceOfUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserStickerHistory newUserHistory;
-                List<UserStickerHistory.StickerSentCount>  stickerSentCountList = new ArrayList<>();
+                List<UserStickerHistory.StickerSentCount> stickerSentCountList = new ArrayList<>();
                 List<UserStickerHistory.StickerReceivedCount> stickerReceivedCountList = new ArrayList<>();
-                if (dataSnapshot.child(uid).child("SentHistory").exists()){
+                if (dataSnapshot.child(uid).child("SentHistory").exists()) {
                     DataSnapshot sentStickerHistorySnapshot = dataSnapshot.child(uid).child("SentHistory");
-                    for (DataSnapshot snapshotChild : sentStickerHistorySnapshot.getChildren()){
+                    for (DataSnapshot snapshotChild : sentStickerHistorySnapshot.getChildren()) {
                         String sendToUserId = snapshotChild.child("sendToUserID").getValue().toString();
                         String sentStickerId = snapshotChild.child("stickerSentID").getValue().toString();
                         newUserHistory = new UserStickerHistory(
@@ -86,49 +86,38 @@ public class StickerHistoryFragment extends Fragment {
                         usersStickerHistoryList.add(newUserHistory);
                     }
                 }
-                adapter.notifyDataSetChanged();
 
-//                    if(!stickerReceivedCountList.isEmpty() && !stickerSentCountList.isEmpty()){
-//                        newUserHistory = new UserStickerHistory(snapshot.getKey(),stickerSentCountList,stickerReceivedCountList);
-//                    } else if (!stickerSentCountList.isEmpty()){
-//                        newUserHistory = new UserStickerHistory(snapshot.getKey(),stickerSentCountList,null);
-//                    } else if (!stickerReceivedCountList.isEmpty()){
-//                        newUserHistory = new UserStickerHistory(snapshot.getKey(),null,stickerReceivedCountList);
-//                    } else{
-//                        newUserHistory = new UserStickerHistory(snapshot.getKey(),null,null);
-//                    }
-
-//                    usersStickerHistoryList.add(newUserHistory);
-                }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-
-        });
-
-        referenceOfSticker.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (UserStickerHistory usersStickerHistory : usersStickerHistoryList){
-                    String stickerId = usersStickerHistory.getStickerId();
-                    for (DataSnapshot snapshot1 : snapshot.getChildren()){
-                        for (DataSnapshot snapshot2 : snapshot1.getChildren()){
-                            if (snapshot2.getKey().toString().equals(stickerId)){
-                                usersStickerHistory.setStickerPath(snapshot2.child("StickerPath").toString());
-                                break;
+                referenceOfSticker = database.getReference().child("Sticker")
+                        .child("StickerPack");
+                referenceOfSticker.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (UserStickerHistory usersStickerHistory : usersStickerHistoryList){
+                            String stickerId = usersStickerHistory.getStickerId();
+                            for (DataSnapshot snapshot1 : snapshot.getChildren()){
+                                for (DataSnapshot snapshot2 : snapshot1.getChildren()){
+                                    if (snapshot2.getKey().toString().equals(stickerId)){
+                                        usersStickerHistory.setStickerPath(snapshot2.child("StickerPath").getValue().toString());
+                                        break;
+                                    }
+                                }
                             }
                         }
                     }
-                }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
 
+        });
     }
 }

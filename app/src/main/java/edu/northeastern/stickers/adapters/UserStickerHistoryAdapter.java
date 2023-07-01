@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
@@ -51,11 +52,13 @@ public class UserStickerHistoryAdapter extends RecyclerView.Adapter<UserStickerH
         childAdapter = new UserHistoryChildAdapter(userStickerHistory.getStickerSentCountList(), context);
 //        holder.childRecyclerOfDisplay.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
 //        holder.childRecyclerOfDisplay.setAdapter(childAdapter);
-        if (!userStickerHistory.getStickerPath().isEmpty()){
-            Picasso.get().load(userStickerHistory.getStickerPath()).into(holder.imageView);
-        } else {
-            holder.imageView.setVisibility(View.INVISIBLE);
-        }
+//        if (!userStickerHistory.getStickerPath().isEmpty()){
+//            Picasso.get().load(userStickerHistory.getStickerPath()).into(holder.imageView);
+//        }
+        Glide.with(this.context)
+                .load(userStickerHistory.getStickerPath())
+                .into(holder.imageView);
+
         childAdapter.notifyDataSetChanged();
 
     }
