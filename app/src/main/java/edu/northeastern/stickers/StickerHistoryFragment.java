@@ -32,7 +32,7 @@ public class StickerHistoryFragment extends Fragment {
     private UserStickerHistoryAdapter adapter;
     private List<UserStickerHistory> usersStickerHistoryList;
     DatabaseReference referenceOfUser;
-    DatabaseReference referenceOfSticker;
+//    DatabaseReference referenceOfSticker;
     FirebaseUser user;
     String uid;
 
@@ -79,38 +79,40 @@ public class StickerHistoryFragment extends Fragment {
                     for (DataSnapshot snapshotChild : sentStickerHistorySnapshot.getChildren()) {
                         String sendToUserId = snapshotChild.child("sendToUserID").getValue().toString();
                         String sentStickerId = snapshotChild.child("stickerSentID").getValue().toString();
+                        String sentStickerPath = snapshotChild.child("sentStickerPath").getValue().toString();
                         newUserHistory = new UserStickerHistory(
                                 dataSnapshot.child(sendToUserId).child("name").getValue().toString(),
                                 snapshotChild.child("sentTimestamp").getValue().toString(),
-                                sentStickerId);
+                                sentStickerId,sentStickerPath);
                         usersStickerHistoryList.add(newUserHistory);
                     }
                 }
-
-                referenceOfSticker = database.getReference().child("Sticker")
-                        .child("StickerPack");
-                referenceOfSticker.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (UserStickerHistory usersStickerHistory : usersStickerHistoryList){
-                            String stickerId = usersStickerHistory.getStickerId();
-                            for (DataSnapshot snapshot1 : snapshot.getChildren()){
-                                for (DataSnapshot snapshot2 : snapshot1.getChildren()){
-                                    if (snapshot2.getKey().toString().equals(stickerId)){
-                                        usersStickerHistory.setStickerPath(snapshot2.child("StickerPath").getValue().toString());
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
                 adapter.notifyDataSetChanged();
+
+//                referenceOfSticker = database.getReference().child("Sticker")
+//                        .child("StickerPack");
+//                referenceOfSticker.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        for (UserStickerHistory usersStickerHistory : usersStickerHistoryList){
+//                            String stickerId = usersStickerHistory.getStickerId();
+//                            for (DataSnapshot snapshot1 : snapshot.getChildren()){
+//                                for (DataSnapshot snapshot2 : snapshot1.getChildren()){
+//                                    if (snapshot2.getKey().toString().equals(stickerId)){
+//                                        usersStickerHistory.setStickerPath(snapshot2.child("StickerPath").getValue().toString());
+//                                        break;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
+
             }
 
             @Override

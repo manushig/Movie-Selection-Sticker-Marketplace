@@ -10,14 +10,14 @@ public class UserStickerHistory {
     private List<StickerSentCount> stickerSentCountList;
     private List<StickerReceivedCount> stickerReceivedCountList;
 
-    public UserStickerHistory(String userId, String time, String stickerId) {
+    public UserStickerHistory(String userId, String time, String stickerId, String stickerPath) {
         this.userId = userId;
         this.time = time;
         this.stickerId = stickerId;
-        this.stickerPath = "";
+        this.stickerPath = stickerPath;
     }
 
-    public void setStickerPath(String stickerPath) {
+    private void setStickerPath(String stickerPath) {
         this.stickerPath = stickerPath;
     }
 
