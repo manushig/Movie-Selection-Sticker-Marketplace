@@ -53,7 +53,6 @@ public class UserStickerHistory {
         }
 
         public int getSentCountNumber() {
-
             try {
                 return sentCountNumber;
             } catch (Exception e) {

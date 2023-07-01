@@ -10,11 +10,11 @@
         android:id="@+id/userNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="34dp"
-        android:text="User Name:"
+        android:text="User ID:"
         android:textColor="#FFC107"
-        android:textSize="20sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,11 +22,11 @@
         android:id="@+id/numOfStickersText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="24dp"
         android:text="Stickers Sent:"
         android:textColor="#FFC107"
-        android:textSize="20sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userNameText" />
 
@@ -34,9 +34,10 @@
         android:id="@+id/userName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="117dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="34dp"
-        android:textSize="24sp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/userNameText"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,12 +56,13 @@
         android:id="@+id/stickerRecievedHistoryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         android:background="@color/bg_color"
         android:text="Sticker Recieved History"
         android:textColor="@color/text_color"
-        app:layout_constraintTop_toBottomOf="@+id/childRecyclerOfDisplay"
-        tools:layout_editor_absoluteX="27dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/childRecyclerOfDisplay" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -39,11 +39,12 @@ public class UserHistoryChildAdapter extends RecyclerView.Adapter<UserHistoryChi
 
     @Override
     public int getItemCount() {
-        try{
-            return stickerSentCountList.size();
-        } catch (Exception e){
-            return 0;
-        }
+        return 0;
+//        try{
+//            return stickerSentCountList.size();
+//        } catch (Exception e){
+//            return 0;
+//        }
     }
 
     public class UserHistoryChildHolder extends RecyclerView.ViewHolder {
