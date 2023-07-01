@@ -110,6 +110,7 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
         ImageView sendStickerImage = view.findViewById(R.id.sendimageView);
+
         Glide.with(view.getContext())
                 .load(stickerPath)
                 .apply(new RequestOptions().override(150, 150))
@@ -146,9 +147,11 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
     private class ViewHolder extends RecyclerView.ViewHolder {
 
         final TextView text;
+        final View itemView;
 
         ViewHolder(View itemView) {
             super(itemView);
+            this.itemView = itemView;
             text = itemView.findViewById(R.id.text);
         }
 
