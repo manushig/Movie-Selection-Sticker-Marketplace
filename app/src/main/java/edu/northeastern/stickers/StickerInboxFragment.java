@@ -73,9 +73,6 @@ public class StickerInboxFragment extends Fragment {
                                 snapshotChild.child("stickerReceivedID").getValue().toString(),
                                 snapshotChild.child("receivedTimestamp").getValue().toString(),
                                 snapshotChild.child("receivingStickerPath").getValue().toString());
-                        Log.i(receivingInfo.getReceivedFromUserID(),"receiverID");
-                        Log.i(receivingInfo.getReceivedTimestamp(),"timestamp");
-                        Log.i(receivingInfo.getStickerReceivedID(),"stickerID");
 
                         receivedHistoryCollectors.add(receivingInfo);
                     }
