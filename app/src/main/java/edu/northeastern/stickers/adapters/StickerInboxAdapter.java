@@ -10,15 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import edu.northeastern.movieapi.R;
-import edu.northeastern.stickers.models.StickerInboxCollector;
 import edu.northeastern.stickers.StickerInboxViewHolder;
+import edu.northeastern.stickers.models.ReceivingInfo;
 
 public class StickerInboxAdapter extends RecyclerView.Adapter<StickerInboxViewHolder> {
 
-    private List<StickerInboxCollector> receivedHistoryCollectors;
+    private List<ReceivingInfo> receivedHistoryCollectors;
     private final Context context;
 
-    public StickerInboxAdapter(List<StickerInboxCollector> receivedHistoryCollectors, Context context) {
+    public StickerInboxAdapter(List<ReceivingInfo> receivedHistoryCollectors, Context context) {
         this.receivedHistoryCollectors = receivedHistoryCollectors;
         this.context = context;
     }
@@ -33,6 +33,7 @@ public class StickerInboxAdapter extends RecyclerView.Adapter<StickerInboxViewHo
     @Override
     public void onBindViewHolder(@NonNull StickerInboxViewHolder holder, int position) {
         holder.bindThisData(receivedHistoryCollectors.get(position));
+
     }
 
     @Override
