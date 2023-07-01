@@ -64,19 +64,9 @@ public class StickerPackAdapter extends RecyclerView.Adapter<StickerPackAdapter.
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    ItemListDialogFragment itemListDialogFragment;
                     ItemListDialogFragment.newInstance(stickerPack.getStickerID(),
                             stickerPack.getStickerPath())
                             .show(parentFragmentManager, "sheet");
-                }
-            });
-
-            view.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                  //  ItemListDialogFragment itemListDialogFragment;
-                    ItemListDialogFragment.newInstance(stickerPack.getStickerID(), sectionName).show(parentFragmentManager, "sheet");
-                    return true;
                 }
             });
             holder.linearLayout.addView(view);
