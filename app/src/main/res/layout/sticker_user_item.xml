@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="16dp"
-        android:text="Stickers Sent:"
+        android:text="> You sent a massage."
         android:textColor="#FFC107"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,10 +35,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="56dp"
         android:text="Sent Time:"
         android:textColor="#FFC107"
         android:textSize="16sp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/numOfStickersText" />
 
@@ -61,6 +62,7 @@
         android:background="@color/bg_color"
         android:textColor="@color/text_color"
         android:textSize="14sp"
+        android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@+id/numOfStickersText"
         app:layout_constraintTop_toTopOf="@+id/numOfStickersText" />
 
@@ -68,19 +70,22 @@
         android:id="@+id/sentTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="8dp"
         android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@+id/timeText"
-        app:layout_constraintTop_toTopOf="@+id/timeText" />
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/numOfStickersText"
+        app:layout_constraintTop_toBottomOf="@+id/userNameText" />
 
     <ImageView
         android:id="@+id/stickerItemImage"
         android:layout_width="80dp"
         android:layout_height="66dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="43dp"
-        app:layout_constraintStart_toEndOf="@+id/numOfStickersText"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="112dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
