@@ -3,13 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:background="@color/white"
+    android:background="@color/black"
     android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/stickImageView"
         android:layout_width="wrap_content"
+        android:layout_margin="2dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/custom_border_sticker"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -18,22 +20,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:background="@color/purple"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="@color/yellow"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="2dp"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stickImageView">
+        app:layout_constraintTop_toBottomOf="@+id/stickImageView"
+        android:background="@drawable/custom_border">
 
         <TextView
             android:id="@+id/CountTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Send"
-            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:textSize="12sp" />
 
         <ImageView
@@ -41,6 +45,6 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             app:srcCompat="@android:drawable/ic_menu_send"
-            app:tint="@color/white" />
+            app:tint="@color/black" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

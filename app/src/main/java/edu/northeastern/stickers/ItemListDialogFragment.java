@@ -39,13 +39,6 @@ import edu.northeastern.stickers.models.ReceivingInfo;
 import edu.northeastern.stickers.models.SendingInfo;
 import edu.northeastern.stickers.models.Users;
 
-/**
- * <p>A fragment that shows a list of items as a modal bottom sheet.</p>
- * <p>You can show this modal bottom sheet from your activity like this:</p>
- * <pre>
- *     ItemListDialogFragment.newInstance(30).show(getSupportFragmentManager(), "dialog");
- * </pre>
- */
 public class ItemListDialogFragment extends BottomSheetDialogFragment {
 
     // TODO: Customize parameter argument names
@@ -110,6 +103,7 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
         ImageView sendStickerImage = view.findViewById(R.id.sendimageView);
+
         Glide.with(view.getContext())
                 .load(stickerPath)
                 .apply(new RequestOptions().override(150, 150))
@@ -146,9 +140,11 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
     private class ViewHolder extends RecyclerView.ViewHolder {
 
         final TextView text;
+        final View itemView;
 
         ViewHolder(View itemView) {
             super(itemView);
+            this.itemView = itemView;
             text = itemView.findViewById(R.id.text);
         }
 
