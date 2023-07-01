@@ -4,11 +4,13 @@ public class ReceivingInfo {
     private String receivedFromUserID;
     private String stickerReceivedID;
     private String receivedTimestamp;
+    private String receivingStickerPath;
 
-    public ReceivingInfo(String sendToUserID, String stickerSentID, String sentTimestamp) {
+    public ReceivingInfo(String sendToUserID, String stickerSentID, String sentTimestamp, String receivingStickerPath) {
         this.receivedFromUserID = sendToUserID;
         this.stickerReceivedID = stickerSentID;
         this.receivedTimestamp = sentTimestamp;
+        this.receivingStickerPath = receivingStickerPath;
     }
 
     public String getReceivedFromUserID() {
@@ -29,6 +31,14 @@ public class ReceivingInfo {
 
     public String getReceivedTimestamp() {
         return receivedTimestamp;
+    }
+
+    public String getReceivingStickerPath() {
+        return receivingStickerPath;
+    }
+
+    public void setReceivingStickerPath(String receivingStickerPath) {
+        this.receivingStickerPath = receivingStickerPath;
     }
 
     public void setReceivedTimestamp(String receivedTimestamp) {

@@ -42,7 +42,7 @@ public class AboutActivity extends AppCompatActivity {
         groupMembers.add(new GroupMembers(". Manushi", "manushig", "manushi.f@northeastern.edu"));
         groupMembers.add(new GroupMembers("Komal Upadhyay", "komalup1991", "upadhyay.ko@northeastern.edu"));
         groupMembers.add(new GroupMembers("Rakshit Soni", "rakshitsoni05", "soni.rak@northeastern.edu"));
-        groupMembers.add(new GroupMembers("Komal Upadhyay", "Ruby-8", "liang.ziy@northeastern.edu"));
+        groupMembers.add(new GroupMembers("Zi Liyang", "Ruby-8", "liang.ziy@northeastern.edu"));
 
         return groupMembers;
     }

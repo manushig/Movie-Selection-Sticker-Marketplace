@@ -31,6 +31,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import edu.northeastern.movieapi.R;
@@ -42,17 +43,17 @@ import edu.northeastern.stickers.models.Users;
 public class ItemListDialogFragment extends BottomSheetDialogFragment {
 
     // TODO: Customize parameter argument names
-    private static final java.lang.String ARG_STICKER_ID = "sticker_id";
-    private static final java.lang.String ARG_STICKER_PATH = "sticker_path";
+    private static final String ARG_STICKER_ID = "sticker_id";
+    private static final String ARG_STICKER_PATH = "sticker_path";
     private FragmentItemListDialogListDialogBinding binding;
 
     ArrayList<Users> userList = new ArrayList<>();
     private RecyclerView.Adapter adapter;
-    private java.lang.String stickerId;
-    private java.lang.String stickerPath;
+    private String stickerId;
+    private String stickerPath;
 
     // TODO: Customize parameters
-    public static ItemListDialogFragment newInstance(java.lang.String stickerId, java.lang.String stickerPath) {
+    public static ItemListDialogFragment newInstance(String stickerId, String stickerPath) {
         final ItemListDialogFragment fragment = new ItemListDialogFragment();
         final Bundle args = new Bundle();
         args.putString(ARG_STICKER_ID, stickerId);
@@ -70,6 +71,7 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
         adapter = new ItemAdapter(userList);
         stickerId = getArguments().getString(ARG_STICKER_ID);
         stickerPath = getArguments().getString(ARG_STICKER_PATH);
+        String auth = FirebaseAuth.getInstance().getUid();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance()
                 .getReference("Users");
 
@@ -80,7 +82,8 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Users user = new Users(snapshot.getKey(), snapshot.child("email").getValue().toString(),
                             snapshot.child("name").getValue().toString());
-                    userList.add(user);
+                    if(!Objects.equals(user.getUserId(), auth)){
+                    userList.add(user);}
 
                 }
                 adapter.notifyDataSetChanged();
@@ -177,8 +180,8 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
                 public void onClick(View v) {
                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
-                    java.lang.String currentUserUid = FirebaseAuth.getInstance().getUid();
-                    java.lang.String otherUserUid = items.get(holder.getBindingAdapterPosition()).getUserId();
+                    String currentUserUid = FirebaseAuth.getInstance().getUid();
+                    String otherUserUid = items.get(holder.getBindingAdapterPosition()).getUserId();
 
                     updateCurrentUserStickerCount(databaseReference, currentUserUid);
 
@@ -189,7 +192,7 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
             });
         }
 
-        private void updateCurrentUserStickerCount(DatabaseReference databaseReference, java.lang.String currentUserUid) {
+        private void updateCurrentUserStickerCount(DatabaseReference databaseReference, String currentUserUid) {
             DatabaseReference stickerRef = databaseReference.child(currentUserUid).child("SentStickerCount")
                     .child(stickerId);
             stickerRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -204,26 +207,34 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
             });
         }
 
-        private void sendToOtherUser(DatabaseReference databaseReference, java.lang.String otherUserUid, java.lang.String currentUserUid) {
+        private void sendToOtherUser(DatabaseReference databaseReference, String otherUserUid, String currentUserUid) {
             databaseReference.child(otherUserUid).child("ReceivedHistory")
                     .child(UUID.randomUUID().toString())
                     .setValue(new ReceivingInfo(currentUserUid, stickerId,
-                            java.lang.String.valueOf(Calendar.getInstance().getTime())));
+                            String.valueOf(Calendar.getInstance().getTime()),stickerPath));
 
         }
 
-        private void updateCurrentUserHistory(DatabaseReference databaseReference, java.lang.String currentUserUid, java.lang.String otherUserUid) {
+        private void updateCurrentUserHistory(DatabaseReference databaseReference, String currentUserUid, String otherUserUid) {
             databaseReference.child(currentUserUid).child("SentHistory")
                     .child(UUID.randomUUID().toString())
                     .setValue(new SendingInfo(otherUserUid, stickerId,
-                            java.lang.String.valueOf(Calendar.getInstance().getTime())))
+                            String.valueOf(Calendar.getInstance().getTime()),stickerPath))
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
+                                databaseReference.child(currentUserUid).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        testNotificationCode(snapshot, stickerPath, otherUserUid);
+                                    }
 
-                                testNotificationCode(); // Dummy code .... Replace it
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
 
+                                    }
+                                });
                                 Toast.makeText(getContext(), "Sent Successfully!", Toast.LENGTH_SHORT).show();
                                 dismiss();
 
@@ -238,15 +249,24 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
             return items.size();
         }
 
-        private void testNotificationCode() {
+        private void testNotificationCode(DataSnapshot dataSnapshot, String stickerPath, String otherUserUid) {
             String title = "You've Got a Sticker!";
-            String receivedByUserName = "Manushi Gupta";
-            String message = "\"A new sticker has been received from " + receivedByUserName + ".";
-            String fcmToken = "cqao7Is8SGiPB8n6OB0m66:APA91bEMzd838FcPQfuMcDEd50mBCWKssTaCXH2Tsyy859Wsgm7eGXGw7HOK-mKc7-VMBjiizTl3ezyIzcO7CG4x0Ri9u9Myr4Ed1b8unCPgUKy_FYH4cPEuyzqzS1Xq2uSsxbKB53Pb"; //  Can get this value from Users Table
-            String stickerPath = "https://firebasestorage.googleapis.com/v0/b/a8-stick-it-to--em-8342d.appspot.com/o/Animal%20Pack%2Fcow.png?alt=media&token=abab86b3-bf02-4543-8658-ff6d0c3bb5b4";
+            Users currentUser = dataSnapshot.getValue(Users.class);
+            String message = "\"A new sticker has been received from " + currentUser.getName() + ".";
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(otherUserUid);
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            Users otherUser = snapshot.getValue(Users.class);
+                            NotificationSender notificationSender = new NotificationSender();
+                            notificationSender.sendNotification(otherUser.getFcmToken(), title, message, stickerPath);
+                            databaseReference.removeEventListener(this);
+                        }
 
-            NotificationSender notificationSender = new NotificationSender();
-            notificationSender.sendNotification(fcmToken, title, message, stickerPath);
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
         }
     }
 }

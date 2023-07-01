@@ -2,20 +2,20 @@ package edu.northeastern.stickers.models;
 
 public class Users {
 
-    private java.lang.String userId;
-    private java.lang.String email;
-    private java.lang.String name;
+    private String userId;
+    private String email;
+    private String name;
     private String fcmToken;
     public Users() {
     }
 
-    public Users(java.lang.String userId, java.lang.String email, java.lang.String name) {
+    public Users(String userId, String email, String name) {
         this.email = email;
         this.name = name;
         this.userId = userId;
     }
 
-    public Users(java.lang.String email, java.lang.String name) {
+    public Users(String email, String name) {
         this.email = email;
         this.name = name;
     }
@@ -35,27 +35,27 @@ public class Users {
         this.fcmToken = fcmToken;
     }
 
-    public java.lang.String getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(java.lang.String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public java.lang.String getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(java.lang.String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public java.lang.String getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(java.lang.String userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 }

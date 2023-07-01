@@ -5,10 +5,13 @@ public class SendingInfo {
     private String stickerSentID;
     private String sentTimestamp;
 
-    public SendingInfo(String sendToUserID, String stickerSentID, String sentTimestamp) {
+    private String sentStickerPath;
+
+    public SendingInfo(String sendToUserID, String stickerSentID, String sentTimestamp,String sentStickerPath) {
         this.sendToUserID = sendToUserID;
         this.stickerSentID = stickerSentID;
         this.sentTimestamp = sentTimestamp;
+        this.sentStickerPath = sentStickerPath;
     }
 
 
@@ -34,5 +37,13 @@ public class SendingInfo {
 
     public void setSentTimestamp(String sentTimestamp) {
         this.sentTimestamp = sentTimestamp;
+    }
+
+    public String getSentStickerPath() {
+        return sentStickerPath;
+    }
+
+    public void setSentStickerPath(String sentStickerPath) {
+        this.sentStickerPath = sentStickerPath;
     }
 }
