@@ -4,22 +4,33 @@ import java.util.List;
 
 public class UserStickerHistory {
     private String userId;
+    private String time;
+    private String stickerId;
     private List<StickerSentCount> stickerSentCountList;
     private List<StickerReceivedCount> stickerReceivedCountList;
 
-    public UserStickerHistory(String userId) {
+    public UserStickerHistory(String userId, String time, String stickerId) {
         this.userId = userId;
+        this.time = time;
+        this.stickerId = stickerId;
     }
 
-    public UserStickerHistory(String userId, List<StickerSentCount> stickerSentCountList, List<StickerReceivedCount> stickerReceivedCountList) {
-        this(userId);
-        this.stickerReceivedCountList = stickerReceivedCountList;
-        this.stickerSentCountList = stickerSentCountList;
-    }
+//    public UserStickerHistory(String userId, List<StickerSentCount> stickerSentCountList, List<StickerReceivedCount> stickerReceivedCountList) {
+//        this(userId);
+//        this.stickerReceivedCountList = stickerReceivedCountList;
+//        this.stickerSentCountList = stickerSentCountList;
+//    }
 
     public String getUserId() {
         return userId;
     }
+    public String getTime() {
+        return time;
+    }
+    public String getStickerId() {
+        return stickerId;
+    }
+
 
     public List<StickerSentCount> getStickerSentCountList() {
         return stickerSentCountList;

@@ -32,14 +32,6 @@ public class ReceivedHistoryAdapter extends RecyclerView.Adapter<ReceivedHistory
 
     @Override
     public void onBindViewHolder(@NonNull ReceivedHistoryAdapter.ReceivedHistoryHolder holder, int position) {
-//UserStickerHistory userStickerHistory = userStickerHistoryList.get(position);
-//        holder.userName.setText(userStickerHistory.getUserId().toString());
-//
-//        UserHistoryChildAdapter childAdapter;
-//        childAdapter = new UserHistoryChildAdapter(userStickerHistory.getStickerSentCountList(), context);
-//        holder.childRecyclerOfDisplay.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-//        holder.childRecyclerOfDisplay.setAdapter(childAdapter);
-//        childAdapter.notifyDataSetChanged();
         UserStickerHistory.StickerReceivedCount stickerReceivedCount = stickerReceivedCountList.get(position);
         holder.receivedTime.setText(stickerReceivedCount.getTime().toString());
         holder.receivedStickerId.setText(stickerReceivedCount.getStickerId().toString());
@@ -48,7 +40,11 @@ public class ReceivedHistoryAdapter extends RecyclerView.Adapter<ReceivedHistory
 
     @Override
     public int getItemCount() {
-        return stickerReceivedCountList.size();
+        if (stickerReceivedCountList != null){
+            return stickerReceivedCountList.size();
+        } else {
+            return 0;
+        }
     }
 
     class ReceivedHistoryHolder extends RecyclerView.ViewHolder{
@@ -59,7 +55,7 @@ public class ReceivedHistoryAdapter extends RecyclerView.Adapter<ReceivedHistory
             receivedFromUserText = itemView.findViewById(R.id.receivedFromUserText);
             receivedStickerIdText = itemView.findViewById(R.id.recievedStickerIdText);
             receivedTimeText = itemView.findViewById(R.id.receivedTimeText);
-            receivedFromUserId = itemView.findViewById(R.id.receivedFromUserID);
+            receivedFromUserId = itemView.findViewById(R.id.userName);
             receivedStickerId = itemView.findViewById(R.id.recievedStickerId);
             receivedTime = itemView.findViewById(R.id.receivedTime);
         }

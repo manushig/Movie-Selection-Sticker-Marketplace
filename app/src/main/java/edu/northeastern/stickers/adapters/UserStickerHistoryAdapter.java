@@ -23,6 +23,7 @@ public class UserStickerHistoryAdapter extends RecyclerView.Adapter<UserStickerH
     private List<UserStickerHistory> userStickerHistoryList;
     private Button receivedHistoryButton;
 
+
     public UserStickerHistoryAdapter(Context context, List<UserStickerHistory> userStickerHistoryList) {
         this.context = context;
         this.userStickerHistoryList = userStickerHistoryList;
@@ -39,11 +40,12 @@ public class UserStickerHistoryAdapter extends RecyclerView.Adapter<UserStickerH
     public void onBindViewHolder(@NonNull UserStickerHistoryHolder holder, int position) {
         UserStickerHistory userStickerHistory = userStickerHistoryList.get(position);
         holder.userName.setText(userStickerHistory.getUserId().toString());
-
+        holder.stickerId.setText(userStickerHistory.getStickerId().toString());
+        holder.time.setText(userStickerHistory.getTime().toString());
         UserHistoryChildAdapter childAdapter;
         childAdapter = new UserHistoryChildAdapter(userStickerHistory.getStickerSentCountList(), context);
-        holder.childRecyclerOfDisplay.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-        holder.childRecyclerOfDisplay.setAdapter(childAdapter);
+//        holder.childRecyclerOfDisplay.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+//        holder.childRecyclerOfDisplay.setAdapter(childAdapter);
         childAdapter.notifyDataSetChanged();
 
     }
@@ -54,22 +56,25 @@ public class UserStickerHistoryAdapter extends RecyclerView.Adapter<UserStickerH
     }
 
     class UserStickerHistoryHolder extends RecyclerView.ViewHolder {
-        private TextView userNameText, userName;
+        private TextView userNameText, userName,stickerId,time, timeText;
         private RecyclerView childRecyclerOfDisplay;
 
         public UserStickerHistoryHolder(@NonNull View itemView) {
             super(itemView);
             userNameText = itemView.findViewById(R.id.userNameText);
             userName = itemView.findViewById(R.id.userName);
-            receivedHistoryButton = itemView.findViewById(R.id.stickerRecievedHistoryButton);
-            childRecyclerOfDisplay = itemView.findViewById(R.id.childRecyclerOfDisplay);
-            receivedHistoryButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, StickerReceivedHistoryActivity.class);
-                    context.startActivity(intent);
-                }
-            });
+            timeText = itemView.findViewById(R.id.timeText);
+//            receivedHistoryButton = itemView.findViewById(R.id.stickerRecievedHistoryButton);
+//            childRecyclerOfDisplay = itemView.findViewById(R.id.childRecyclerOfDisplay);
+            stickerId = itemView.findViewById(R.id.stickerId);
+            time = itemView.findViewById(R.id.sentTime);
+//            receivedHistoryButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(context, StickerReceivedHistoryActivity.class);
+//                    context.startActivity(intent);
+//                }
+//            });
         }
     }
 }
