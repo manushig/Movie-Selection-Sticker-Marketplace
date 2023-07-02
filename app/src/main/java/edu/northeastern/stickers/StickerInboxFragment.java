@@ -104,8 +104,8 @@ public class StickerInboxFragment extends Fragment {
     }
 
     /**
-     * Sort List of UserStickerHistory by descending time order.
-     * @param list of UserStickerHistory
+     * Sort List of Receiving info by descending time order.
+     * @param list of Receiving Info
      */
     private void sort(List<ReceivingInfo> list) {
         list.sort(((o1, o2) -> o2.getReceivedTimestamp().compareTo(o1.getReceivedTimestamp())));
