@@ -78,6 +78,7 @@ public class StickerHistoryFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserStickerHistory newUserHistory;
+                usersStickerHistoryList.clear();
                 if (dataSnapshot.child(uid).child("SentHistory").exists()) {
                     DataSnapshot sentStickerHistorySnapshot = dataSnapshot.child(uid).child("SentHistory");
                     for (DataSnapshot snapshotChild : sentStickerHistorySnapshot.getChildren()) {
