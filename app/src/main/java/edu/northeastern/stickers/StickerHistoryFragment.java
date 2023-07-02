@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,14 +28,16 @@ import edu.northeastern.movieapi.R;
 import edu.northeastern.stickers.adapters.UserStickerHistoryAdapter;
 import edu.northeastern.stickers.models.UserStickerHistory;
 
+/**
+ * History fragment to show logged in user's sending history.
+ */
 public class StickerHistoryFragment extends Fragment {
     private RecyclerView recyclerDisplay;
     private UserStickerHistoryAdapter adapter;
     private List<UserStickerHistory> usersStickerHistoryList;
-    DatabaseReference referenceOfUser;
-//    DatabaseReference referenceOfSticker;
-    FirebaseUser user;
-    String uid;
+    private DatabaseReference referenceOfUser;
+    private FirebaseUser user;
+    private String uid;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -44,7 +47,6 @@ public class StickerHistoryFragment extends Fragment {
         uid = user.getUid();
 
         recyclerDisplay = view.findViewById(R.id.recyclerOfDisplay);
-
         recyclerDisplay.setLayoutManager(new LinearLayoutManager(this.getContext()));
         usersStickerHistoryList = new ArrayList<UserStickerHistory>();
 
@@ -62,18 +64,18 @@ public class StickerHistoryFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_sticker_history, container, false);
     }
 
+    /**
+     * Fetch data from database to show user's sending history to the xml relative textviews.
+     */
     private void createListData() {
         usersStickerHistoryList = new ArrayList<>();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         referenceOfUser = database.getReference().child("Users");
 
-
         referenceOfUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserStickerHistory newUserHistory;
-                List<UserStickerHistory.StickerSentCount> stickerSentCountList = new ArrayList<>();
-                List<UserStickerHistory.StickerReceivedCount> stickerReceivedCountList = new ArrayList<>();
                 if (dataSnapshot.child(uid).child("SentHistory").exists()) {
                     DataSnapshot sentStickerHistorySnapshot = dataSnapshot.child(uid).child("SentHistory");
                     for (DataSnapshot snapshotChild : sentStickerHistorySnapshot.getChildren()) {
@@ -85,41 +87,15 @@ public class StickerHistoryFragment extends Fragment {
                                 snapshotChild.child("sentTimestamp").getValue().toString(),
                                 sentStickerId,sentStickerPath);
                         usersStickerHistoryList.add(newUserHistory);
+                        adapter.notifyDataSetChanged();
                     }
+                } else {
+                    Toast.makeText(getContext(), "Sending History is  empty. No stickers received yet.", Toast.LENGTH_SHORT).show();
                 }
-                adapter.notifyDataSetChanged();
-
-//                referenceOfSticker = database.getReference().child("Sticker")
-//                        .child("StickerPack");
-//                referenceOfSticker.addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        for (UserStickerHistory usersStickerHistory : usersStickerHistoryList){
-//                            String stickerId = usersStickerHistory.getStickerId();
-//                            for (DataSnapshot snapshot1 : snapshot.getChildren()){
-//                                for (DataSnapshot snapshot2 : snapshot1.getChildren()){
-//                                    if (snapshot2.getKey().toString().equals(stickerId)){
-//                                        usersStickerHistory.setStickerPath(snapshot2.child("StickerPath").getValue().toString());
-//                                        break;
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                    }
-//                });
-
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-
+            public void onCancelled(@NonNull DatabaseError error) {}
         });
     }
 }
