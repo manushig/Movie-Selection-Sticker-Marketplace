@@ -1,5 +1,6 @@
 package edu.northeastern.stickers;
 
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -65,6 +66,9 @@ public class StickerHomeActivity extends AppCompatActivity implements LogoutDial
         Intent intent = getIntent();
         String fragmentToOpen = intent.getStringExtra("fragment");
         if (fragmentToOpen != null && fragmentToOpen.equals("StickerInboxFragment")) {
+            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            notificationManager.cancel(0);
+
             // Open the StickerInboxFragment
             currentSelectedItemIndex = R.id.sticker_inbox;
             replaceFragment(StickerInboxFragment.class, R.id.sticker_inbox);
