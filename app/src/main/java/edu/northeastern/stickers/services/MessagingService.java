@@ -112,7 +112,7 @@ public class MessagingService extends FirebaseMessagingService {
         actionIntent.setAction("OPEN_INBOX_FRAGMENT");
 
         PendingIntent actionPendingIntent = PendingIntent.getActivity(this, 0, actionIntent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_MUTABLE);
-        notificationBuilder.addAction(R.drawable.all_inbox, "Inbox", actionPendingIntent);
+        notificationBuilder.addAction(R.drawable.all_inbox, "View in inbox", actionPendingIntent);
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         if (notificationManager != null) {
