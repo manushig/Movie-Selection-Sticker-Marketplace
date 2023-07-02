@@ -31,10 +31,13 @@ public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         GroupMembers groupMember = groupMembers.get(position);
+        String name = "Name: " + groupMember.getName();
+        String githubId = "Github Id: " + groupMember.getGithubId();
+        String email = "Email Id: " + groupMember.getEmail();
 
-        holder.nameTextView.setText(groupMember.getName());
-        holder.githubIdTextView.setText(groupMember.getGithubId());
-        holder.emailTextView.setText(groupMember.getEmail());
+        holder.nameTextView.setText(name);
+        holder.githubIdTextView.setText(githubId);
+        holder.emailTextView.setText(email);
     }
 
     @Override

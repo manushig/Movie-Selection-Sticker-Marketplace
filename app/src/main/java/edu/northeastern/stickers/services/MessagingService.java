@@ -42,7 +42,7 @@ public class MessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MessagingService";
     private static final String CHANNEL_ID = "default_channel";
-    private static int NOTIFICATION_ID = 0;
+
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
