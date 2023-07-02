@@ -34,19 +34,7 @@ public class StickerInboxViewHolder extends RecyclerView.ViewHolder {
         Glide.with(this.itemView)
                 .load(theLinkToBind.getReceivingStickerPath())
                 .into(sticker);
-//        String uri = "@drawable/" + theLinkToBind.getStickerReceivedID(); // where myresource (without the extension) is the file
-//
-//
-//        int imageResource = itemView.getContext().getResources().getIdentifier(uri, null, itemView.getContext().getPackageName());
-//        try {
-//            Drawable res = itemView.getContext().getResources().getDrawable(imageResource);
-//            sticker.setImageDrawable(res);
-//        } catch (Exception exception) {
-//
-//            Toast.makeText(itemView.getContext(), "Images not loaded due to different version", Toast.LENGTH_SHORT).show();
-//        }
 
-//        sticker.setImageDrawable(res);
 
 
     }

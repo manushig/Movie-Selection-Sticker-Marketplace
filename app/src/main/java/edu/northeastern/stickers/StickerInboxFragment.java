@@ -77,7 +77,6 @@ public class StickerInboxFragment extends Fragment {
                         receivedHistoryCollectors.add(receivingInfo);
                     }
                 }
-                Log.i("list",receivedHistoryCollectors.get(0).toString());
                 receivedHIstoryAdapter.notifyDataSetChanged();
 
             }
