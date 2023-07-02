@@ -22,7 +22,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import edu.northeastern.movieapi.R;
@@ -40,6 +39,8 @@ public class StickerHistoryFragment extends Fragment {
     private FirebaseUser user;
     private String uid;
 
+    private ValueEventListener listener;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -51,7 +52,7 @@ public class StickerHistoryFragment extends Fragment {
         recyclerDisplay.setLayoutManager(new LinearLayoutManager(this.getContext()));
         usersStickerHistoryList = new ArrayList<UserStickerHistory>();
 
-        createListData();
+        createListData(view);
 
         adapter = new UserStickerHistoryAdapter(this.getContext(), usersStickerHistoryList);
         recyclerDisplay.setAdapter(adapter);
@@ -68,12 +69,12 @@ public class StickerHistoryFragment extends Fragment {
     /**
      * Fetch data from database to show user's sending history to the xml relative textviews.
      */
-    private void createListData() {
+    private void createListData(View view) {
         usersStickerHistoryList = new ArrayList<>();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         referenceOfUser = database.getReference().child("Users");
 
-        referenceOfUser.addValueEventListener(new ValueEventListener() {
+        listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserStickerHistory newUserHistory;
@@ -94,13 +95,14 @@ public class StickerHistoryFragment extends Fragment {
 
                     adapter.notifyDataSetChanged();
                 } else {
-                    Toast.makeText(getContext(), "Sending History is  empty. No stickers received yet.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "Sending History is  empty. No stickers received yet.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
-        });
+        };
+        referenceOfUser.addValueEventListener(listener);
     }
 
     /**
@@ -109,5 +111,13 @@ public class StickerHistoryFragment extends Fragment {
      */
     private void sort(List<UserStickerHistory> list) {
         list.sort(((o1, o2) -> o2.getTime().compareTo(o1.getTime())));
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (listener != null) {
+            referenceOfUser.removeEventListener(listener);
+        }
     }
 }

@@ -41,6 +41,7 @@ public class StickerInboxFragment extends Fragment {
     private DatabaseReference mDatabase;
 
     FirebaseUser user;
+    private ValueEventListener listener;
 
 
     @Override
@@ -63,11 +64,11 @@ public class StickerInboxFragment extends Fragment {
                 DividerItemDecoration.VERTICAL);
         receiveHistoryRecyclerView.addItemDecoration(dividerItemDecoration);
 
-        mDatabase.addValueEventListener(new ValueEventListener() {
+        listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ReceivingInfo receivingInfo;
-
+                receivedHistoryCollectors.clear();
                 if (dataSnapshot.child(userID).child("ReceivedHistory").exists()){
                     DataSnapshot sentStickerHistorySnapshot = dataSnapshot.child(userID).child("ReceivedHistory");
                     for (DataSnapshot snapshotChild : sentStickerHistorySnapshot.getChildren()){
@@ -93,9 +94,19 @@ public class StickerInboxFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };
+
+        mDatabase.addValueEventListener(listener);
 
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (listener != null) {
+            mDatabase.removeEventListener(listener);
+        }
     }
 
     @Nullable
