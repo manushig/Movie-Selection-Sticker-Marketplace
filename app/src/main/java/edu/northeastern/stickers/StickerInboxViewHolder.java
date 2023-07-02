@@ -29,7 +29,7 @@ public class StickerInboxViewHolder extends RecyclerView.ViewHolder {
 
     public void bindThisData(ReceivingInfo theLinkToBind) {
 
-        senderId.setText(("Sender: " + theLinkToBind.getReceivedFromUserID()));
+        senderId.setText(("From: " + theLinkToBind.getReceivedFromUserID()));
         timeSent.setText(("Time: " + theLinkToBind.getReceivedTimestamp()));
         Glide.with(this.itemView)
                 .load(theLinkToBind.getReceivingStickerPath())
