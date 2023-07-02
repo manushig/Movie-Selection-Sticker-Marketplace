@@ -1,7 +1,6 @@
 package edu.northeastern.stickers.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,19 +8,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
 import edu.northeastern.movieapi.R;
-import edu.northeastern.stickers.StickerReceivedHistoryActivity;
 import edu.northeastern.stickers.models.UserStickerHistory;
 
 public class UserStickerHistoryAdapter extends RecyclerView.Adapter<UserStickerHistoryAdapter.UserStickerHistoryHolder> {
@@ -48,18 +42,10 @@ public class UserStickerHistoryAdapter extends RecyclerView.Adapter<UserStickerH
         holder.userName.setText(userStickerHistory.getUserId().toString());
         holder.stickerId.setText(userStickerHistory.getStickerId().toString());
         holder.time.setText(userStickerHistory.getTime().toString());
-        UserHistoryChildAdapter childAdapter;
-        childAdapter = new UserHistoryChildAdapter(userStickerHistory.getStickerSentCountList(), context);
-//        holder.childRecyclerOfDisplay.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-//        holder.childRecyclerOfDisplay.setAdapter(childAdapter);
-//        if (!userStickerHistory.getStickerPath().isEmpty()){
-//            Picasso.get().load(userStickerHistory.getStickerPath()).into(holder.imageView);
-//        }
+
         Glide.with(this.context)
                 .load(userStickerHistory.getStickerPath())
                 .into(holder.imageView);
-
-        childAdapter.notifyDataSetChanged();
 
     }
 

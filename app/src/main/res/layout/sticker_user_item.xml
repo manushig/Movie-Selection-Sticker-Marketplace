@@ -10,11 +10,11 @@
         android:id="@+id/userNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="34dp"
+        android:layout_marginStart="8dp"
         android:text="To:"
-        android:textColor="#FFC107"
+        android:textColor="@color/yellow"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,11 +22,12 @@
         android:id="@+id/numOfStickersText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="16dp"
-        android:text="> You sent a message."
-        android:textColor="#FFC107"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:text="Time:"
+        android:textColor="@color/yellow"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userNameText" />
 
@@ -37,7 +38,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="56dp"
         android:text="Sent Time:"
-        android:textColor="#FFC107"
+        android:textColor="@color/yellow"
         android:textSize="16sp"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,11 +49,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="34dp"
-        android:textColor="@color/white"
+        android:textColor="@color/yellow"
         android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/userNameText"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/userNameText" />
 
     <TextView
         android:id="@+id/stickerId"
@@ -70,25 +71,24 @@
         android:id="@+id/sentTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="89dp"
-        android:textColor="@color/white"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/yellow"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/numOfStickersText"
         app:layout_constraintTop_toBottomOf="@+id/userNameText" />
 
     <ImageView
         android:id="@+id/stickerItemImage"
-        android:layout_width="80dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="112dp"
+        android:layout_width="144dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/custom_border"
+        android:backgroundTint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numOfStickersText"
         tools:srcCompat="@tools:sample/avatars" />
 
     <!--    <androidx.recyclerview.widget.RecyclerView-->
