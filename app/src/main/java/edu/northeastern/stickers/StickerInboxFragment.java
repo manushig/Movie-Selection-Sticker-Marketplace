@@ -82,7 +82,6 @@ public class StickerInboxFragment extends Fragment {
                 Collections.reverse(receivedHistoryCollectors);
                 receivedHIstoryAdapter.notifyDataSetChanged();
                 if (receivedHistoryCollectors.isEmpty()) {
-                    // Print a message or perform any action
                     Toast.makeText(getContext(), "Inbox empty. No stickers received yet.", Toast.LENGTH_SHORT).show();
                 }
             }
