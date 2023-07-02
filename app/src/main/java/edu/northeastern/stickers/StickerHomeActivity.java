@@ -25,7 +25,7 @@ public class StickerHomeActivity extends AppCompatActivity implements LogoutDial
     private ImageView logoutImageView;
     private FirebaseAuth auth;
     private Toolbar toolbar;
-
+    private static final String FRAGMENT_STICKER_INBOX = "StickerInboxFragment";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +62,18 @@ public class StickerHomeActivity extends AppCompatActivity implements LogoutDial
         } else {
             currentSelectedItemIndex = savedInstanceState.getInt("current_selected_item_index");
         }
-        showInitialFragment(savedInstanceState);
+        Intent intent = getIntent();
+        String fragmentToOpen = intent.getStringExtra("fragment");
+        if (fragmentToOpen != null && fragmentToOpen.equals("StickerInboxFragment")) {
+            // Open the StickerInboxFragment
+            currentSelectedItemIndex = R.id.sticker_inbox;
+            replaceFragment(StickerInboxFragment.class, R.id.sticker_inbox);
+            bottomNavigationView.setSelectedItemId(R.id.sticker_inbox);
+        } else {
+
+            showInitialFragment(savedInstanceState);
+        }
+
     }
 
     @Override
@@ -74,17 +85,28 @@ public class StickerHomeActivity extends AppCompatActivity implements LogoutDial
     private void showInitialFragment(Bundle savedInstanceState) {
         Class initialFragment = null;
         if (savedInstanceState == null) {
-            initialFragment = StickerStoreFragment.class;
-            toolbar.setTitle("Sticker Home");
-            String tag = "fragment_" + R.id.sticker_store;
+            initialFragment = getFragmentClassBasedOnId(currentSelectedItemIndex);
+            toolbar.setTitle(getFragmentTitleBasedOnId(currentSelectedItemIndex));
+            String tag = "fragment_" + currentSelectedItemIndex;
             getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
-                    .add(R.id.fragment_container_view, initialFragment, null, tag)
+                    .add(R.id.fragment_container_view, initialFragment,null, tag)
                     .commit();
         } else {
             initialFragment = getFragmentClassBasedOnId(currentSelectedItemIndex);
             replaceFragment(initialFragment, currentSelectedItemIndex);
         }
+    }
+
+    private String getFragmentTitleBasedOnId(int itemId) {
+        if (itemId == R.id.sticker_store) {
+            return "Sticker Home";
+        } else if (itemId == R.id.sticker_inbox) {
+            return "Inbox";
+        } else if (itemId == R.id.sticker_history) {
+            return "History";
+        }
+        return "";
     }
 
     private void replaceFragment(Class fragmentClass, int itemId) {
@@ -121,7 +143,7 @@ public class StickerHomeActivity extends AppCompatActivity implements LogoutDial
     @Override
     public void onBackPressed() {
         if (currentSelectedItemIndex != R.id.sticker_store) {
-            replaceFragment(StickerStoreFragment.class, currentSelectedItemIndex);
+            replaceFragment(StickerStoreFragment.class, R.id.sticker_store);
             bottomNavigationView.setSelectedItemId(R.id.sticker_store);
             currentSelectedItemIndex = R.id.sticker_store;
         } else {

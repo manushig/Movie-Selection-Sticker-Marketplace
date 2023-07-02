@@ -228,7 +228,7 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
                                 databaseRef.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        testNotificationCode(snapshot, stickerPath, otherUserUid);
+                                        sendNotification(snapshot, stickerPath, otherUserUid);
                                         databaseRef.removeEventListener(this);
                                     }
 
@@ -251,17 +251,19 @@ public class ItemListDialogFragment extends BottomSheetDialogFragment {
             return items.size();
         }
 
-        private void testNotificationCode(DataSnapshot dataSnapshot, String stickerPath, String otherUserUid) {
+        private void sendNotification(DataSnapshot dataSnapshot, String stickerPath, String otherUserUid) {
             String title = "You've Got a Sticker!";
             Users currentUser = dataSnapshot.getValue(Users.class);
-            String message = "\"A new sticker has been received from " + currentUser.getName() + ".";
+            String message = currentUser.getName() + " sent you a sticker.";
+            String summaryText = "A new sticker has been received from " + currentUser.getName() + " .";
+
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(otherUserUid);
             databaseReference.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Users otherUser = snapshot.getValue(Users.class);
                             NotificationSender notificationSender = new NotificationSender();
-                            notificationSender.sendNotification(otherUser.getFcmToken(), title, message, stickerPath);
+                            notificationSender.sendNotification(otherUser.getFcmToken(), title, message, stickerPath, summaryText);
                             databaseReference.removeEventListener(this);
                         }
 

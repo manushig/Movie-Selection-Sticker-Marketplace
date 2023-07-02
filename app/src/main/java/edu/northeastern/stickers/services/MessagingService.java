@@ -30,27 +30,25 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import edu.northeastern.movieapi.R;
 import edu.northeastern.stickers.FirebaseUtils;
 import edu.northeastern.stickers.StickerHomeActivity;
+import edu.northeastern.stickers.StickerInboxFragment;
 
 public class MessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MessagingService";
     private static final String CHANNEL_ID = "default_channel";
-
+    private static int NOTIFICATION_ID = 0;
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
-        if (remoteMessage.getData().size() > 0) {
-            handleDataMessage(remoteMessage.getData());
-        }
-
         if (remoteMessage.getNotification() != null) {
-            handleNotificationMessage(remoteMessage.getNotification());
+            handleNotificationMessage(remoteMessage);
         }
     }
 
@@ -62,44 +60,44 @@ public class MessagingService extends FirebaseMessagingService {
     }
 
 
-    private void handleDataMessage(final java.util.Map<String, String> data) {
-        final String stickerPath = data.get("stickerPath");
+    private void handleNotificationMessage(RemoteMessage remoteMessage) {
 
-        downloadAndShowImage(stickerPath);
-
+        String stickerPath = remoteMessage.getNotification().getImageUrl().toString();
+        String title = remoteMessage.getNotification().getTitle();
+        String body = remoteMessage.getNotification().getBody();
+        String summaryText = "";
+        if (remoteMessage.getData().size() > 0) {
+            summaryText = remoteMessage.getData().get("summaryText");
+        }
+        downloadAndShowNotification(title, body, stickerPath, summaryText);
     }
 
-    private void handleNotificationMessage(RemoteMessage.Notification notification) {
-        String title = notification.getTitle();
-        String body = notification.getBody();
-        String stickerPath = notification.getImageUrl().toString();
-
-        downloadAndShowNotification(title, body, stickerPath);
-    }
-
-    private void downloadAndShowNotification(String title, String body, String imageUrl) {
+    private void downloadAndShowNotification(String title, String body, String imageUrl, String summaryText) {
         Bitmap bitmap = downloadImage(imageUrl);
 
         if (bitmap != null) {
-            showNotificationWithBigPicture(title, body, bitmap);
+            showNotificationWithBigPicture(title, body, bitmap, summaryText);
         } else {
             showNotificationWithTextOnly(title, body);
         }
     }
 
-    private void showNotificationWithBigPicture(String title, String body, Bitmap bigPicture) {
+
+    private void showNotificationWithBigPicture(String title, String body, Bitmap bigPicture, String summaryText) {
         Intent intent = new Intent(this, StickerHomeActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.BigPictureStyle bigPictureStyle = new NotificationCompat.BigPictureStyle()
                 .bigPicture(bigPicture)
                 .setBigContentTitle(title)
-                .setSummaryText(body);
+                .setSummaryText(summaryText)
+                .bigLargeIcon(null);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.baseline_notifications_24) // Replace with your small icon
+                .setSmallIcon(R.drawable.giphy)
+                .setLargeIcon(bigPicture)
                 .setContentTitle(title)
                 .setContentText(body)
                 .setAutoCancel(true)
@@ -108,6 +106,14 @@ public class MessagingService extends FirebaseMessagingService {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent);
 
+        Intent actionIntent = new Intent(this, StickerHomeActivity.class);
+        actionIntent.putExtra("fragment", "StickerInboxFragment");
+
+        actionIntent.setAction("OPEN_INBOX_FRAGMENT");
+
+        PendingIntent actionPendingIntent = PendingIntent.getActivity(this, 0, actionIntent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_MUTABLE);
+        notificationBuilder.addAction(R.drawable.all_inbox, "Inbox", actionPendingIntent);
+
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         if (notificationManager != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -115,18 +121,19 @@ public class MessagingService extends FirebaseMessagingService {
                 NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "Default Channel", NotificationManager.IMPORTANCE_HIGH);
                 notificationManager.createNotificationChannel(channel);
             }
+
             notificationManager.notify(0, notificationBuilder.build());
         }
     }
 
     private void showNotificationWithTextOnly(String title, String body) {
         Intent intent = new Intent(this, StickerHomeActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.baseline_notifications_24) // Replace with your small icon
+                .setSmallIcon(R.drawable.giphy)
                 .setContentTitle(title)
                 .setContentText(body)
                 .setAutoCancel(true)
@@ -161,14 +168,6 @@ public class MessagingService extends FirebaseMessagingService {
         }
     }
 
-    private void downloadAndShowImage(String imageUrl) {
-        Bitmap bitmap = downloadImage(imageUrl);
-        if (bitmap != null) {
-            Toast.makeText(this, "Success to download the image", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Failed to download the image", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     public void getAndSaveFcmToken() {
         FirebaseMessaging.getInstance().getToken()

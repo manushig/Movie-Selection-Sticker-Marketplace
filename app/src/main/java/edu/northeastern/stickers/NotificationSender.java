@@ -10,7 +10,7 @@ public class NotificationSender {
     private static final String SERVER_KEY = "AAAA3WW5cxQ:APA91bEi-G14_H75cX5DzDEZ_VpqDXbgctUb-U6YqOkriI_cN0DC9dNmGsFqpBQWYU5lz4juFI0Vf8T-TiuWwjc_lIrb42m_X5YiA5EXAMADrhdBhrgFFx_BKepxvMBiEg2BQtfh2bvW";
     private static final String API_URL = "https://fcm.googleapis.com/fcm/send";
 
-    public static void sendNotification(final String fcmToken, final String title, final String body, final String stickerPath) {
+    public static void sendNotification(final String fcmToken, final String title, final String body, final String stickerPath, final String summaryText) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -20,7 +20,7 @@ public class NotificationSender {
 
                 String payloadObj=null;
                 try {
-                    payloadObj = buildNotificationPayload(fcmToken,title,body,stickerPath).toString();
+                    payloadObj = buildNotificationPayload(fcmToken,title,body,stickerPath, summaryText).toString();
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
@@ -47,15 +47,18 @@ public class NotificationSender {
         }).start();
     }
 
-    private static JSONObject buildNotificationPayload(String fcmToken, String title, String body, String stickerPath) throws JSONException {
+    private static JSONObject buildNotificationPayload(String fcmToken, String title, String body, String stickerPath, String summaryText) throws JSONException {
         JSONObject notification = new JSONObject();
         JSONObject jsonObject = new JSONObject();
+        JSONObject data = new JSONObject();
 
         notification.put("title", title);
         notification.put("body", body);
         notification.put("image", stickerPath);
+        data.put("summaryText", summaryText);
         jsonObject.put("to", fcmToken);
         jsonObject.put("notification", notification);
+        jsonObject.put("data", data);
 
         return jsonObject;
     }
