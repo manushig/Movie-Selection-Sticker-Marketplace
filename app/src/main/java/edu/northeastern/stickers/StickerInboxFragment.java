@@ -25,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import edu.northeastern.movieapi.R;
 import edu.northeastern.stickers.adapters.StickerInboxAdapter;
@@ -73,7 +74,7 @@ public class StickerInboxFragment extends Fragment {
                         String receivedFromUserID = snapshotChild.child("receivedFromUserID").getValue().toString();
                         receivingInfo = new ReceivingInfo(
                                 dataSnapshot.child(receivedFromUserID).child("name").getValue().toString(),
-                                snapshotChild.child("stickerReceivedID").getValue().toString(),
+                                Objects.requireNonNull(snapshotChild.child("stickerReceivedID").getValue()).toString(),
                                 snapshotChild.child("receivedTimestamp").getValue().toString(),
                                 snapshotChild.child("receivingStickerPath").getValue().toString());
 
@@ -83,7 +84,7 @@ public class StickerInboxFragment extends Fragment {
                 sort(receivedHistoryCollectors);
                 receivedHIstoryAdapter.notifyDataSetChanged();
                 if (receivedHistoryCollectors.isEmpty()) {
-                    Toast.makeText(getContext(), "Inbox empty. No stickers received yet.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "Inbox empty. No stickers received yet.", Toast.LENGTH_SHORT).show();
                 }
             }
 
