@@ -29,6 +29,7 @@ import java.util.List;
 import edu.northeastern.movieapi.R;
 import edu.northeastern.stickers.adapters.StickerInboxAdapter;
 import edu.northeastern.stickers.models.ReceivingInfo;
+import edu.northeastern.stickers.models.UserStickerHistory;
 
 public class StickerInboxFragment extends Fragment {
 
@@ -61,7 +62,7 @@ public class StickerInboxFragment extends Fragment {
                 DividerItemDecoration.VERTICAL);
         receiveHistoryRecyclerView.addItemDecoration(dividerItemDecoration);
 
-        mDatabase.orderByChild("receivedTimestamp").addValueEventListener(new ValueEventListener() {
+        mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ReceivingInfo receivingInfo;
@@ -79,7 +80,7 @@ public class StickerInboxFragment extends Fragment {
                         receivedHistoryCollectors.add(receivingInfo);
                     }
                 }
-                Collections.reverse(receivedHistoryCollectors);
+                sort(receivedHistoryCollectors);
                 receivedHIstoryAdapter.notifyDataSetChanged();
                 if (receivedHistoryCollectors.isEmpty()) {
                     Toast.makeText(getContext(), "Inbox empty. No stickers received yet.", Toast.LENGTH_SHORT).show();
@@ -100,5 +101,13 @@ public class StickerInboxFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_sticker_inbox, container, false);
+    }
+
+    /**
+     * Sort List of UserStickerHistory by descending time order.
+     * @param list of UserStickerHistory
+     */
+    private void sort(List<ReceivingInfo> list) {
+        list.sort(((o1, o2) -> o2.getReceivedTimestamp().compareTo(o1.getReceivedTimestamp())));
     }
 }
