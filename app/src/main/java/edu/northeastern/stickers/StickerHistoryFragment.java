@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import edu.northeastern.movieapi.R;
@@ -87,8 +88,11 @@ public class StickerHistoryFragment extends Fragment {
                                 snapshotChild.child("sentTimestamp").getValue().toString(),
                                 sentStickerId,sentStickerPath);
                         usersStickerHistoryList.add(newUserHistory);
-                        adapter.notifyDataSetChanged();
                     }
+
+                    sort(usersStickerHistoryList);
+
+                    adapter.notifyDataSetChanged();
                 } else {
                     Toast.makeText(getContext(), "Sending History is  empty. No stickers received yet.", Toast.LENGTH_SHORT).show();
                 }
@@ -97,5 +101,13 @@ public class StickerHistoryFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
         });
+    }
+
+    /**
+     * Sort List of UserStickerHistory by descending time order.
+     * @param list of UserStickerHistory
+     */
+    private void sort(List<UserStickerHistory> list) {
+        list.sort(((o1, o2) -> o2.getTime().compareTo(o1.getTime())));
     }
 }
