@@ -2,21 +2,20 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="25dp"
-    android:background="@color/black">
+    android:layout_margin="25dp">
 
     <TextView
         android:id="@+id/textView_senderId"
-        android:layout_width="227dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
         android:text="Received From:"
-        android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textColor="@color/yellow"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,11 +24,11 @@
         android:id="@+id/textView_dateSent"
         android:layout_width="299dp"
         android:layout_height="25dp"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
         android:text="Time:"
-        android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textColor="@color/yellow"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_senderId" />
@@ -38,9 +37,23 @@
         android:id="@+id/imageView_sticker"
         android:layout_width="144dp"
         android:layout_height="125dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/custom_border"
+        android:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_dateSent"
         app:srcCompat="@android:drawable/ic_dialog_alert" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/white_opacity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_sticker" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
