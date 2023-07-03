@@ -63,8 +63,8 @@ public class StickerStoreFragment extends Fragment {
         FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-               String userName = snapshot.getValue(Users.class).getName();
-                welcomeUserTextView.setText(view.getResources().getString(R.string.weclome_user,userName));
+               Users userName = snapshot.getValue(Users.class);
+                welcomeUserTextView.setText(view.getResources().getString(R.string.weclome_user,userName.getName(), userName.getEmail()));
             }
 
             @Override
